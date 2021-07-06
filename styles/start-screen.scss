@@ -1,0 +1,35 @@
+.install-chrome-screen {
+  background: url('../public/start_screen.png') no-repeat center;
+  background-size: cover;
+
+  .img {
+    margin-bottom: 1rem;
+  }
+  .btn {
+    margin-top: 3rem;
+  }
+}
+
+.connect-midi-device {
+  background: url('../public/start_screen.png') no-repeat center;
+  background-size: cover;
+
+  .img {
+    margin-bottom: 2rem;
+  }
+
+  .title-text {
+    margin: 2rem 0 4rem;
+  }
+
+  .btn {
+    width: 144px;
+    margin-top: 4rem;
+  }
+}
+
+.wait-midi-connect {
+  .img {
+    margin-bottom: 5rem;
+  }
+}

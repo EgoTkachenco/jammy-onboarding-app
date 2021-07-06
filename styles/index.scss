@@ -1,0 +1,96 @@
+// CONNECT FONTS
+@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import '../public/PT Root UI_Bold/PT Root UI_Bold.css';
+@import '../public/PT Root UI_Light/PT Root UI_Light.css';
+@import '../public/PT Root UI_Medium/PT Root UI_Medium.css';
+@import '../public/PT Root UI_Regular/PT Root UI_Regular.css';
+// THEME
+$bold_font: 'PTRootUIWebBold', sans-serif;
+$light_font: 'PTRootUIWebLight', sans-serif;
+$medium_font: 'PTRootUIWebMedium', sans-serif;
+$regular_font: 'PTRootUIWebRegular', sans-serif;
+$secondary_font: 'Montserrat', sans-serif;
+
+// Typography
+.title-text {
+  font-family: $secondary_font;
+  font-weight: 500;
+  font-size: 2.25rem;
+  line-height: 2.375rem;
+}
+.lg-text {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+.md-text {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+.sm-text {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+a {
+  color: #ff00ff;
+  text-decoration: none;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.text-center {
+  text-align: center;
+}
+.white {
+  color: #fff;
+}
+
+.btn {
+  font-family: $regular_font;
+  transition: all 0.3s;
+  height: 40px;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &.btn-primary {
+    border: 0.125rem solid #1b15ff;
+    color: #fff;
+    background: #1b15ff;
+
+    &:hover {
+      background: #fff;
+      color: #000;
+    }
+  }
+}
+
+html {
+  // 16px = 1rem on 1200px screen
+  font-size: 1.33vw;
+  font-family: $light_font;
+  background: #000;
+}
+body {
+  margin: 0;
+}
+
+// COMMON
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100vh - 4.5rem);
+
+  &.centered {
+    align-items: center;
+  }
+  &.no-navigation {
+    height: 100vh;
+  }
+}
+
+// IMPORTS
+@import './start-screen';
