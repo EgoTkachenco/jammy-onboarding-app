@@ -1,5 +1,5 @@
 // CONNECT FONTS
-@import url('https://fonts.googleapis.com/css2?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;900&display=swap');
 @import '../public/PT Root UI_Bold/PT Root UI_Bold.css';
 @import '../public/PT Root UI_Light/PT Root UI_Light.css';
 @import '../public/PT Root UI_Medium/PT Root UI_Medium.css';
@@ -14,7 +14,7 @@ $secondary_font: 'Montserrat', sans-serif;
 // Typography
 .title-text {
   font-family: $secondary_font;
-  font-weight: 500;
+  font-weight: 900;
   font-size: 2.25rem;
   line-height: 2.375rem;
 }
@@ -44,9 +44,12 @@ a {
 .white {
   color: #fff;
 }
+.white-50 {
+  color: rgba(255, 255, 255, 0.55);
+}
 
 .btn {
-  font-family: $regular_font;
+  font-family: $light_font;
   transition: all 0.3s;
   height: 40px;
   padding: 0 1rem;
@@ -81,11 +84,11 @@ body {
 .page-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: calc(100vh - 4.5rem);
 
   &.centered {
-    align-items: center;
+    justify-content: center;
   }
   &.no-navigation {
     height: 100vh;

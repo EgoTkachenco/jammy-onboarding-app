@@ -33,3 +33,27 @@
     margin-bottom: 5rem;
   }
 }
+
+.denied-access {
+  .title-text {
+    margin: 4rem 0 5rem;
+  }
+  .images-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 3rem;
+
+    .step-text {
+      text-align: center;
+      font-size: 1rem;
+      line-height: 2rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .img:first-child {
+      margin-right: 2rem;
+    }
+  }
+}

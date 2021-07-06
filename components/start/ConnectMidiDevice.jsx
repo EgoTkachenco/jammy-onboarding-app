@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import { useState } from 'react'
+import DeniedMidiAccess from './DeniedMidiAccess'
+import FirmwareUpdate from './FirmwareUpdate'
 export default function ConnectMidiDevice() {
   const [isLoading, setIsLoading] = useState(false)
-  const [isConnected, setisConnected] = useState(false)
+  const [isConnected, setisConnected] = useState(null)
   const connectMidi = () => {
     setIsLoading(true)
     if (navigator.requestMIDIAccess) {
@@ -19,8 +21,9 @@ export default function ConnectMidiDevice() {
       setIsLoading(false)
     }
   }
-
   if (isLoading) return <WaitMidiConnect />
+  if (isConnected !== null)
+    return isConnected ? <FirmwareUpdate /> : <DeniedMidiAccess />
 
   return (
     <div className="page-container no-navigation centered connect-midi-device">
