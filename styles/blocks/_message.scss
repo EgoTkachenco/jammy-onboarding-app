@@ -1,0 +1,7 @@
+.message {
+  color: #000;
+  padding: 1.5rem;
+  background: #32d74b;
+  font-family: $regular_font;
+  @extend .caption-text;
+}

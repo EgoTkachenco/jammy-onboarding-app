@@ -1,5 +1,7 @@
+import Head from 'next/head'
 import ConnectMidiDevice from '../components/start/ConnectMidiDevice'
 import { useRouter } from 'next/router'
+
 export default function Home() {
   // On this screen we should check user browser \ connect to MIDI and update firmware
 
@@ -17,5 +19,12 @@ export default function Home() {
   // IF MIDI connection denied ---> Screen with information forn Denied access
   // IF MIDI connection accessed ---> Screen with firmware update
 
-  return <ConnectMidiDevice />
+  return (
+    <>
+      <Head>
+        <title>My page title</title>
+      </Head>
+      <ConnectMidiDevice />
+    </>
+  )
 }

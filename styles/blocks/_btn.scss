@@ -1,0 +1,28 @@
+.btn {
+  font-family: $light_font;
+  transition: all 0.3s;
+  height: 40px;
+  padding: 0 1.625rem;
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  border: 0.125rem solid transparent;
+  outline: none;
+
+  &.btn-primary {
+    background: #1b15ff;
+    color: #fff;
+
+    &:hover {
+      background: #433eff;
+    }
+  }
+  &.btn-primary__outline {
+    border-color: #1b15ff;
+    background: #000;
+    &:hover {
+      background: #292931;
+    }
+  }
+}

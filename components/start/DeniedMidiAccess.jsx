@@ -2,7 +2,7 @@ import Image from 'next/image'
 export default function DeniedMidiAccess() {
   return (
     <div className="page-container no-navigation denied-access">
-      <div className="title-text white text-center">Denied Access</div>
+      <div className="title-text text-center">Denied Access</div>
       <div className="sm-text text-center white-50">
         This site needs permission to send messages to MIDI devices (such as
         your Jammy) <br />

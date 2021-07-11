@@ -1,0 +1,41 @@
+.navigation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 100;
+
+  .process-wrapper {
+    height: 1rem;
+    background: #1b1b1f;
+    border-bottom: calc(1rem / 16) solid #292931;
+    .process-value {
+      background: #1b15ff;
+      margin-bottom: calc(1rem / 16);
+      height: 100%;
+      transition: all 1s linear;
+      width: 0;
+    }
+  }
+
+  .navigation-content {
+    padding: 1rem 10.5rem;
+    display: flex;
+    align-items: center;
+    background: #1b1b1f;
+    .navigation__logo {
+      margin-right: 2rem;
+    }
+    .navigation__label {
+      font-family: $medium_font;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 1.6875rem;
+      padding: calc(1rem / 16) 1rem;
+      color: #1b1b1f;
+      &.success {
+        background: #32d74b;
+      }
+    }
+  }
+}
