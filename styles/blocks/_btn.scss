@@ -17,12 +17,28 @@
     &:hover {
       background: #433eff;
     }
+    &:active {
+      color: #c6c6cd;
+    }
   }
   &.btn-primary__outline {
     border-color: #1b15ff;
     background: #000;
     &:hover {
       background: #292931;
+    }
+    &:active {
+      color: #c6c6cd;
+    }
+  }
+  &.btn-dark {
+    background: #1b1b1f;
+    color: #fff;
+    &:hover {
+      background: #292931;
+    }
+    &:active {
+      color: #c6c6cd;
     }
   }
 }
