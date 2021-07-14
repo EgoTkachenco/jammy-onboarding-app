@@ -109,6 +109,9 @@ div {
 @import './blocks/_btn';
 @import './blocks/_navigation';
 @import './blocks/message';
+@import './blocks/presets';
+@import './blocks/slider';
+@import './blocks/dialog';
 
 .sound-check {
   position: relative;
@@ -128,9 +131,12 @@ div {
 .stepper-wrapper {
   width: 100%;
   display: flex;
+  align-items: center;
   background: #292931;
   padding: 0.5rem 10.5rem;
   margin-top: 4.5rem;
+  height: 3.5rem;
+
   .stepper__next {
     margin-left: auto;
   }

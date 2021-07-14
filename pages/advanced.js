@@ -1,13 +1,14 @@
 import Head from 'next/head'
+import Navigation from '../components/Navigation'
+import Presets from '../components/presets/Presets'
 export default function AdvancedSettings() {
   return (
     <>
       <Head>
         <title>Advanced Settings</title>
       </Head>
-      <div className="page-container no-navigation centered">
-        <div className="lg-text text-center white">Advanced Settings</div>
-      </div>
+      <Navigation process={75} />
+      <Presets />
     </>
   )
 }

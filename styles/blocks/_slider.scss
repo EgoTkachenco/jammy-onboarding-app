@@ -1,0 +1,39 @@
+.slider {
+  padding: 0.75rem 1rem;
+
+  &-top {
+    display: flex;
+    margin-bottom: 0.75rem;
+    color: #888899;
+    font-family: $regular_font;
+    @extend .md-text;
+  }
+  &__value {
+    margin-left: auto;
+  }
+
+  .rc-slider {
+    &-rail {
+      height: 1px;
+      background: #c6c6cd;
+      border-radius: 20px;
+    }
+    &-track {
+      height: 1px;
+      border-radius: 20px;
+      background-color: #1b15ff;
+    }
+    &-handle {
+      width: 1.75rem;
+      height: 1.75rem;
+      background: #c6c6cd;
+      border: none;
+      margin-top: -0.9rem;
+      box-shadow: 0px 3px 8px rgba(22, 18, 18, 0.15),
+        0px 0.5px 1px 0.5px rgba(28, 26, 26, 0.04),
+        0px 1px 0.5px rgba(28, 26, 26, 0.03),
+        0px 3px 0.5px rgba(27, 27, 28, 0.03),
+        0px 3.5px 0.5px rgba(0, 0, 0, 0.02), 0px 4px 1px rgba(0, 0, 0, 0.02);
+    }
+  }
+}

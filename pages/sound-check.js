@@ -12,7 +12,6 @@ export default function SoundCheck() {
         <title>Sound Check</title>
       </Head>
       <Navigation process={60} />
-      {/* <Stepper onNext={() => {}} nextText="Next step" /> */}
       <Stepper
         onPrev={lastStep && (() => setlastStep(false))}
         prevText={
