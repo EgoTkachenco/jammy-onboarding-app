@@ -5,4 +5,39 @@
   .presets-side-card {
     margin-bottom: 7.5rem;
   }
+  .sensitivity-top {
+    min-height: 13rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .sensitivity__image {
+    position: relative;
+    width: 100%;
+    min-height: 40rem;
+  }
+}
+.support-btns {
+  display: flex;
+  margin-left: auto;
+
+  &__item {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #43434f;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &.active {
+      background: #1b15ff;
+    }
+  }
 }

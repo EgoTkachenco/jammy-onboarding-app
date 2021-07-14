@@ -1,4 +1,10 @@
-export default function Stepper({ prevText, onPrev, nextText, onNext }) {
+export default function Stepper({
+  prevText,
+  onPrev,
+  nextText,
+  onNext,
+  centerSlot,
+}) {
   return (
     <div className="stepper-wrapper">
       {onPrev && (
@@ -6,6 +12,7 @@ export default function Stepper({ prevText, onPrev, nextText, onNext }) {
           {prevText}
         </button>
       )}
+      {centerSlot}
       {onNext && (
         <button className="btn btn-primary stepper__next" onClick={onNext}>
           {nextText}
