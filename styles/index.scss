@@ -111,8 +111,10 @@ div {
 @import './blocks/message';
 @import './blocks/presets';
 @import './blocks/software';
+@import './blocks/midi-settings';
 @import './blocks/slider';
 @import './blocks/dialog';
+@import './blocks/select';
 
 .sound-check {
   position: relative;

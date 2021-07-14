@@ -1,13 +1,14 @@
 import Head from 'next/head'
+import Navigation from '../components/Navigation'
+import Midi from '../components/midi-settings/Midi'
 export default function MidiSettings() {
   return (
     <>
       <Head>
         <title>Midi Settings</title>
       </Head>
-      <div className="page-container no-navigation centered">
-        <div className="lg-text text-center white">Midi Settings</div>
-      </div>
+      <Navigation process={80} />
+      <Midi />
     </>
   )
 }
