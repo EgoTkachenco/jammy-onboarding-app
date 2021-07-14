@@ -32,6 +32,17 @@
       color: #c6c6cd;
     }
   }
+  &.btn-pink__outline {
+    border-color: #ff00ff;
+    background: #000;
+    color: #fff;
+    &:hover {
+      background: #292931;
+    }
+    &:active {
+      color: #c6c6cd;
+    }
+  }
   &.btn-dark {
     background: #1b1b1f;
     color: #fff;

@@ -1,5 +1,6 @@
 import Chords from './Chords'
 import MusicVisualizer from './MusicVisualizer'
+import HelpTooltip from '../HelpTooltip'
 export function SoundCheck() {
   return (
     <div className="page-container sound-check">
@@ -16,6 +17,7 @@ export function SoundCheck() {
       </div>
       <Chords />
       <MusicVisualizer />
+      <HelpTooltip />
     </div>
   )
 }
