@@ -37,7 +37,7 @@ export default function Sensitivity() {
       />
       <div className="page-container sensitivity">
         <div className="lg-text text-center">
-          Let's adjust Picking Sensitivity in <br />
+          Let&apos;s adjust Picking Sensitivity in <br />
           accordance to your playing style.
         </div>
         <div className="presets-side-card">

@@ -26,7 +26,7 @@ export default function FirmwareUpdate() {
         }
       }, 150)
     }, 1000)
-  }, [])
+  }, [process, router])
   return (
     <div className="page-container centered">
       <Navigation process={isFinished ? 50 : isUploading ? 30 : 10} />

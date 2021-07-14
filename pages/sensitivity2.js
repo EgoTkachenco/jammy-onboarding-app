@@ -71,7 +71,7 @@ export default function Sensitivity() {
         <div className="sensitivity-top">
           {step === 0 && (
             <div className="lg-text text-center">
-              Let's adjust Picking Sensitivity in <br />
+              Let&apos;s adjust Picking Sensitivity in <br />
               accordance to your playing style.
             </div>
           )}

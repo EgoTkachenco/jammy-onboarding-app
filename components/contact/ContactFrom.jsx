@@ -52,7 +52,7 @@ export default function ContactFrom() {
                 fill="#5C5C6D"
               />
             </svg>
-            Sensors' values automatically attached.
+            Sensors&apos; values automatically attached.
           </div>
           <div className="file-input">
             <svg

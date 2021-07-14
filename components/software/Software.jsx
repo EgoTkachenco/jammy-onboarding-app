@@ -85,8 +85,8 @@ const Feedback = () => {
   return (
     <div className="software-feedback">
       <div className="caption-text text-center">
-        if you can't find your DAW in the list, share the name of your DAW with
-        us. We'll collect <br /> this info and if possible, add the
+        if you can&apos;t find your DAW in the list, share the name of your DAW
+        with us. We&apos;ll collect <br /> this info and if possible, add the
         corresponding MIDI preset later on.
       </div>
       {sent ? (
