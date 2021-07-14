@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Navigation from '../components/Navigation'
 import Stepper from '../components/Stepper'
 import { useRouter } from 'next/router'
-import Image from 'next/Image'
+import Image from 'next/image'
 export default function Sensitivity() {
   const router = useRouter()
   const texts = [
