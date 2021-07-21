@@ -170,9 +170,16 @@ export default function Midi() {
         {dialog && (
           <Dialog close={() => setDialog(false)}>
             <div className="title-text">All set?</div>
-            <button className="btn btn-primary" onClick={() => {}}>
-              Yes
-            </button>
+            <a
+              className="no-effect"
+              href="https://playjammy.com/plugin/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button style={{ width: '100%' }} className="btn btn-primary">
+                Yes
+              </button>
+            </a>
             <button
               className="btn btn-primary__outline"
               onClick={() => setDialog(false)}

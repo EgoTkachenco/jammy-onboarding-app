@@ -22,7 +22,7 @@ export default function PresetCustomize({ preset }) {
     { id: 19, name: 'Velocity Minimum' },
     { id: 20, name: 'Velocity Maximum' },
   ]
-  const [active, setactive] = useState(null)
+  const [active, setactive] = useState(SETTINGS[0])
   return (
     <div className="presets-customize">
       <div className="title-text text-center">Customize the playability</div>

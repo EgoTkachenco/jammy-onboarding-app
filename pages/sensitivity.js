@@ -13,7 +13,7 @@ export default function Sensitivity() {
       </Head>
       <Navigation process={60} />
       <Stepper
-        onPrev={() => router.back()}
+        onPrev={() => router.push('/sound-check')}
         prevText={
           <div className="d-flex align-center">
             <svg

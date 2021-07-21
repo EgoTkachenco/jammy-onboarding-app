@@ -58,7 +58,7 @@ export default function Presets() {
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
                   <div className="presets-list__item active">
-                    <div className="md-text">{active.name}</div>
+                    <div className="md-text">Custom preset</div>
                     <button
                       className="btn btn-dark"
                       onClick={(e) => {
