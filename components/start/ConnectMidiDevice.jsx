@@ -22,7 +22,7 @@ export default function ConnectMidiDevice() {
       }
     })
   }
-  if (isLoading) return <WaitMidiConnect />
+  // if (isLoading) return <WaitMidiConnect />
 
   if (isConnected !== null)
     return isConnected ? <FirmwareUpdate /> : <DeniedMidiAccess />
