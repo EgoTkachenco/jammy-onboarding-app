@@ -1,21 +1,19 @@
 import Image from 'next/image'
 import { useState } from 'react'
-import DeniedMidiAccess from './DeniedMidiAccess'
+import DeniedMidiAccess from '../screens/DeniedMidiAccess'
 import FirmwareUpdate from './FirmwareUpdate'
+import WelcomeScreen from '../screens/Welcome'
+
 export default function ConnectMidiDevice() {
   const [isLoading, setIsLoading] = useState(false)
   const [isConnected, setisConnected] = useState(null)
+
   const connectMidi = () => {
     setIsLoading(true)
     navigator.requestMIDIAccess().then(function (access) {
       // Get lists of available MIDI controllers
       const inputs = access.inputs.values()
       const outputs = access.outputs.values()
-
-      setTimeout(() => {
-        setIsLoading(false)
-        setisConnected(true)
-      }, 1500)
 
       access.onstatechange = function (e) {
         debugger
@@ -25,6 +23,7 @@ export default function ConnectMidiDevice() {
     })
   }
   if (isLoading) return <WaitMidiConnect />
+
   if (isConnected !== null)
     return isConnected ? <FirmwareUpdate /> : <DeniedMidiAccess />
 
@@ -46,20 +45,6 @@ export default function ConnectMidiDevice() {
       <button className="btn btn-primary" onClick={connectMidi}>
         Done
       </button>
-    </div>
-  )
-}
-
-function WaitMidiConnect() {
-  return (
-    <div className="page-container no-navigation centered wait-midi-connect">
-      <div className="img">
-        <Image src="/jammy-white-logo.svg" width={72} height={72} alt="Jammy" />
-      </div>
-      <div className="lg-text white text-center">
-        Allow this page to access MIDI devices so <br /> we could sync with your
-        Jammy
-      </div>
     </div>
   )
 }

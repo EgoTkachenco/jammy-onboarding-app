@@ -7,6 +7,7 @@ export default function Presets() {
   const router = useRouter()
   const [active, setactive] = useState(null)
   const [isCustomize, setisCustomize] = useState(false)
+  const [customized, setCustomized] = useState(null)
   const [showDialog, setShowDialog] = useState(false)
   const PRESETS = [
     { id: 1, name: 'Clean Picking and Strumming' },
@@ -22,6 +23,7 @@ export default function Presets() {
     { id: 11, name: 'Troubleshoot Self-Muting Strings' },
     { id: 12, name: 'Troubleshoot Tapping' },
   ]
+  console.log('C', customized)
   return (
     <>
       <Stepper
@@ -37,12 +39,12 @@ export default function Presets() {
           </div>
         }
         onNext={
-          active &&
+          (customized || active) &&
           (isCustomize
             ? () => setisCustomize(false)
             : () => setShowDialog(true))
         }
-        nextText={isCustomize ? 'Done' : 'Apply Selected Preset'}
+        nextText={customized || active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
         {isCustomize ? (
@@ -53,7 +55,7 @@ export default function Presets() {
               Try different presets to find the one that provides <br /> the
               best performance. You can then customize it.
             </div>
-            {active && (
+            {customized && (
               <>
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
@@ -94,6 +96,8 @@ export default function Presets() {
                       onClick={(e) => {
                         e.stopPropagation()
                         setisCustomize(true)
+                        setCustomized(preset)
+                        setactive(null)
                       }}
                     >
                       Customize preset
@@ -115,7 +119,7 @@ export default function Presets() {
             </button>
             <button
               className="btn btn-primary"
-              onClick={() => router.push('/midi-settings')}
+              onClick={() => router.push('/software-settings')}
             >
               {"No but I'd like to proceed to MIDI"}
             </button>

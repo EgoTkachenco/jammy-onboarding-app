@@ -13,7 +13,7 @@ export default function SetUpLinks() {
           <ArrowIcon />
         </div>
       </Link>
-      <Link href="/midi-settings" passHref>
+      <Link href="/software-settings" passHref>
         <div className="link-block">
           <div>
             Proceed to MIDI settings now and set up advanced guitar techniques

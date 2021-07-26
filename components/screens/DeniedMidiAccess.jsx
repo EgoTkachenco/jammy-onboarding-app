@@ -1,5 +1,5 @@
 import Image from 'next/image'
-export default function DeniedMidiAccess() {
+export default function DeniedMidiAccess(props) {
   return (
     <div className="page-container no-navigation denied-access">
       <div className="title-text text-center">Denied Access</div>
@@ -31,7 +31,9 @@ export default function DeniedMidiAccess() {
         </div>
       </div>
 
-      <button className="btn btn-primary">Reconnect</button>
+      <button className="btn btn-primary" onClick={props.action}>
+        Reconnect
+      </button>
     </div>
   )
 }
