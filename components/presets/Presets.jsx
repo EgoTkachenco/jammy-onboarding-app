@@ -59,17 +59,24 @@ export default function Presets() {
               <>
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
-                  <div className="presets-list__item active">
+                  <div
+                    onClick={() => setactive(null)}
+                    className={`presets-list__item ${
+                      customized && !active ? 'active' : ''
+                    }`}
+                  >
                     <div className="md-text">Custom preset</div>
-                    <button
-                      className="btn btn-dark"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        setisCustomize(true)
-                      }}
-                    >
-                      Customize preset
-                    </button>
+                    {customized && !active && (
+                      <button
+                        className="btn btn-dark"
+                        onClick={(e) => {
+                          e.stopPropagation()
+                          setisCustomize(true)
+                        }}
+                      >
+                        Customize preset
+                      </button>
+                    )}
                   </div>
                   <div className="sm-text white-50">
                     This preset will be overwritten when you press the button
