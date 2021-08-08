@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "mobx": "^6.3.2",
+    "mobx-react-lite": "^3.2.0",
     "next": "11.0.1",
     "rc-slider": "^9.7.2",
     "react": "17.0.2",

@@ -27,8 +27,15 @@ export default function Home() {
     setisLoading(true)
     function onMIDISuccess(midiAccess) {
       setisLoading(false)
-      console.log('MIDI ready!')
-      console.log(midiAccess)
+      debugger
+      if (midiAccess.inputs.size > 0) {
+        for (const input of midiAccess.inputs) {
+          console.log(input)
+        }
+        // router.push('/sound-check')
+      } else {
+        setTimeout(() => onMIDISuccess(midiAccess), 5000)
+      }
     }
 
     function onMIDIFailure(msg) {

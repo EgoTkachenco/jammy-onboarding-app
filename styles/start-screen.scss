@@ -9,7 +9,24 @@
     margin-top: 3rem;
   }
 }
+.mobile-screen {
+  background: url('../public/start_screen.png') no-repeat center;
+  background-size: cover;
 
+  .img {
+    margin-bottom: 1rem;
+  }
+  .lg-text {
+    font-size: 24px;
+    max-width: 305px;
+    line-height: 39px;
+    .chrome-img {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}
 .connect-midi-device {
   background: url('../public/start_screen.png') no-repeat center;
   background-size: cover;
