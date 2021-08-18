@@ -1,7 +1,10 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
+import Dialog from '../Dialog'
 export default function ContactFrom() {
   const router = useRouter()
+  const [showDialog, setShowDialog] = useState(false)
   return (
     <>
       <Stepper
@@ -24,7 +27,7 @@ export default function ContactFrom() {
             Previous Step
           </div>
         }
-        onNext={() => {}}
+        onNext={() => setShowDialog(true)}
         nextText="Submit"
       />
       <div className="page-container support">
@@ -70,6 +73,27 @@ export default function ContactFrom() {
             Attach a short video demonstrating the problem (optional)
           </div>
         </div>
+        {showDialog && (
+          <Dialog close={() => setShowDialog(false)}>
+            <div className="title-text text-center">
+              Thanks for submitting your <br /> support request!
+            </div>
+            <div className="md-text text-center">
+              We’ll analyse the data collected from the sensors of your Jammy
+              and one of our technical support agents will get back to you
+              within 48 hours.
+            </div>
+            <a
+              className="no-effect"
+              href="https://playjammy.com/plugin/"
+              rel="noreferrer"
+            >
+              <button className="btn btn-primary">
+                Close onboarding and proceed to the companion app
+              </button>
+            </a>
+          </Dialog>
+        )}
       </div>
     </>
   )

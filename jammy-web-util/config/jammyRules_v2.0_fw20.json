@@ -1,0 +1,37 @@
+{
+    "eventTypes":[
+        {"value":0, "name":"Left part event"},
+        {"value":1, "name":"Right part event"},
+        {"value":2, "name":"Switch note"},
+        {"value":3, "name":"Behaviour"}
+    ],
+    "eventDescs":[
+         {"value":0, "name":"Picked tap"},
+         {"value":1, "name":"Picked slide"},
+         {"value":2, "name":"Only tap"},
+         {"value":3, "name":"Only slide"},
+         {"value":4, "name":"Silent fret change"},
+         {"value":5, "name":"Tap trig, but still touched"},
+         {"value":6, "name":"Note off"},
+         {"value":7, "name":"Off by slow algo"},
+         {"value":8, "name":"Off by sharp algo"},
+         {"value":9, "name":"Picked"},
+         {"value":10, "name":"send to left part"},
+         {"value":11, "name":"Ignored tap"},
+         {"value":12, "name":"Blocked second pullOff algo"},
+         {"value":13, "name":"Blocked tap by string activity"},
+         {"value":14, "name":"send to right part"},
+         {"value":15, "name":"Art trig"},
+         {"value":16, "name":"dbg_osc"},
+         {"value":17, "name":"dbg_ResetFilter"},
+         {"value":18, "name":"Blocked pick by bottom string"},
+         {"value":19, "name":"Blocked pick by top string"},
+         {"value":20, "name":"Blocked pick by low velocity"},
+         {"value":21, "name":"selfBlocked pick by low velocity"},
+         {"value":22, "name":"Blocked pick by far string velocity"},
+         {"value":23, "name":"Trig pick less then 500 and more then last velocity"},
+         {"value":24, "name":"Trig pick less then 500 and less then last velocity"},
+         {"value":25, "name":"Trig pick more then 500"},
+         {"value":26, "name":"------------fingerPause-----------"}
+    ]
+}

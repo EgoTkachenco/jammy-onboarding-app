@@ -1,35 +1,34 @@
 import { useState } from 'react'
 import Stepper from '../Stepper'
 import Dialog from '../Dialog'
-import PresetCustomize from './PresetCustomize'
 import { useRouter } from 'next/router'
-export default function Presets() {
+import Store from '../../store'
+import PresetsStore from '../../store/PresetsStore'
+import { observer } from 'mobx-react-lite'
+import {
+  ConfiguratorG,
+  ConfiguratorE,
+} from '../../jammy-web-util/components/Configurator'
+
+const Presets = observer(() => {
   const router = useRouter()
   const [active, setactive] = useState(null)
-  const [isCustomize, setisCustomize] = useState(false)
-  const [customized, setCustomized] = useState(null)
   const [showDialog, setShowDialog] = useState(false)
-  const PRESETS = [
-    { id: 1, name: 'Clean Picking and Strumming' },
-    { id: 2, name: 'Default (All Techniques)	' },
-    { id: 3, name: 'Rock’n’Roll' },
-    { id: 4, name: 'Shredding' },
-    { id: 5, name: 'Tapping' },
-    { id: 6, name: 'Tapping (Dampened Strings)' },
-    { id: 7, name: 'Increased Picking Sensitivity' },
-    { id: 8, name: 'Increased Tapping Sensitivity ' },
-    { id: 9, name: 'Increased Right Hand Muting Sensitivity' },
-    { id: 10, name: 'Increased Left Hand Muting Sensitivity' },
-    { id: 11, name: 'Troubleshoot Self-Muting Strings' },
-    { id: 12, name: 'Troubleshoot Tapping' },
-  ]
-  console.log('C', customized)
+  const isCustomize = PresetsStore.isCustomize
+  const customized = PresetsStore.activePreset
+  const customizedPreset = PresetsStore.customizedPreset
+  const jammy = Store.jammy
+  const isJammyG = Store.jammyName === 'Jammy G'
+  const isFetch = PresetsStore.isFetch
+
+  const PRESETS = PresetsStore.presets
+  if (isFetch) return <div className="page-container presets">Saving...</div>
   return (
     <>
       <Stepper
         onPrev={
           isCustomize
-            ? () => setisCustomize(false)
+            ? () => (PresetsStore.isCustomize = false)
             : () => router.push('/sound-check')
         }
         prevText={
@@ -39,39 +38,44 @@ export default function Presets() {
           </div>
         }
         onNext={
-          (customized || active) &&
+          (customizedPreset || active) &&
           (isCustomize
-            ? () => setisCustomize(false)
+            ? () => {
+                PresetsStore.applyPreset()
+                setactive(null)
+              }
             : () => setShowDialog(true))
         }
-        nextText={customized || active ? 'Apply Selected Preset' : 'Done'}
+        nextText={customizedPreset || active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
         {isCustomize ? (
-          <PresetCustomize preset={active} />
+          isJammyG ? (
+            <ConfiguratorG jammy={jammy} preset={customized.preset} />
+          ) : (
+            <ConfiguratorE jammy={jammy} preset={customized.preset} />
+          )
         ) : (
           <>
             <div className="lg-text text-center">
               Try different presets to find the one that provides <br /> the
               best performance. You can then customize it.
             </div>
-            {customized && (
+            {customizedPreset && (
               <>
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
                   <div
                     onClick={() => setactive(null)}
-                    className={`presets-list__item ${
-                      customized && !active ? 'active' : ''
-                    }`}
+                    className={`presets-list__item ${!active ? 'active' : ''}`}
                   >
                     <div className="md-text">Custom preset</div>
-                    {customized && !active && (
+                    {!active && (
                       <button
                         className="btn btn-dark"
                         onClick={(e) => {
                           e.stopPropagation()
-                          setisCustomize(true)
+                          PresetsStore.setActivePreset(customizedPreset, true)
                         }}
                       >
                         Customize preset
@@ -102,9 +106,7 @@ export default function Presets() {
                       className="btn btn-dark"
                       onClick={(e) => {
                         e.stopPropagation()
-                        setisCustomize(true)
-                        setCustomized(preset)
-                        setactive(null)
+                        PresetsStore.setActivePreset(preset)
                       }}
                     >
                       Customize preset
@@ -117,7 +119,9 @@ export default function Presets() {
         )}
         {showDialog && (
           <Dialog close={() => setShowDialog(false)}>
-            <div className="title-text">Happy with the result?</div>
+            <div className="title-text text-center">
+              Proceed to <br /> MIDI settings?
+            </div>
             <button
               className="btn btn-primary"
               onClick={() => router.push('/software-settings')}
@@ -125,23 +129,18 @@ export default function Presets() {
               Yes
             </button>
             <button
-              className="btn btn-primary"
-              onClick={() => router.push('/software-settings')}
-            >
-              {"No but I'd like to proceed to MIDI"}
-            </button>
-            <button
               className="btn btn-primary__outline"
-              onClick={() => router.push('/support')}
+              onClick={() => router.push('/sensitivity')}
             >
-              {"No. I'd like to contact support"}
+              {'No, I’d like to troubleshoot playability'}
             </button>
           </Dialog>
         )}
       </div>
     </>
   )
-}
+})
+export default Presets
 
 const ArrowIcon = () => {
   return (

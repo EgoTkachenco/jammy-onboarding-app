@@ -47,4 +47,14 @@
       margin-right: 0.5rem;
     }
   }
+
+  .dialog {
+    max-width: 50%;
+    .title-text {
+      margin: 0 0 1.5rem 0;
+    }
+    .no-effect {
+      margin: 2.5rem auto 0;
+    }
+  }
 }

@@ -1,0 +1,2722 @@
+{
+  "left": 19,
+  "right": 19,
+  "groups": [
+    {
+      "groupId": 0,
+      "title": "Picking Settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "First filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            184,
+            184,
+            184,
+            184,
+            184,
+            184
+          ],
+          "values": [
+            184,
+            184,
+            184,
+            184,
+            184,
+            184
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Second filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 3,
+          "title": "OSC",
+          "type": "INT",
+          "min": 1,
+          "max": 23,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "values": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "id": 4,
+          "title": "OSC step",
+          "type": "INT",
+          "min": 1,
+          "max": 10,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "values": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Double notes limit",
+          "type": "INT",
+          "min": 1,
+          "max": 500,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Double Notes Limit",
+          "description": "Filters the unwanted double notes that may appear at hard picking. Lower the setting to avoid skipping notes when playing fast.",
+          "default": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "values": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 1,
+          "max": 8,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Picking Sensitivity",
+          "description": "Defines how easy is to pick notes on the right part and how loud they are.",
+          "default": [
+            6,
+            8,
+            8,
+            8,
+            8,
+            6
+          ],
+          "values": [
+            6,
+            8,
+            8,
+            8,
+            8,
+            6
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Resonance suppresion time",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "values": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Resonance suppresion window",
+          "type": "INT",
+          "min": 1,
+          "max": 1000,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "values": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Resonance suppresion delta",
+          "type": "INT",
+          "min": 5,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ],
+          "values": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ]
+        },
+        {
+          "id": 11,
+          "title": "UpCalmLimit",
+          "type": "INT",
+          "min": 0,
+          "max": 400,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            300,
+            300,
+            300,
+            300,
+            300,
+            300
+          ],
+          "values": [
+            300,
+            300,
+            300,
+            300,
+            300,
+            300
+          ]
+        },
+        {
+          "id": 13,
+          "title": "OneDirLimit",
+          "type": "INT",
+          "min": 0,
+          "max": 512,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "values": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        {
+          "id": 14,
+          "title": "trigDiffLimit",
+          "type": "INT",
+          "min": 0,
+          "max": 512,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 1,
+      "title": "Time-out Settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "CC7_TimeOut",
+          "type": "INT",
+          "min": 0,
+          "max": 250,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "values": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Activity extension",
+          "type": "INT",
+          "min": 0,
+          "max": 500,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "values": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ]
+        },
+        {
+          "id": 2,
+          "title": "isCC7use",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 2,
+      "title": "Muting settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Y filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ],
+          "values": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Slow mute time",
+          "type": "INT",
+          "min": 1,
+          "max": 200,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "values": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Sharp mute",
+          "type": "INT",
+          "min": 1,
+          "max": 500,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Sharp Right-Hand Muting Sensitivity",
+          "description": "Defines how easy you can mute the sound by sharply putting your right hand on\n the string, which is ringing. Lowering the level helps to fix the problem with \nopen strings that sometimes mute themselves",
+          "default": [
+            125,
+            125,
+            125,
+            125,
+            125,
+            125
+          ],
+          "values": [
+            125,
+            125,
+            125,
+            125,
+            125,
+            125
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Sharp mute time",
+          "type": "INT",
+          "min": 1,
+          "max": 512,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "values": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "id": 4,
+          "title": "One ch wheel",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "One ch wheel",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Mute CC enable",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "One ch wheel",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 6,
+          "title": "isModWheel",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "One ch wheel",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Aftertouch mode",
+          "type": "INT",
+          "min": 0,
+          "max": 2,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Aftertouch control change",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ],
+          "values": [
+            64,
+            64,
+            64,
+            64,
+            64,
+            64
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Aftertouch timeout",
+          "type": "INT",
+          "min": 6,
+          "max": 200,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "values": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Aftertouch isDDorCC",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 3,
+      "title": "Tapping settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Fret filtering",
+          "type": "INT",
+          "min": 2,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "values": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "id": 1,
+          "title": "First data filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ],
+          "values": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Second data filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ],
+          "values": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Tapping threshold",
+          "type": "INT",
+          "min": 0,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Tapping/Legato Threshold",
+          "description": "Defines how easy is to trigger legato-type effects (hammer-ons, pull-offs,\n regular tapping) with the left hand. Higher the threshold – harder you have to\n tap/hammer-on to get the sound and less unwanted notes happen during chord\n transition and fretting.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 4,
+          "title": "OSC counter",
+          "type": "INT",
+          "min": 4,
+          "max": 32,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "values": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Tap state filter",
+          "type": "INT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Tap pause",
+          "type": "INT",
+          "min": 1,
+          "max": 1500,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ],
+          "values": [
+            70,
+            70,
+            70,
+            70,
+            70,
+            70
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Touch delta",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Left-Hand Muting Sensitivity",
+          "description": "Defines how easily you can mute the sound by touching the string on the left part\n of Jammy. If you experience sound cut-offs frequently when playing fast solos,\n it might be worth looking at and making it less sensitive. Same applies for\n situations when you play open chords and one of the fretting fingers is too close\n to the nearest open string making it mute.",
+          "default": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ],
+          "values": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Slide off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Slide Off",
+          "description": "Turn slide detection on or off. Turning it off will also help with unwanted ghost notes.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 1,
+          "max": 32,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Tapping/Legato Sensitivity",
+          "description": "Defines how sensitive and loud legato-type effects (hammer-ons, pull-offs,\n regular tapping) are.",
+          "default": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ],
+          "values": [
+            16,
+            16,
+            16,
+            16,
+            16,
+            16
+          ]
+        },
+        {
+          "id": 10,
+          "title": "Pressed delta",
+          "type": "INT",
+          "min": 0,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": 11,
+          "title": "smoothFilter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "smoothFilter",
+          "description": "",
+          "default": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "values": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Tap type",
+          "type": "INT",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 13,
+          "title": "Tap On",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": false,
+          "reversed": false,
+          "name": "Tap On",
+          "description": "",
+          "default": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": 14,
+          "title": "Kill tap time",
+          "type": "INT",
+          "min": 0,
+          "max": 150,
+          "left": true,
+          "all": true,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "values": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        {
+          "id": 15,
+          "title": "isKillTap",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": true,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 4,
+      "title": "Slide settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Slide down limit",
+          "type": "INT",
+          "min": 0,
+          "max": 254,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            22,
+            22,
+            22,
+            22,
+            22,
+            22
+          ],
+          "values": [
+            22,
+            22,
+            22,
+            22,
+            22,
+            22
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Slide up limit",
+          "type": "INT",
+          "min": 0,
+          "max": 254,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            22,
+            22,
+            22,
+            22,
+            22,
+            22
+          ],
+          "values": [
+            22,
+            22,
+            22,
+            22,
+            22,
+            22
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Tap off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Tap Off",
+          "description": "Turn tap detection on or off. Turning it off will also help with unwanted ghost notes.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Slide On",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": false,
+          "reversed": false,
+          "name": "Slide On",
+          "description": "",
+          "default": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": 4,
+          "title": "One finger mode",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 5,
+      "title": "Bending settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Data filtering",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ],
+          "values": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Triggering time slot",
+          "type": "INT",
+          "min": 5,
+          "max": 2000,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "values": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Triggering delta",
+          "type": "INT",
+          "min": 100,
+          "max": 3000,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ],
+          "values": [
+            50,
+            50,
+            50,
+            50,
+            50,
+            50
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Bending time slot less 7",
+          "type": "INT",
+          "min": 5,
+          "max": 1000,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "values": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Bending time slot more then 7",
+          "type": "INT",
+          "min": 5,
+          "max": 1000,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ],
+          "values": [
+            10,
+            10,
+            10,
+            10,
+            10,
+            10
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Bending mask",
+          "type": "MASK",
+          "min": 0,
+          "max": 16383,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Bending/Vibrato",
+          "description": "Disables/enables bending and vibrato type playing techniques on every string.",
+          "default": [
+            16383,
+            16383,
+            16383,
+            16383,
+            16383,
+            16383
+          ],
+          "values": [
+            16383,
+            16383,
+            16383,
+            16383,
+            16383,
+            16383
+          ]
+        },
+        {
+          "id": 6,
+          "title": "velocityPitch0",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "values": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ]
+        },
+        {
+          "id": 7,
+          "title": "velocityPitch10",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 8,
+          "title": "velocityPitch12",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "values": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "id": 9,
+          "title": "velocityPitch16",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "values": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        },
+        {
+          "id": 10,
+          "title": "filterPitchLast",
+          "type": "FLOAT",
+          "min": 80,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            80,
+            80,
+            80,
+            80,
+            80,
+            80
+          ],
+          "values": [
+            80,
+            80,
+            80,
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "id": 11,
+          "title": "pitchSensRatio",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 6,
+      "title": "Learning mode",
+      "params": [
+        {
+          "id": 0,
+          "title": "Switch on learning mode",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Switch on flag mode",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Switch on tension probe",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 7,
+      "title": "Service settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Current fret",
+          "type": "INT",
+          "min": 0,
+          "max": 15,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 8,
+      "title": "Modelling tap settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "firstFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ],
+          "values": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ]
+        },
+        {
+          "id": 1,
+          "title": "UpFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            60,
+            60,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            60,
+            60,
+            40,
+            40,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 2,
+          "title": "DownFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            120,
+            100,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            120,
+            100,
+            40,
+            40,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 3,
+          "title": "internalFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            80,
+            80,
+            80,
+            80,
+            80,
+            80
+          ],
+          "values": [
+            80,
+            80,
+            80,
+            80,
+            80,
+            80
+          ]
+        },
+        {
+          "id": 4,
+          "title": "deltaUpFilterFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "values": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "id": 5,
+          "title": "deltaDownFilterFretTap",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "values": [
+            3,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": 6,
+          "title": "Switch on tap modelling",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ],
+          "values": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "id": 7,
+          "title": "firstFringe",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ],
+          "values": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "id": 8,
+          "title": "secondFringe",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ],
+          "values": [
+            60,
+            60,
+            60,
+            60,
+            60,
+            60
+          ]
+        },
+        {
+          "id": 9,
+          "title": "aboveSecFringeLev",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65
+          ],
+          "values": [
+            65,
+            65,
+            65,
+            65,
+            65,
+            65
+          ]
+        },
+        {
+          "id": 10,
+          "title": "aboveSecFringeRatio",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            160,
+            160,
+            160,
+            160,
+            160,
+            160
+          ],
+          "values": [
+            160,
+            160,
+            160,
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "id": 11,
+          "title": "belowFirstFringeLev",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ],
+          "values": [
+            30,
+            30,
+            30,
+            30,
+            30,
+            30
+          ]
+        },
+        {
+          "id": 12,
+          "title": "belowFirstFringeRatio",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            160,
+            160,
+            160,
+            160,
+            160,
+            160
+          ],
+          "values": [
+            160,
+            160,
+            160,
+            160,
+            160,
+            160
+          ]
+        },
+        {
+          "id": 13,
+          "title": "betweenFringesLev",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            45,
+            45,
+            45,
+            45,
+            45,
+            45
+          ],
+          "values": [
+            45,
+            45,
+            45,
+            45,
+            45,
+            45
+          ]
+        },
+        {
+          "id": 14,
+          "title": "betweenFringesRatio",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ],
+          "values": [
+            140,
+            140,
+            140,
+            140,
+            140,
+            140
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 9,
+      "title": "Compression settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Switch on compressor",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 1,
+          "title": "coefficient",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ],
+          "values": [
+            180,
+            180,
+            180,
+            180,
+            180,
+            180
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Level",
+          "type": "INT",
+          "min": 1,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ],
+          "values": [
+            100,
+            100,
+            100,
+            100,
+            100,
+            100
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 10,
+      "title": "Midi settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Midi channel",
+          "type": "INT",
+          "min": 0,
+          "max": 15,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ],
+          "values": [
+            6,
+            5,
+            4,
+            3,
+            2,
+            1
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Midi note",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            64,
+            59,
+            55,
+            50,
+            45,
+            40
+          ],
+          "values": [
+            64,
+            59,
+            55,
+            50,
+            45,
+            40
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Insrtument number",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10
+          ],
+          "values": [
+            0,
+            2,
+            4,
+            6,
+            8,
+            10
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Reset string midi",
+          "type": "INT",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "global": [
+    {
+      "groupId": 0,
+      "title": "Global settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Switch on trace over midi",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Switch on learning mode",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Capo for all",
+          "type": "INT",
+          "min": 0,
+          "max": 14,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 1,
+      "title": "Right muting",
+      "params": [
+        {
+          "id": 0,
+          "title": "Any string reaction mode",
+          "type": "INT",
+          "min": 0,
+          "max": 3,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Any string reaction channel",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Any string reaction CC",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            90
+          ],
+          "values": [
+            90
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Any string reaction note",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            14
+          ],
+          "values": [
+            14
+          ]
+        },
+        {
+          "id": 4,
+          "title": "Any string reaction note off",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            12
+          ],
+          "values": [
+            12
+          ]
+        },
+        {
+          "id": 5,
+          "title": "Any string note mode",
+          "type": "INT",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            0
+          ],
+          "values": [
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

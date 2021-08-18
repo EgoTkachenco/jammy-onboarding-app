@@ -3,19 +3,24 @@ import { useEffect, useState } from 'react'
 const SIZE = 188
 const MAX_HEIGHT = 110
 
-const MusicVisualizer = () => {
+const MusicVisualizer = ({ isPlaying }) => {
   const [values, setvalues] = useState(null)
   useEffect(() => {
-    let interval = setInterval(() => {
-      let newValues = new Array(SIZE)
-        .fill(0)
-        .map(() => getRandomInt(MAX_HEIGHT))
+    if (isPlaying) {
+      let interval = setInterval(() => {
+        let newValues = new Array(SIZE)
+          .fill(0)
+          .map(() => getRandomInt(MAX_HEIGHT))
+        setvalues(newValues)
+      }, 300)
+      return () => {
+        clearInterval(interval)
+      }
+    } else {
+      let newValues = new Array(SIZE).fill(0)
       setvalues(newValues)
-    }, 600)
-    return () => {
-      clearInterval(interval)
     }
-  })
+  }, [isPlaying])
   return (
     <div className="music-visualizer">
       {values?.map((v, i) => (

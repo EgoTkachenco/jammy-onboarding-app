@@ -1,11 +1,57 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import Navigation from '../components/Navigation'
 import Stepper from '../components/Stepper'
-import Range from '../components/Range'
-import HelpTooltip from '../components/HelpTooltip'
+import Dialog from '../components/Dialog'
 import { useRouter } from 'next/router'
+import { CalibrationG } from '../jammy-web-util/components/Calibrator'
+// import 'bootstrap/dist/css/bootstrap.css'
+// import '../styles/bootstrap/scss/bootstrap.scss'
+
 export default function Sensitivity() {
   const router = useRouter()
+  const texts = [
+    {
+      title: 'Take a closer look on how the sensors of your Jammy perform.',
+      text: 'On this step, don’t touch the strings to check the default values detected by the sensors. If the calibration went well the bars should be situated along the center of their windows, showing values around 2000 for the fretboard-facing sensors (top row) and around 500 for the bridge-facing sensors (bottom row).',
+    },
+    {
+      title:
+        "Let's check how the optical sensors capture the movement of the strings.",
+      text: 'For each string you can see the X and Y axes (the X is parallel to the frets and the Y is orthogonal to the fretboard). Pull the strings on the right-hand side of Jammy up and down to inspect the range. Normally, the values should reach around 0-200 when you pull the string all the way to one side and 800-1000 when you pull them all the way to the other side.',
+    },
+    {
+      title: 'Try to recalibrate the sensors to improve performance. ',
+      text: ' If the bars aren’t in the middle, click on the “Auto” button for all the uncentered sensors. You might need to click the “Auto” button a few times for the sensors to reach the middle of the window. Once done, check the performance of the strings after this additional recalibration by playing a few chords (same as you did at the very begining of the onboarding).',
+    },
+  ]
+  const [step, setStep] = useState(0)
+  const STEP_CONFIGS = [
+    {
+      showLeftPart: true,
+      isManual: false,
+    },
+    {
+      showLeftPart: false,
+      isManual: false,
+    },
+    {
+      showLeftPart: true,
+      isManual: true,
+    },
+  ]
+  const [showDialog, setShowDialog] = useState(false)
+  const prev = () => {
+    if (step === 0) router.push('/advanced')
+    if (step > 0) setStep(step - 1)
+  }
+  const next = () => {
+    if (step === 2) {
+      setShowDialog(true)
+    } else {
+      setStep(step + 1)
+    }
+  }
   return (
     <>
       <Head>
@@ -13,7 +59,20 @@ export default function Sensitivity() {
       </Head>
       <Navigation process={60} />
       <Stepper
-        onPrev={() => router.push('/sound-check')}
+        centerSlot={
+          <div className="support-btns">
+            {texts.map((btn, i) => (
+              <div
+                className={`support-btns__item ${i <= step ? 'active' : ''}`}
+                key={i}
+                onClick={() => setStep(i)}
+              >
+                {i < step ? <Icon /> : i + 1}
+              </div>
+            ))}
+          </div>
+        }
+        onPrev={prev}
         prevText={
           <div className="d-flex align-center">
             <svg
@@ -32,27 +91,54 @@ export default function Sensitivity() {
             Previous Step
           </div>
         }
-        onNext={() => router.push('/sensitivity2')}
-        nextText="Next step"
+        onNext={next}
+        nextText={step === 3 ? 'Done' : 'Next step'}
       />
       <div className="page-container sensitivity">
-        <div className="lg-text text-center">
-          Let&apos;s adjust Picking Sensitivity in <br />
-          accordance to your playing style.
+        <div className="sensitivity-top">
+          <div className="title-text text-center" style={{ maxWidth: '90%' }}>
+            {texts[step].title}
+          </div>
+          <div className="md-text text-center">{texts[step].text}</div>
         </div>
-        <div className="presets-side-card">
-          <button className="presets-side-card__btn">
-            Restore to default settings
-          </button>
-          <Range label="String 1 (high E)" value={80} />
-          <Range label="String 2 (B)" value={80} />
-          <Range label="String 3 (G)" value={80} />
-          <Range label="String 4 (D)" value={80} />
-          <Range label="String 5 (A)" value={80} />
-          <Range label="String 6 (low E)" value={80} />
-        </div>
-        <HelpTooltip />
+        <CalibrationG config={STEP_CONFIGS[step]} />
+        {showDialog && (
+          <Dialog close={() => setShowDialog(false)}>
+            <div className="title-text text-center">
+              Proceed to <br /> MIDI settings?
+            </div>
+            <button
+              className="btn btn-primary"
+              onClick={() => router.push('/software-settings')}
+            >
+              Yes
+            </button>
+            <button
+              className="btn btn-primary__outline"
+              onClick={() => router.push('/support')}
+            >
+              {"No. I'd like to contact support"}
+            </button>
+          </Dialog>
+        )}
       </div>
     </>
+  )
+}
+
+const Icon = () => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.00039 16.2001L4.80039 12.0001L3.40039 13.4001L9.00039 19.0001L21.0004 7.0001L19.6004 5.6001L9.00039 16.2001Z"
+        fill="white"
+      />
+    </svg>
   )
 }

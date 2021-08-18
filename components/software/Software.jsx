@@ -36,8 +36,11 @@ export default function Software() {
             <Image
               src="/Youtube player.png"
               alt="video"
-              layout="fill"
-              objectFit="contain"
+              // layout="fill"
+              // objectFit="fill"
+              layout="responsive"
+              width="1200"
+              height="675"
             />
           </div>
         ) : (

@@ -1,0 +1,86 @@
+.calibrator {
+  .calibrator-label-card {
+    background: #1b1b1f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    margin: 1.5rem 0 0.5rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .calibrator-strings-line {
+    display: flex;
+  }
+
+  .sensor-container {
+    height: 15.75rem;
+    width: 8.75rem;
+    border: 0.125rem solid transparent;
+    background: #1b1b1f;
+    margin-right: 0.25rem;
+    padding: 0.5rem 0.25rem 1rem;
+    &:last-child {
+      margin-right: 0;
+    }
+    &__title {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      font-weight: bold;
+    }
+    &-sensors {
+      display: flex;
+    }
+  }
+  .active .sensor-container {
+    border: 0.125rem solid #ffd60a;
+  }
+
+  .gause-sensor {
+    flex: 1;
+    margin-right: 0.25rem;
+    &:last-child {
+      margin-right: 0;
+    }
+    &__value {
+      text-align: center;
+    }
+    .gause-sensor-visualize {
+      height: 6rem;
+      &__value {
+        background: #ff00ff;
+        border-bottom: 0.5rem solid #1b15ff;
+      }
+    }
+  }
+  .sensor-auto__btn {
+    margin: 0.5rem auto;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 6.875rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @extend .btn, .btn-primary;
+
+    &.loading {
+      background: #363640;
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      svg {
+        animation: rotate 1s infinite;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}

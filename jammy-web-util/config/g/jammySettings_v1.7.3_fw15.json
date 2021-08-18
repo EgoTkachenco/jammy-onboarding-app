@@ -1,0 +1,449 @@
+{
+  "left": 15,
+  "right": 15,
+  "groups": [
+    {
+      "groupId": 0,
+      "title": "Picking Settings",
+      "params": [
+        {
+          "id": 1,
+          "title": "Second filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ],
+          "values": [
+            40,
+            40,
+            40,
+            40,
+            40,
+            40
+          ]
+        },
+        {
+          "id": 7,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 1,
+          "max": 8,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Picking Loudness",
+          "description": "Defines the velocity level of every string when picking and strumming.",
+          "default": [
+            6,
+            8,
+            8,
+            8,
+            8,
+            6
+          ],
+          "values": [
+            6,
+            8,
+            8,
+            8,
+            8,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 2,
+      "title": "Muting settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Y filter",
+          "type": "FLOAT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ],
+          "values": [
+            190,
+            190,
+            190,
+            190,
+            190,
+            190
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Slow mute time",
+          "type": "INT",
+          "min": 1,
+          "max": 200,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "values": [
+            7,
+            7,
+            7,
+            7,
+            7,
+            7
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Sharp mute",
+          "type": "INT",
+          "min": 1,
+          "max": 500,
+          "left": false,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Sharp Right-Hand Muting Sensitivity",
+          "description": "Defines how easy you can mute the sound by sharply putting your right hand on the ringing string. Lowering the level helps to fix the problem with open strings that sometimes mute themselves.",
+          "default": [
+            125,
+            125,
+            125,
+            125,
+            125,
+            125
+          ],
+          "values": [
+            125,
+            125,
+            125,
+            125,
+            125,
+            125
+          ]
+        },
+        {
+          "id": 3,
+          "title": "Sharp mute time",
+          "type": "INT",
+          "min": 1,
+          "max": 512,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "",
+          "description": "",
+          "default": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "values": [
+            5,
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 3,
+      "title": "Tapping settings",
+      "params": [
+        {
+          "id": 7,
+          "title": "Touch delta",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Left-Hand Muting Sensitivity",
+          "description": "Defines how easily you can mute the sound by touching the string on the left part of Jammy. If you experience sound cut-offs frequently when playing fast solos, it might be worth looking at and making it less sensitive. Same applies for situations when you play open chords and one of the fretting fingers is too close to the nearest open string making it mute.",
+          "default": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ],
+          "values": [
+            35,
+            35,
+            35,
+            35,
+            35,
+            35
+          ]
+        },
+        {
+          "id": 8,
+          "title": "Slide off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Disable Slides",
+          "description": "Enabling this switch will filter out any slides, which can help reduce the number of unwanted MIDI notes.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": 9,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 1,
+          "max": 32,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Hammer-On and Pull-Off Loudness",
+          "description": "Defines the velocity level of hammer-ons, pull-offs and tapping.",
+          "default": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ],
+          "values": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "id": 12,
+          "title": "Tap type",
+          "type": "INT",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Alternative Tapping Detection",
+          "description": "Switches the algorithm that's being used to detect hammer-ons and pull-offs. Set this parameter to '1' for the strings that don't produce hammer-ons or pull-offs even when their sensitivity is set to the maximum.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 4,
+      "title": "Slide settings",
+      "params": [
+        {
+          "id": 2,
+          "title": "Tap off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Disable Hammer-Ons and Pull-Offs",
+          "description": "Enabling this switch will filter out any hammer-ons, pull-offs and tapping. Only the notes you pick with your right hand will play.",
+          "default": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "values": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 5,
+      "title": "Bending settings",
+      "params": [
+        {
+          "id": 5,
+          "title": "Bending mask",
+          "type": "MASK",
+          "min": 0,
+          "max": 16383,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Bending and Vibrato",
+          "description": "Disables / enables bending and vibrato for all strings.",
+          "default": [
+            16383,
+            16383,
+            16383,
+            16383,
+            16383,
+            16383
+          ],
+          "values": [
+            16383,
+            16383,
+            16383,
+            16383,
+            16383,
+            16383
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 8,
+      "title": "Modelling tap settings",
+      "params": [
+        {
+          "id": 4,
+          "title": "deltaUpFilterFretTap",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Pull-Off Sensitivity",
+          "description": "Defines how easy it is to trigger pull-offs.",
+          "default": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ],
+          "values": [
+            4,
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "id": 5,
+          "title": "deltaDownFilterFretTap",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Hammer-On Sensitivity",
+          "description": "Defines how easy it is to trigger hammer-ons and tapping.",
+          "default": [
+            30,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          "values": [
+            30,
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        }
+      ]
+    }
+  ],
+  "global": []
+}

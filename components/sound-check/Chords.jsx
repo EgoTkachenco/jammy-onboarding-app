@@ -21,12 +21,7 @@ const Chords = () => {
       </div>
 
       <div className="chords-list">
-        <Image
-          src="/chords.png"
-          layout="fill"
-          objectFit="contain"
-          alt="Chords"
-        />
+        <Image src="/chords.png" layout="fill" objectFit="fill" alt="Chords" />
       </div>
     </div>
   )

@@ -1,5 +1,7 @@
 .sensitivity {
-  .lg-text {
+  padding-left: 10.5rem;
+  padding-right: 10.5rem;
+  .title-text {
     margin: 1.5rem 0 2rem;
   }
   .presets-side-card {
@@ -16,6 +18,18 @@
     position: relative;
     width: 100%;
     min-height: 40rem;
+  }
+  .dialog {
+    align-items: center;
+    .title-text {
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      margin-bottom: 1rem;
+      @extend .caption-text;
+      padding: 0 1rem;
+      width: 15rem;
+    }
   }
 }
 .support-btns {

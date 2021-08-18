@@ -1,51 +1,34 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-
+import Store from '../store'
+import { observer } from 'mobx-react-lite'
 import WelcomeScreen from '../components/screens/Welcome'
 import WaitMidiConnect from '../components/screens/WaitMidiConnect'
 import DeniedMidiAccess from '../components/screens/DeniedMidiAccess'
 
-export default function Home() {
-  // On this screen we should check user browser \ connect to MIDI and update firmware
-
-  // STEP 1
-  // Check browser
-  // IF NOT Chrome ---> Screen with Chrome installation
-  // IF Chrome ---> Screen with message to connect midi
+const Home = observer(() => {
   const router = useRouter()
-  if (process.browser && !window.chrome) router.push('/chrome-required')
-
   // STEP 2 (After click done btn in chrome)
   // Show Screen with info for connecting midi to Chrome
   // IF MIDI connection denied ---> Screen with information forn Denied access
   // IF MIDI connection accessed ---> Screen with firmware update
   const [isLoading, setisLoading] = useState(false)
   const [isDenied, setisDenied] = useState(false)
-
-  const connectMidi = () => {
+  const connectMidi = async () => {
     setisLoading(true)
-    function onMIDISuccess(midiAccess) {
-      setisLoading(false)
-      debugger
-      if (midiAccess.inputs.size > 0) {
-        for (const input of midiAccess.inputs) {
-          console.log(input)
-        }
-        // router.push('/sound-check')
-      } else {
-        setTimeout(() => onMIDISuccess(midiAccess), 5000)
-      }
-    }
-
-    function onMIDIFailure(msg) {
-      setisLoading(false)
-      setisDenied(true)
-      console.log('Failed to get MIDI access - ' + msg)
-    }
-    navigator
-      .requestMIDIAccess({ sysex: true })
-      .then(onMIDISuccess, onMIDIFailure)
+    Store.initJammy()
+      .then(() => {
+        router.push('/sound-check')
+      })
+      .catch((err) => {
+        debugger
+        setisDenied(true)
+        // setTimeout(() => connectMidi(midiAccess), 5000)
+      })
+      .finally(() => {
+        setisLoading(false)
+      })
   }
 
   const renderScreen = () => {
@@ -64,4 +47,6 @@ export default function Home() {
       {renderScreen()}
     </>
   )
-}
+})
+
+export default Home

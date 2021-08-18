@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
-export default function Navigation({ process }) {
+import { observer } from 'mobx-react-lite'
+import Store from '../store'
+const Navigation = observer(({ process }) => {
+  const isPlaying = Store.isPlaying
   return (
     <div className="navigation-wrapper">
       <NavigationProcess process={process} />
@@ -15,11 +18,12 @@ export default function Navigation({ process }) {
         </div>
         <div className="navigation__label success">Connected</div>
 
-        <AnimatedLogo />
+        <AnimatedLogo isPlaying={isPlaying} />
       </div>
     </div>
   )
-}
+})
+export default Navigation
 
 function NavigationProcess({ process }) {
   return (
@@ -32,17 +36,22 @@ function NavigationProcess({ process }) {
   )
 }
 
-function AnimatedLogo() {
+function AnimatedLogo({ isPlaying }) {
   const [lines, setvalues] = useState(null)
   useEffect(() => {
-    let interval = setInterval(() => {
-      let newValues = new Array(9).fill(0).map(() => getRandomInt(51))
+    if (isPlaying) {
+      let interval = setInterval(() => {
+        let newValues = new Array(9).fill(0).map(() => getRandomInt(51))
+        setvalues(newValues)
+      }, 600)
+      return () => {
+        clearInterval(interval)
+      }
+    } else {
+      let newValues = new Array(9).fill(0)
       setvalues(newValues)
-    }, 600)
-    return () => {
-      clearInterval(interval)
     }
-  })
+  }, [isPlaying])
   return (
     <div className="navigation-animated-logo">
       <svg
