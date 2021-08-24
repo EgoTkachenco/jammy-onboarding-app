@@ -26,6 +26,9 @@
     height: 3.5rem;
     max-height: 3.5rem;
     .navigation__logo {
+      height: 1.625rem;
+      width: 3.625rem;
+      position: relative;
       margin-right: 2rem;
     }
     .navigation__label {
@@ -35,8 +38,11 @@
       border-radius: 1.6875rem;
       padding: calc(1rem / 16) 1rem;
       color: #1b1b1f;
-      &.success {
+      &.Connected {
         background: #32d74b;
+      }
+      &.Disconnected {
+        background: #ff453a;
       }
     }
     .navigation-animated-logo {

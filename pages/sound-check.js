@@ -4,6 +4,7 @@ import Navigation from '../components/Navigation'
 import SoundCheckCmp from '../components/sound-check/SoundCheck'
 import Stepper from '../components/Stepper'
 import SetUpLinks from '../components/sound-check/SetUpLinks'
+
 export default function SoundCheck() {
   const [lastStep, setlastStep] = useState(false)
   return (

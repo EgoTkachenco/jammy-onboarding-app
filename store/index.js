@@ -8,24 +8,25 @@ configure({
 class Store {
   status = null
   jammyName = null
-  get midiService() {
-    return midiService
-  }
-  get jammy() {
-    return jammy
-  }
+  isRebooted = false
+  // START SCREEN TABS | Welcome, Waiting, Denied, CheckFirmware, UpdateFirmware, Reboot |
+  startScreenTab = 'Welcome'
+
   isPlaying = false
   isPlayingTime = null
   constructor() {
-    makeAutoObservable(this, { midiService: computed, jammy: computed })
+    makeAutoObservable(this, {
+      midiService: computed,
+      jammy: computed,
+    })
   }
 
   initJammy = () => {
-    return this.midiService.init().then(() => {
-      this.midiService.loadState()
-      if (this.midiService.midiAccess) {
+    this.startScreenTab = 'Waiting'
+    return midiService.init().then(() => {
+      midiService.loadState()
+      if (midiService.midiAccess.inputs.size > 0) {
         let input
-        debugger
         for (const inp of midiService.midiAccess.inputs) {
           input = inp[1]
         }
@@ -41,24 +42,66 @@ class Store {
             jammy.api = JAMMY_E
             this.jammyName = 'Jammy E'
           }
-          midiService.addEventListener('midimessage', (e) => {
-            if (this.isPlaying && this.isPlayTime) {
-              clearTimeout(this.isPlayTime)
-            } else {
-              this.isPlaying = true
-            }
-            this.isPlayTime = setTimeout(() => {
-              this.isPlaying = false
-              clearTimeout(this.isPlayTime)
-            }, 1000)
-          })
-          return
+          // Check jammy status
+          let statusCheckInterval = setInterval(() => {
+            this.status =
+              midiService.midiAccess.inputs.size === 1
+                ? 'Connected'
+                : 'Disconnected'
+          }, 2000)
+          // Midi Access and Jammy detected
+          this.startScreenTab = 'CheckFirmware'
+          console.log('Version: ', input.version)
+          if (!this.isRebooted) {
+            setTimeout(() => {
+              this.startScreenTab = 'UpdateFirmware'
+              setTimeout(() => {
+                this.startScreenTab = 'Reboot'
+                // Wait untill jammy off
+                let interval = setInterval(() => {
+                  if (!this.isRebooted && this.status === 'Disconnected') {
+                    clearInterval(interval)
+                    // wait until jammy on
+                    this.isRebooted = true
+                    interval = setInterval(() => {
+                      if (this.status === 'Connected') {
+                        clearInterval(interval)
+                        clearInterval(statusCheckInterval)
+                      }
+                    }, 1000)
+                  }
+                }, 1000)
+              }, 4000)
+            }, 4000)
+          } else {
+            midiService.addEventListener('midimessage', (e) => {
+              if (this.isPlaying && this.isPlayTime) {
+                clearTimeout(this.isPlayTime)
+              } else {
+                this.isPlaying = true
+              }
+              this.isPlayTime = setTimeout(() => {
+                this.isPlaying = false
+                clearTimeout(this.isPlayTime)
+              }, 1000)
+            })
+            return Promise.resolve(true)
+          }
+          return Promise.reject('Updating')
+        } else {
+          return Promise.reject('No Input')
         }
-        return new Promise.reject('No Input')
       } else {
-        // throw Error('denied')
+        this.startScreenTab = 'Denied'
       }
     })
+  }
+
+  get midiService() {
+    return midiService
+  }
+  get jammy() {
+    return jammy
   }
 }
 

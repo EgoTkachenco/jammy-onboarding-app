@@ -4,6 +4,8 @@ import { observer } from 'mobx-react-lite'
 import Store from '../store'
 const Navigation = observer(({ process }) => {
   const isPlaying = Store.isPlaying
+  const status = Store.status
+  console.log('STATUS', status)
   return (
     <div className="navigation-wrapper">
       <NavigationProcess process={process} />
@@ -11,12 +13,12 @@ const Navigation = observer(({ process }) => {
         <div className="navigation__logo">
           <Image
             src="/jammy-white-logo__small.svg"
-            height={26}
-            width={58}
+            layout="fill"
+            objectFit="fill"
             alt="Logo"
           />
         </div>
-        <div className="navigation__label success">Connected</div>
+        <div className={`navigation__label ${status}`}>{status}</div>
 
         <AnimatedLogo isPlaying={isPlaying} />
       </div>

@@ -1,11 +1,14 @@
-import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import Store from '../store'
 import { observer } from 'mobx-react-lite'
 import WelcomeScreen from '../components/screens/Welcome'
 import WaitMidiConnect from '../components/screens/WaitMidiConnect'
 import DeniedMidiAccess from '../components/screens/DeniedMidiAccess'
+import {
+  CheckingForUpdate,
+  Updating,
+  Reboot,
+} from '../components/start/FirmwareUpdate'
 
 const Home = observer(() => {
   const router = useRouter()
@@ -13,40 +16,50 @@ const Home = observer(() => {
   // Show Screen with info for connecting midi to Chrome
   // IF MIDI connection denied ---> Screen with information forn Denied access
   // IF MIDI connection accessed ---> Screen with firmware update
-  const [isLoading, setisLoading] = useState(false)
-  const [isDenied, setisDenied] = useState(false)
   const connectMidi = async () => {
-    setisLoading(true)
     Store.initJammy()
       .then(() => {
         router.push('/sound-check')
       })
       .catch((err) => {
         debugger
-        setisDenied(true)
+        // setisDenied(true)
         // setTimeout(() => connectMidi(midiAccess), 5000)
       })
       .finally(() => {
-        setisLoading(false)
+        // setisLoading(false)
       })
   }
+  const activeTab = Store.startScreenTab
+  const jammyName = Store.jammyName
+  const isRebooted = Store.isRebooted
 
-  const renderScreen = () => {
-    if (!isDenied && !isLoading) return <WelcomeScreen action={connectMidi} />
-    if (!isDenied && isLoading) return <WaitMidiConnect />
-    if (isDenied)
-      return <DeniedMidiAccess action={() => window.location.reload(true)} />
+  const renderScreen = (activeTab) => {
+    switch (activeTab) {
+      case 'Welcome':
+        return <WelcomeScreen action={connectMidi} />
+      case 'Waiting':
+        return <WaitMidiConnect />
+      case 'Denied':
+        return <DeniedMidiAccess action={() => window.location.reload(true)} />
+      case 'CheckFirmware':
+        return <CheckingForUpdate process={50} />
+      case 'UpdateFirmware':
+        return <Updating />
+      case 'Reboot':
+        return (
+          <Reboot
+            jammyName={jammyName}
+            isRebooted={isRebooted}
+            init={connectMidi}
+          />
+        )
+      default:
+        return null
+    }
   }
 
-  return (
-    <>
-      <Head>
-        <title>My page title</title>
-      </Head>
-
-      {renderScreen()}
-    </>
-  )
+  return <>{renderScreen(activeTab)}</>
 })
 
 export default Home

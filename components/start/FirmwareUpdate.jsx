@@ -1,71 +1,134 @@
-import { useState, useEffect } from 'react'
 import Navigation from '../Navigation'
+import Lottie from 'react-lottie'
+import * as animationDataG1 from '../../public/animations/Jammy G1 856x650'
+import * as animationDataE1 from '../../public/animations/Jammy E1 946x650.json'
+import * as animationDataG2 from '../../public/animations/Jammy dont touch G 375x667.json'
+import * as animationDataE2 from '../../public/animations/Jammy dont touch E 946x650.json'
 import { useRouter } from 'next/router'
-export default function FirmwareUpdate() {
-  const router = useRouter()
-  const [isUploading, setisUploading] = useState(false)
-  const [process, setProcess] = useState(0)
-  const [isFinished, setisFinished] = useState(false)
-  useEffect(() => {
-    setTimeout(() => {
-      setisUploading(true)
-      let pr = process
-      let interval = setInterval(() => {
-        console.log(pr)
-        if (pr < 100) {
-          pr += 5
-          setProcess(pr)
-        } else {
-          clearInterval(interval)
-          setisUploading(false)
-          setisFinished(true)
-
-          setTimeout(() => {
-            router.push('/sound-check')
-          }, 3000)
-        }
-      }, 150)
-    }, 1000)
-  }, [process, router])
+function FirmwareUpdate({ children }) {
   return (
     <div className="page-container centered">
-      <Navigation process={isFinished ? 50 : isUploading ? 30 : 10} />
-      {!isUploading && !isFinished && <CheckingForUpdate />}
-      {isUploading && <Updating process={process} />}
-      {isFinished && <Reboot />}
+      <Navigation process={25} />
+      {children}
     </div>
   )
 }
 
 const CheckingForUpdate = () => {
   return (
-    <>
+    <FirmwareUpdate>
       <div className="title-text text-center">
         Checking for firmware updates
       </div>
       <Loader />
-    </>
+    </FirmwareUpdate>
   )
 }
 
 const Updating = ({ process }) => {
   return (
-    <div className="firmware-update">
-      <div className="title-text text-center">
-        Installing the latest firmware
+    <FirmwareUpdate>
+      <div className="firmware-update">
+        <div className="title-text text-center">
+          Installing the latest firmware
+        </div>
+        <LoaderLine width={process + '%'} />
+        <div className="sm-text text-center">{process}%</div>
       </div>
-      <LoaderLine width={process + '%'} />
-      <div className="sm-text text-center">{process}%</div>
-    </div>
+    </FirmwareUpdate>
   )
 }
 
-const Reboot = () => {
+const Reboot = ({ jammyName, isRebooted, init }) => {
+  const optionsG1 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataG1,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+  const optionsE1 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataE1,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+  const optionsG2 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataG2,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+  const optionsE2 = {
+    loop: true,
+    autoplay: true,
+    animationData: animationDataE2,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  }
+  const router = useRouter()
+
   return (
-    <div className="reboot">
-      <div className="title-text text-center">Please reboot the guitar</div>
-      <div className="sm-text text-center">Waiting for reboot</div>
-    </div>
+    <FirmwareUpdate>
+      <div className="reboot">
+        {!isRebooted ? (
+          <>
+            <div className="title-text text-center">
+              Please reboot the guitar
+            </div>
+            <div className="sm-text text-center">Waiting for reboot</div>
+          </>
+        ) : (
+          <div className="rebooted-text">
+            <div className="title-text text-center">
+              To make sure your first jam on Jammy is pleasant, <br />
+              you’ll need to calibrate it correctly.
+            </div>
+            <div className="sm-text text-center">
+              When you push the power button to turn your Jammy on, the LED
+              turns purple for a few seconds to indicate that the sensors are
+              determining their default values. Please avoid touching the
+              strings while the LED is glowing purple — they’re in the process
+              of calibration. Once the LED is white/light blue, your Jammy is
+              ready to play.
+            </div>
+            <button className="btn btn-primary" onClick={init}>
+              Got it
+            </button>
+          </div>
+        )}
+
+        <div className={`animation-screen ${isRebooted ? 'rebooted' : ''}`}>
+          {jammyName === 'Jammy E' &&
+            (isRebooted ? (
+              <Lottie options={optionsG2} height="42rem" width="23.4375rem" />
+            ) : (
+              <Lottie options={optionsG1} height="40.625rem" width="53.5rem" />
+            ))}
+          {jammyName === 'Jammy G' &&
+            (isRebooted ? (
+              <Lottie
+                options={optionsE2}
+                height="40.625rem"
+                width="59.125rem"
+              />
+            ) : (
+              // <Lottie options={optionsE1} height="946px" width="650px" />
+              <Lottie
+                options={optionsE1}
+                height="40.625rem"
+                width="59.125rem"
+              />
+            ))}
+        </div>
+      </div>
+    </FirmwareUpdate>
   )
 }
 
@@ -99,3 +162,5 @@ const LoaderLine = ({ width }) => {
     </div>
   )
 }
+
+export { CheckingForUpdate, Updating, Reboot }

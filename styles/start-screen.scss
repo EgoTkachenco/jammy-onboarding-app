@@ -111,7 +111,49 @@
   }
 }
 .reboot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  .title-text {
+    position: relative;
+    z-index: 10;
+  }
   .sm-text {
-    line-height: 7.6rem;
+    position: relative;
+    z-index: 10;
+    line-height: 4.6rem;
+  }
+  .animation-screen {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    &.rebooted {
+      bottom: unset;
+      top: 0;
+      margin-top: -4rem;
+    }
+  }
+  .rebooted-text {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-bottom: 6rem;
+    align-items: center;
+    .title-text {
+    }
+    .sm-text {
+      margin-top: auto;
+      line-height: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 53%;
+    }
+    .btn {
+      z-index: 10;
+
+      position: relative;
+    }
   }
 }

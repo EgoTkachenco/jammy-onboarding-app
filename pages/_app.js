@@ -15,6 +15,7 @@ const MyApp = observer(({ Component, pageProps }) => {
     if (process.browser && !window.chrome) router.push('/chrome-required')
     if (process.browser && mobileAndTabletCheck()) router.push('/mobile')
   }, [])
+  // router ?
   const jammy = Store.jammy
   useEffect(() => {
     if (!jammy) router.push('/')
@@ -23,6 +24,7 @@ const MyApp = observer(({ Component, pageProps }) => {
   return (
     <>
       <Head>
+        <title>Jammy Onboarding</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Component {...pageProps} />
