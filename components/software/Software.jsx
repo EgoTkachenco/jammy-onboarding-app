@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Image from 'next/image'
+import YouTube from 'react-youtube'
+import FormsStore from '../../store/FormsStore'
+import { observer } from 'mobx-react-lite'
 export default function Software() {
   const router = useRouter()
   const [active, setactive] = useState(null)
@@ -17,6 +20,7 @@ export default function Software() {
       url: '/softwares/default.png',
     },
   ]
+
   return (
     <>
       <Stepper
@@ -33,14 +37,10 @@ export default function Software() {
       <div className="page-container software">
         {active ? (
           <div className="software__video">
-            <Image
-              src="/Youtube player.png"
-              alt="video"
-              // layout="fill"
-              // objectFit="fill"
-              layout="responsive"
-              width="1200"
-              height="675"
+            <YouTube
+              videoId="36XeB1T8l7Q"
+              opts={{ autoplay: 1, width: '100%', height: '100%' }}
+              containerClassName="software__video-container"
             />
           </div>
         ) : (
@@ -83,8 +83,16 @@ export default function Software() {
   )
 }
 
-const Feedback = () => {
-  const [sent, setSent] = useState(false)
+const Feedback = observer(() => {
+  const isDawFormSended = FormsStore.isDawFormSended
+  const sendForm = (e) => {
+    e.preventDefault()
+    var formData = new FormData(
+      document.querySelector('.software-feedback__input')
+    )
+    let daw = formData.get('daw')
+    if (daw) FormsStore.sendDawForm(daw)
+  }
   return (
     <div className="software-feedback">
       <div className="caption-text text-center">
@@ -92,19 +100,19 @@ const Feedback = () => {
         with us. We&apos;ll collect <br /> this info and if possible, add the
         corresponding MIDI preset later on.
       </div>
-      {sent ? (
+      {isDawFormSended ? (
         <div className="software-feedback__sent">Sent</div>
       ) : (
-        <div className="software-feedback__input">
-          <input placeholder="Your DAW" type="text" />
-          <button className="btn btn-primary" onClick={() => setSent(true)}>
+        <form className="software-feedback__input" onSubmit={sendForm}>
+          <input placeholder="Your DAW" type="text" name="daw" />
+          <button className="btn btn-primary" type="submit">
             Send
           </button>
-        </div>
+        </form>
       )}
     </div>
   )
-}
+})
 
 const ArrowIcon = () => {
   return (

@@ -12,17 +12,17 @@ export default function Sensitivity() {
   const router = useRouter()
   const texts = [
     {
-      title: 'Take a closer look on how the sensors of your Jammy perform.',
-      text: 'On this step, don’t touch the strings to check the default values detected by the sensors. If the calibration went well the bars should be situated along the center of their windows, showing values around 2000 for the fretboard-facing sensors (top row) and around 500 for the bridge-facing sensors (bottom row).',
+      title: "Take a closer look at how your Jammy's sensors perform.",
+      text: 'On this step, don’t touch the strings to check the default values detected by the sensors. If the calibration went well, the bars should reach the center of their windows, showing values around 2000 for the fretboard-facing sensors (top row) and around 500 for the bridge-facing sensors (bottom row).',
     },
     {
       title:
-        "Let's check how the optical sensors capture the movement of the strings.",
+        "Let's check how the optical sensors capture the strings' movement.",
       text: 'For each string you can see the X and Y axes (the X is parallel to the frets and the Y is orthogonal to the fretboard). Pull the strings on the right-hand side of Jammy up and down to inspect the range. Normally, the values should reach around 0-200 when you pull the string all the way to one side and 800-1000 when you pull them all the way to the other side.',
     },
     {
       title: 'Try to recalibrate the sensors to improve performance. ',
-      text: ' If the bars aren’t in the middle, click on the “Auto” button for all the uncentered sensors. You might need to click the “Auto” button a few times for the sensors to reach the middle of the window. Once done, check the performance of the strings after this additional recalibration by playing a few chords (same as you did at the very begining of the onboarding).',
+      text: `If the bar isn't in the middle, click the "Auto" button. You might need to click it several times to center the sensor.Once done, check the strings' performance by playing a few chords.`,
     },
   ]
   const [step, setStep] = useState(0)
@@ -96,7 +96,7 @@ export default function Sensitivity() {
       />
       <div className="page-container sensitivity">
         <div className="sensitivity-top">
-          <div className="title-text text-center" style={{ maxWidth: '90%' }}>
+          <div className="lg-text text-center" style={{ maxWidth: '67%' }}>
             {texts[step].title}
           </div>
           <div className="md-text text-center">{texts[step].text}</div>

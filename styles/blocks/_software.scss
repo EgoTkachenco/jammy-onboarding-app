@@ -4,7 +4,11 @@
   }
   &__video {
     width: 100%;
-    height: 42rem;
+    height: calc(100vh - 8rem);
+    &-container {
+      width: 100%;
+      height: 100%;
+    }
   }
   &-list {
     margin: 1.5rem 0 2.5rem;
@@ -47,7 +51,6 @@
       align-items: center;
       background: #363640;
       padding: 0.5rem 1rem;
-      color: #fff;
 
       input {
         height: 100%;
@@ -56,6 +59,8 @@
         border: none;
         outline: none;
         background: none;
+        color: #fff;
+
         &::placeholder {
           color: #aaaab6;
         }

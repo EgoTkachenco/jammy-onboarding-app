@@ -2,9 +2,17 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Dialog from '../Dialog'
-export default function ContactFrom() {
+import FormsStore from '../../store/FormsStore'
+import { observer } from 'mobx-react-lite'
+const ContactForm = observer(() => {
+  const isFormSended = FormsStore.isSupportFormSended
+  const handleForm = () => {
+    var formData = new FormData(document.querySelector('.support-form'))
+    let email = formData.get('email')
+    let message = formData.get('message')
+    FormsStore.sendSupportForm({ email, message })
+  }
   const router = useRouter()
-  const [showDialog, setShowDialog] = useState(false)
   return (
     <>
       <Stepper
@@ -27,20 +35,22 @@ export default function ContactFrom() {
             Previous Step
           </div>
         }
-        onNext={() => setShowDialog(true)}
+        onNext={handleForm}
         nextText="Submit"
       />
       <div className="page-container support">
         <div className="title-text">Contact Jammy Support Band</div>
-        <div className="support-form">
+        <form className="support-form">
           <input
             className="support-form__field"
             type="email"
             placeholder="Enter your email"
+            name="email"
           />
           <textarea
             placeholder="Describe the issue so we could better assist you"
             rows="8"
+            name="message"
           ></textarea>
           <div className="sensors_values">
             <svg
@@ -72,9 +82,9 @@ export default function ContactFrom() {
             </svg>
             Attach a short video demonstrating the problem (optional)
           </div>
-        </div>
-        {showDialog && (
-          <Dialog close={() => setShowDialog(false)}>
+        </form>
+        {isFormSended && (
+          <Dialog>
             <div className="title-text text-center">
               Thanks for submitting your <br /> support request!
             </div>
@@ -88,8 +98,13 @@ export default function ContactFrom() {
               href="https://playjammy.com/plugin/"
               rel="noreferrer"
             >
-              <button className="btn btn-primary">
-                Close onboarding and proceed to the companion app
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  window.location.href = 'http://playjammy.com/'
+                }}
+              >
+                Finish onboarding and proceed to the desktop app
               </button>
             </a>
           </Dialog>
@@ -97,7 +112,9 @@ export default function ContactFrom() {
       </div>
     </>
   )
-}
+})
+
+export default ContactForm
 
 const ArrowIcon = () => {
   return (
