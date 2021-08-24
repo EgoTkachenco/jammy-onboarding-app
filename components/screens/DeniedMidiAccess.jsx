@@ -2,10 +2,11 @@ import Image from 'next/image'
 export default function DeniedMidiAccess(props) {
   return (
     <div className="page-container no-navigation denied-access">
-      <div className="title-text text-center">Denied Access</div>
+      <div className="title-text text-center">MIDI access denied</div>
       <div className="sm-text text-center white-50">
         This site needs permission to send messages to MIDI devices (such as
-        your Jammy) <br />
+        your Jammy)
+        <br />
         Follow instructions below to provide MIDI access in your browser
       </div>
       <div className="images-wrapper">
