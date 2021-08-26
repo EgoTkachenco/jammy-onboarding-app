@@ -9,6 +9,7 @@ class Store {
   status = null
   jammyName = null
   isRebooted = false
+  isInited = false
   // START SCREEN TABS | Welcome, Waiting, Denied, CheckFirmware, UpdateFirmware, Reboot |
   startScreenTab = 'Welcome'
 
@@ -74,6 +75,7 @@ class Store {
               }, 4000)
             }, 4000)
           } else {
+            this.isInited = true
             midiService.addEventListener('midimessage', (e) => {
               if (this.isPlaying && this.isPlayTime) {
                 clearTimeout(this.isPlayTime)

@@ -34,9 +34,9 @@
     &-sensors {
       display: flex;
     }
-  }
-  .active .sensor-container {
-    border: 0.125rem solid #ffd60a;
+    &.active {
+      border: 0.125rem solid #ffd60a;
+    }
   }
 
   .gause-sensor {

@@ -6,10 +6,11 @@ import { observer } from 'mobx-react-lite'
 import Store from '../../store'
 const SoundCheck = observer(() => {
   const jammyName = Store.jammyName || 'Jammy E'
+  const isPlaying = Store.isPlaying
   const [showMessage, setShowMessage] = useState(false)
   useEffect(() => {
-    setTimeout(() => setShowMessage(true), 2000)
-  }, [])
+    if (isPlaying && !showMessage) setTimeout(() => setShowMessage(true), 10000)
+  }, [isPlaying])
   const videoLink =
     jammyName === 'Jammy G' ? '/videos/Jammy G.mp4' : '/videos/Jammy_E.mp4'
   return (

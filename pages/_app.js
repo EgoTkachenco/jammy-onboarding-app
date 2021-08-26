@@ -16,10 +16,14 @@ const MyApp = observer(({ Component, pageProps }) => {
     if (process.browser && mobileAndTabletCheck()) router.push('/mobile')
   }, [])
   // router ?
-  const jammy = Store.jammy
+  const isInited = Store.isInited
   useEffect(() => {
-    if (!jammy) router.push('/')
-  }, [jammy])
+    // if (
+    //   !isInited &&
+    //   !['/chrome-required', '/mobile', '/'].includes(router.pathname)
+    // )
+    //   router.push('/')
+  }, [router])
 
   return (
     <>

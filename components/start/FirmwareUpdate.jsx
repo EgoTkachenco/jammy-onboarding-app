@@ -5,6 +5,7 @@ import * as animationDataE1 from '../../public/animations/Jammy E1 946x650.json'
 import * as animationDataG2 from '../../public/animations/Jammy dont touch G 375x667.json'
 import * as animationDataE2 from '../../public/animations/Jammy dont touch E 946x650.json'
 import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
 function FirmwareUpdate({ children }) {
   return (
     <div className="page-container centered">
@@ -40,37 +41,35 @@ const Updating = ({ process }) => {
 }
 
 const Reboot = ({ jammyName, isRebooted, init }) => {
-  const optionsG1 = {
-    loop: true,
+  const [isStopped, setisStopped] = useState(false)
+  useEffect(() => {
+    setisStopped(false)
+  }, [isRebooted])
+  const commonProps = {
+    loop: false,
     autoplay: true,
-    animationData: animationDataG1,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+  }
+  const eventListeners = [
+    {
+      eventName: 'complete',
+      callback: () => setisStopped(true),
     },
+  ]
+  const optionsG1 = {
+    ...commonProps,
+    animationData: animationDataG1,
   }
   const optionsE1 = {
-    loop: true,
-    autoplay: true,
+    ...commonProps,
     animationData: animationDataE1,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
   }
   const optionsG2 = {
-    loop: true,
-    autoplay: true,
+    ...commonProps,
     animationData: animationDataG2,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
   }
   const optionsE2 = {
-    loop: true,
-    autoplay: true,
+    ...commonProps,
     animationData: animationDataE2,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
   }
   const router = useRouter()
 
@@ -85,7 +84,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
             <div className="sm-text text-center">Waiting for reboot</div>
           </>
         ) : (
-          <div className="rebooted-text">
+          <div className={`rebooted-text ${isStopped ? 'show' : ''}`}>
             <div className="title-text text-center">
               To make sure your first jam on Jammy is pleasant, <br />
               you’ll need to calibrate it correctly.
@@ -104,19 +103,36 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
           </div>
         )}
 
-        <div className={`animation-screen ${isRebooted ? 'rebooted' : ''}`}>
-          {jammyName === 'Jammy E' &&
-            (isRebooted ? (
-              <Lottie options={optionsG2} height="42rem" width="23.4375rem" />
-            ) : (
-              <Lottie options={optionsG1} height="40.625rem" width="53.5rem" />
-            ))}
+        <div
+          className={`animation-screen ${isRebooted ? 'rebooted' : ''}`}
+          onClick={() => setisStopped(false)}
+        >
           {jammyName === 'Jammy G' &&
+            (isRebooted ? (
+              <Lottie
+                options={optionsG2}
+                height="42rem"
+                width="23.4375rem"
+                isStopped={isStopped}
+                eventListeners={eventListeners}
+              />
+            ) : (
+              <Lottie
+                options={optionsG1}
+                height="40.625rem"
+                width="53.5rem"
+                isStopped={isStopped}
+                eventListeners={eventListeners}
+              />
+            ))}
+          {jammyName === 'Jammy E' &&
             (isRebooted ? (
               <Lottie
                 options={optionsE2}
                 height="40.625rem"
                 width="59.125rem"
+                isStopped={isStopped}
+                eventListeners={eventListeners}
               />
             ) : (
               // <Lottie options={optionsE1} height="946px" width="650px" />
@@ -124,6 +140,8 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 options={optionsE1}
                 height="40.625rem"
                 width="59.125rem"
+                isStopped={isStopped}
+                eventListeners={eventListeners}
               />
             ))}
         </div>

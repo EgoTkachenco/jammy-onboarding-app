@@ -1,4 +1,5 @@
 .midi-settings {
+  padding-bottom: 10rem;
   .lg-text {
     margin: 1.5rem 0 0.5rem;
   }
@@ -25,8 +26,10 @@
   }
 
   .dialog {
+    align-items: center;
     .title-text {
       margin-bottom: 2.5rem;
+      line-height: 4rem;
     }
     .btn {
       margin-bottom: 1rem;

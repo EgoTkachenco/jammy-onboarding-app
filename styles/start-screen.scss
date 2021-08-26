@@ -115,6 +115,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  width: 100%;
   .title-text {
     position: relative;
     z-index: 10;
@@ -142,13 +143,27 @@
     flex: 1;
     padding-bottom: 6rem;
     align-items: center;
+    position: absolute;
+    top: -10rem;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+
+    &.show {
+      top: 1rem;
+      opacity: 1;
+    }
     .title-text {
+      background: #000;
     }
     .sm-text {
       margin-top: auto;
       line-height: 1.5rem;
       margin-bottom: 2rem;
       max-width: 53%;
+      background: #000;
     }
     .btn {
       z-index: 10;

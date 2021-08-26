@@ -6,11 +6,15 @@ import FormsStore from '../../store/FormsStore'
 import { observer } from 'mobx-react-lite'
 const ContactForm = observer(() => {
   const isFormSended = FormsStore.isSupportFormSended
+  const [file, setFile] = useState(null)
   const handleForm = () => {
     var formData = new FormData(document.querySelector('.support-form'))
     let email = formData.get('email')
     let message = formData.get('message')
-    FormsStore.sendSupportForm({ email, message })
+    FormsStore.sendSupportForm({ email, message, file })
+  }
+  const attachFile = (e) => {
+    setFile(e.target.files[0])
   }
   const router = useRouter()
   return (
@@ -68,6 +72,7 @@ const ContactForm = observer(() => {
             Sensors&apos; values automatically attached.
           </div>
           <div className="file-input">
+            <input type="file" onChange={attachFile} />
             <svg
               width="24"
               height="24"
@@ -80,7 +85,9 @@ const ContactForm = observer(() => {
                 fill="#FF00FF"
               />
             </svg>
-            Attach a short video demonstrating the problem (optional)
+            {file
+              ? file.name
+              : 'Attach a short video demonstrating the problem (optional)'}
           </div>
         </form>
         {isFormSended && (

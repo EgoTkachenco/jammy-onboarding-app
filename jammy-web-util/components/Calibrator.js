@@ -145,9 +145,9 @@ const SensorManualContro = ({ manualEnabled, string, axis, part, store }) => {
   }
 }
 
-const GaugeSensors = ({ string, part, store, config }) => {
+const GaugeSensors = ({ string, part, store, config, isActive }) => {
   return (
-    <div className="sensor-container">
+    <div className={`sensor-container ${isActive ? 'active' : ''}`}>
       <div className="sensor-container__title">{STRINGNAMES[string]}</div>
       <div className="sensor-container-sensors">
         <GaugeSensor string={string} part={part} axis="x" store={store} />
@@ -529,14 +529,13 @@ class CalibrationDashboard extends Component {
                       'isBothTouched',
                     ].includes(store.strings[string].nowTouchState)
                     return (
-                      <div className={`${isActive ? 'active' : ''}`}>
-                        <GaugeSensors
-                          string={string}
-                          part="left"
-                          store={store}
-                          config={this.props.config}
-                        />
-                      </div>
+                      <GaugeSensors
+                        string={string}
+                        part="left"
+                        store={store}
+                        config={this.props.config}
+                        isActive={isActive}
+                      />
                     )
                   }}
                 </Observer>
@@ -556,14 +555,13 @@ class CalibrationDashboard extends Component {
                   store.strings[string].nowTouchState
                 )
                 return (
-                  <div className={`${isActive ? 'active' : ''}`}>
-                    <GaugeSensors
-                      string={string}
-                      part="right"
-                      store={store}
-                      config={this.props.config}
-                    />
-                  </div>
+                  <GaugeSensors
+                    string={string}
+                    part="right"
+                    store={store}
+                    config={this.props.config}
+                    isActive={isActive}
+                  />
                 )
               }}
             </Observer>

@@ -135,9 +135,20 @@ div {
   top: 8rem;
   left: 0;
   width: 100%;
-  height: 119vh;
+  height: calc(100vh - 8rem);
   object-fit: cover;
+  animation: video-back forwards 1s;
+  animation-delay: 3.5s;
+  @keyframes video-back {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 }
+
 .sound-check {
   position: relative;
   height: 100%;
@@ -157,7 +168,7 @@ div {
   }
 
   .lg-text {
-    margin-top: 10rem;
+    margin-top: 8rem;
     font-weight: 900;
     margin-bottom: 2rem;
   }
@@ -202,10 +213,53 @@ div {
   }
   .chords-list {
     transition: all 1s;
-    transform: translatex(100%);
-    height: 14rem;
     opacity: 0;
     width: 100vw;
+    position: absolute;
+    left: 0;
+    bottom: 5rem;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      position: relative;
+      z-index: 10;
+    }
+
+    .string-wrapper {
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      .string {
+        background: #292931;
+        height: 0.125rem;
+        width: 100%;
+
+        &:nth-child(1) {
+          height: 1px;
+        }
+        &:nth-child(2),
+        &:nth-child(3) {
+          height: 2px;
+        }
+        &:nth-child(4),
+        &:nth-child(5) {
+          height: 3px;
+        }
+        &:nth-child(6) {
+          height: 4px;
+        }
+      }
+    }
   }
   &.active {
     .chords-activator svg {
@@ -213,8 +267,7 @@ div {
     }
     .chords-list {
       opacity: 1;
-      bottom: 5rem;
-      transform: translateX(0);
+      bottom: -1rem;
     }
   }
 }
