@@ -18,11 +18,11 @@ const MyApp = observer(({ Component, pageProps }) => {
   // router ?
   const isInited = Store.isInited
   useEffect(() => {
-    // if (
-    //   !isInited &&
-    //   !['/chrome-required', '/mobile', '/'].includes(router.pathname)
-    // )
-    //   router.push('/')
+    if (
+      !isInited &&
+      !['/chrome-required', '/mobile', '/'].includes(router.pathname)
+    )
+      router.push('/')
   }, [router])
 
   return (
