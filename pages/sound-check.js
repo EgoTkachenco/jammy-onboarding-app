@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Head from 'next/head'
 import Navigation from '../components/Navigation'
 import SoundCheckCmp from '../components/sound-check/SoundCheck'
