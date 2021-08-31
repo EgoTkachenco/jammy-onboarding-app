@@ -28,8 +28,11 @@ const Presets = observer(() => {
       <Stepper
         onPrev={
           isCustomize
-            ? () => (PresetsStore.isCustomize = false)
-            : () => router.push('/sound-check')
+            ? () => {
+                PresetsStore.isCustomize = false
+                setactive(null)
+              }
+            : () => router.push('/sound-check-2')
         }
         prevText={
           <div className="d-flex align-center">
@@ -38,22 +41,30 @@ const Presets = observer(() => {
           </div>
         }
         onNext={
-          (customizedPreset || active) &&
-          (isCustomize
+          customizedPreset || active
             ? () => {
-                PresetsStore.applyPreset()
+                PresetsStore.applyPreset(active)
                 setactive(null)
+                setShowDialog(true)
               }
-            : () => setShowDialog(true))
+            : () => setShowDialog(true)
         }
         nextText={customizedPreset || active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
         {isCustomize ? (
           isJammyG ? (
-            <ConfiguratorG jammy={jammy} preset={customized.preset} />
+            <ConfiguratorG
+              jammy={jammy}
+              preset={customized.preset}
+              presetName={active.name}
+            />
           ) : (
-            <ConfiguratorE jammy={jammy} preset={customized.preset} />
+            <ConfiguratorE
+              jammy={jammy}
+              preset={customized.preset}
+              presetName={active.name}
+            />
           )
         ) : (
           <>

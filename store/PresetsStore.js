@@ -34,19 +34,21 @@ class PresetsStore {
   }
 
   setActivePreset = (preset, isCustom = false) => {
-    debugger
     this.activePreset = {
       ...preset,
       preset: isCustom ? preset.preset : JammyGPreset,
     }
     this.isCustomize = true
-  }
-  applyPreset = async () => {
-    this.isCustomize = false
     this.customizedPreset = this.activePreset
+  }
+  applyPreset = async (preset) => {
+    debugger
+    this.isCustomize = false
+
     this.activePreset = null
     this.isFetch = true
-    await sendAllParamsRequest('set', this.customizedPreset.preset, Store.jammy)
+    let newPreset = preset ? JammyGPreset : this.customizedPreset.preset
+    await sendAllParamsRequest('set', newPreset, Store.jammy)
     this.isFetch = false
   }
 }

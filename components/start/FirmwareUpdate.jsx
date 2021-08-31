@@ -84,27 +84,32 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
             <div className="sm-text text-center">Waiting for reboot</div>
           </>
         ) : (
-          <div className={`rebooted-text ${isStopped ? 'show' : ''}`}>
-            <div className="title-text text-center">
-              To make sure your first jam on Jammy is pleasant, <br />
-              you’ll need to calibrate it correctly.
+          <>
+            <div className="animation-blank"></div>
+            <div className={`rebooted-text ${isStopped ? 'show' : ''}`}>
+              <div className="title-text text-center">
+                To make sure your first jam on Jammy is pleasant, <br />
+                you’ll need to calibrate it correctly.
+              </div>
+              <div className="sm-text text-center">
+                When you push the power button to turn your Jammy on, the LED
+                turns purple for a few seconds to indicate that the sensors are
+                determining their default values. Please avoid touching the
+                strings while the LED is glowing purple — they’re in the process
+                of calibration. Once the LED is white/light blue, your Jammy is
+                ready to play.
+              </div>
+              <button className="btn btn-primary" onClick={init}>
+                Got it
+              </button>
             </div>
-            <div className="sm-text text-center">
-              When you push the power button to turn your Jammy on, the LED
-              turns purple for a few seconds to indicate that the sensors are
-              determining their default values. Please avoid touching the
-              strings while the LED is glowing purple — they’re in the process
-              of calibration. Once the LED is white/light blue, your Jammy is
-              ready to play.
-            </div>
-            <button className="btn btn-primary" onClick={init}>
-              Got it
-            </button>
-          </div>
+          </>
         )}
 
         <div
-          className={`animation-screen ${isRebooted ? 'rebooted' : ''}`}
+          className={`animation-screen ${isRebooted ? 'rebooted' : ''} ${
+            isStopped ? 'stopped' : ''
+          }`}
           onClick={() => setisStopped(false)}
         >
           {jammyName === 'Jammy G' &&

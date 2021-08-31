@@ -137,7 +137,7 @@ export default function Midi() {
   return (
     <>
       <Stepper
-        onPrev={() => router.back()}
+        onPrev={() => router.push('/software-settings-2')}
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />
@@ -185,7 +185,7 @@ export default function Midi() {
               </a>
               <button
                 className="btn btn-primary__outline"
-                onClick={() => setDialog(false)}
+                onClick={() => router.push('/support')}
               >
                 I still have some questions, would like to contact support
               </button>

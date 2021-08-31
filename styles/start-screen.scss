@@ -130,12 +130,24 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+    transition: all 0.3s;
 
     &.rebooted {
       bottom: unset;
       top: 0;
-      margin-top: -4rem;
+      margin-top: -10rem;
     }
+    &.rebooted.stopped {
+      opacity: 0;
+    }
+  }
+  .animation-blank {
+    z-index: 5;
+    position: absolute;
+    width: 100%;
+    top: -4rem;
+    height: 3.5rem;
+    background: #000;
   }
   .rebooted-text {
     display: flex;

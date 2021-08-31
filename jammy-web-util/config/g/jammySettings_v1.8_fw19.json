@@ -8,7 +8,7 @@
       "params": [
         {
           "id": 0,
-          "title": "First filter",
+          "title": "Picking Sensitivity",
           "type": "FLOAT",
           "min": 1,
           "max": 199,
@@ -18,26 +18,12 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            184,
-            184,
-            184,
-            184,
-            184,
-            184
-          ],
-          "values": [
-            184,
-            184,
-            184,
-            184,
-            184,
-            184
-          ]
+          "default": [184, 184, 184, 184, 184, 184],
+          "values": [184, 184, 184, 184, 184, 184]
         },
         {
           "id": 1,
-          "title": "Second filter",
+          "title": "Maximum Note Duration",
           "type": "FLOAT",
           "min": 1,
           "max": 199,
@@ -47,22 +33,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ]
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
         },
         {
           "id": 3,
@@ -76,22 +48,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8
-          ],
-          "values": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8
-          ]
+          "default": [8, 8, 8, 8, 8, 8],
+          "values": [8, 8, 8, 8, 8, 8]
         },
         {
           "id": 4,
@@ -105,22 +63,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ],
-          "values": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ]
+          "default": [2, 2, 2, 2, 2, 2],
+          "values": [2, 2, 2, 2, 2, 2]
         },
         {
           "id": 5,
@@ -134,22 +78,8 @@
           "reversed": false,
           "name": "Double Notes Limit",
           "description": "Filters the unwanted double notes that may appear at hard picking. Lower the setting to avoid skipping notes when playing fast.",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         },
         {
           "id": 7,
@@ -163,22 +93,8 @@
           "reversed": true,
           "name": "Picking Sensitivity",
           "description": "Defines how easy is to pick notes on the right part and how loud they are.",
-          "default": [
-            6,
-            8,
-            8,
-            8,
-            8,
-            6
-          ],
-          "values": [
-            6,
-            8,
-            8,
-            8,
-            8,
-            6
-          ]
+          "default": [6, 8, 8, 8, 8, 6],
+          "values": [6, 8, 8, 8, 8, 6]
         },
         {
           "id": 8,
@@ -192,22 +108,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ],
-          "values": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ]
+          "default": [3, 3, 3, 3, 3, 3],
+          "values": [3, 3, 3, 3, 3, 3]
         },
         {
           "id": 9,
@@ -221,22 +123,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         },
         {
           "id": 10,
@@ -250,22 +138,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ],
-          "values": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ]
+          "default": [35, 35, 35, 35, 35, 35],
+          "values": [35, 35, 35, 35, 35, 35]
         },
         {
           "id": 11,
@@ -279,22 +153,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            300,
-            300,
-            300,
-            300,
-            300,
-            300
-          ],
-          "values": [
-            300,
-            300,
-            300,
-            300,
-            300,
-            300
-          ]
+          "default": [300, 300, 300, 300, 300, 300],
+          "values": [300, 300, 300, 300, 300, 300]
         },
         {
           "id": 13,
@@ -308,22 +168,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            7,
-            7,
-            7,
-            7,
-            7,
-            7
-          ],
-          "values": [
-            7,
-            7,
-            7,
-            7,
-            7,
-            7
-          ]
+          "default": [7, 7, 7, 7, 7, 7],
+          "values": [7, 7, 7, 7, 7, 7]
         },
         {
           "id": 14,
@@ -337,22 +183,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         }
       ]
     },
@@ -372,22 +204,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ],
-          "values": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ]
+          "default": [50, 50, 50, 50, 50, 50],
+          "values": [50, 50, 50, 50, 50, 50]
         },
         {
           "id": 1,
@@ -401,22 +219,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ],
-          "values": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ]
+          "default": [50, 50, 50, 50, 50, 50],
+          "values": [50, 50, 50, 50, 50, 50]
         },
         {
           "id": 2,
@@ -430,22 +234,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -465,22 +255,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ],
-          "values": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ]
+          "default": [190, 190, 190, 190, 190, 190],
+          "values": [190, 190, 190, 190, 190, 190]
         },
         {
           "id": 1,
@@ -494,22 +270,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            7,
-            7,
-            7,
-            7,
-            7,
-            7
-          ],
-          "values": [
-            7,
-            7,
-            7,
-            7,
-            7,
-            7
-          ]
+          "default": [7, 7, 7, 7, 7, 7],
+          "values": [7, 7, 7, 7, 7, 7]
         },
         {
           "id": 2,
@@ -523,22 +285,8 @@
           "reversed": true,
           "name": "Sharp Right-Hand Muting Sensitivity",
           "description": "Defines how easy you can mute the sound by sharply putting your right hand on\n the string, which is ringing. Lowering the level helps to fix the problem with \nopen strings that sometimes mute themselves",
-          "default": [
-            125,
-            125,
-            125,
-            125,
-            125,
-            125
-          ],
-          "values": [
-            125,
-            125,
-            125,
-            125,
-            125,
-            125
-          ]
+          "default": [125, 125, 125, 125, 125, 125],
+          "values": [125, 125, 125, 125, 125, 125]
         },
         {
           "id": 3,
@@ -552,22 +300,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ],
-          "values": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ]
+          "default": [5, 5, 5, 5, 5, 5],
+          "values": [5, 5, 5, 5, 5, 5]
         },
         {
           "id": 4,
@@ -581,22 +315,8 @@
           "reversed": false,
           "name": "One ch wheel",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 5,
@@ -610,22 +330,8 @@
           "reversed": false,
           "name": "One ch wheel",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 6,
@@ -639,22 +345,8 @@
           "reversed": false,
           "name": "One ch wheel",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 7,
@@ -668,22 +360,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 8,
@@ -697,22 +375,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            64,
-            64,
-            64,
-            64,
-            64,
-            64
-          ],
-          "values": [
-            64,
-            64,
-            64,
-            64,
-            64,
-            64
-          ]
+          "default": [64, 64, 64, 64, 64, 64],
+          "values": [64, 64, 64, 64, 64, 64]
         },
         {
           "id": 9,
@@ -726,22 +390,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ],
-          "values": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ]
+          "default": [10, 10, 10, 10, 10, 10],
+          "values": [10, 10, 10, 10, 10, 10]
         },
         {
           "id": 10,
@@ -755,22 +405,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -790,22 +426,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ],
-          "values": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ]
+          "default": [5, 5, 5, 5, 5, 5],
+          "values": [5, 5, 5, 5, 5, 5]
         },
         {
           "id": 1,
@@ -819,22 +441,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ],
-          "values": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ]
+          "default": [190, 190, 190, 190, 190, 190],
+          "values": [190, 190, 190, 190, 190, 190]
         },
         {
           "id": 2,
@@ -848,22 +456,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ],
-          "values": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ]
+          "default": [190, 190, 190, 190, 190, 190],
+          "values": [190, 190, 190, 190, 190, 190]
         },
         {
           "id": 3,
@@ -877,22 +471,8 @@
           "reversed": false,
           "name": "Tapping/Legato Threshold",
           "description": "Defines how easy is to trigger legato-type effects (hammer-ons, pull-offs,\n regular tapping) with the left hand. Higher the threshold – harder you have to\n tap/hammer-on to get the sound and less unwanted notes happen during chord\n transition and fretting.",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 4,
@@ -906,22 +486,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            16,
-            16,
-            16,
-            16,
-            16,
-            16
-          ],
-          "values": [
-            16,
-            16,
-            16,
-            16,
-            16,
-            16
-          ]
+          "default": [16, 16, 16, 16, 16, 16],
+          "values": [16, 16, 16, 16, 16, 16]
         },
         {
           "id": 5,
@@ -935,22 +501,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         },
         {
           "id": 6,
@@ -964,22 +516,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            70,
-            70,
-            70,
-            70,
-            70,
-            70
-          ],
-          "values": [
-            70,
-            70,
-            70,
-            70,
-            70,
-            70
-          ]
+          "default": [70, 70, 70, 70, 70, 70],
+          "values": [70, 70, 70, 70, 70, 70]
         },
         {
           "id": 7,
@@ -993,22 +531,8 @@
           "reversed": true,
           "name": "Left-Hand Muting Sensitivity",
           "description": "Defines how easily you can mute the sound by touching the string on the left part\n of Jammy. If you experience sound cut-offs frequently when playing fast solos,\n it might be worth looking at and making it less sensitive. Same applies for\n situations when you play open chords and one of the fretting fingers is too close\n to the nearest open string making it mute.",
-          "default": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ],
-          "values": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ]
+          "default": [35, 35, 35, 35, 35, 35],
+          "values": [35, 35, 35, 35, 35, 35]
         },
         {
           "id": 8,
@@ -1022,22 +546,8 @@
           "reversed": false,
           "name": "Slide Off",
           "description": "Turn slide detection on or off. Turning it off will also help with unwanted ghost notes.",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 9,
@@ -1051,22 +561,8 @@
           "reversed": true,
           "name": "Tapping/Legato Sensitivity",
           "description": "Defines how sensitive and loud legato-type effects (hammer-ons, pull-offs,\n regular tapping) are.",
-          "default": [
-            16,
-            16,
-            16,
-            16,
-            16,
-            16
-          ],
-          "values": [
-            16,
-            16,
-            16,
-            16,
-            16,
-            16
-          ]
+          "default": [16, 16, 16, 16, 16, 16],
+          "values": [16, 16, 16, 16, 16, 16]
         },
         {
           "id": 10,
@@ -1080,22 +576,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         },
         {
           "id": 11,
@@ -1109,22 +591,8 @@
           "reversed": false,
           "name": "smoothFilter",
           "description": "",
-          "default": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ],
-          "values": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ]
+          "default": [60, 60, 60, 60, 60, 60],
+          "values": [60, 60, 60, 60, 60, 60]
         },
         {
           "id": 12,
@@ -1138,22 +606,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 13,
@@ -1167,22 +621,8 @@
           "reversed": false,
           "name": "Tap On",
           "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         },
         {
           "id": 14,
@@ -1196,22 +636,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ],
-          "values": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ]
+          "default": [10, 10, 10, 10, 10, 10],
+          "values": [10, 10, 10, 10, 10, 10]
         },
         {
           "id": 15,
@@ -1225,22 +651,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -1260,22 +672,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            22,
-            22,
-            22,
-            22,
-            22,
-            22
-          ],
-          "values": [
-            22,
-            22,
-            22,
-            22,
-            22,
-            22
-          ]
+          "default": [22, 22, 22, 22, 22, 22],
+          "values": [22, 22, 22, 22, 22, 22]
         },
         {
           "id": 1,
@@ -1289,22 +687,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            22,
-            22,
-            22,
-            22,
-            22,
-            22
-          ],
-          "values": [
-            22,
-            22,
-            22,
-            22,
-            22,
-            22
-          ]
+          "default": [22, 22, 22, 22, 22, 22],
+          "values": [22, 22, 22, 22, 22, 22]
         },
         {
           "id": 2,
@@ -1318,22 +702,8 @@
           "reversed": false,
           "name": "Tap Off",
           "description": "Turn tap detection on or off. Turning it off will also help with unwanted ghost notes.",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 3,
@@ -1347,22 +717,8 @@
           "reversed": false,
           "name": "Slide On",
           "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         },
         {
           "id": 4,
@@ -1376,22 +732,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -1411,22 +753,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ],
-          "values": [
-            190,
-            190,
-            190,
-            190,
-            190,
-            190
-          ]
+          "default": [190, 190, 190, 190, 190, 190],
+          "values": [190, 190, 190, 190, 190, 190]
         },
         {
           "id": 1,
@@ -1440,22 +768,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ],
-          "values": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ]
+          "default": [2, 2, 2, 2, 2, 2],
+          "values": [2, 2, 2, 2, 2, 2]
         },
         {
           "id": 2,
@@ -1469,22 +783,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ],
-          "values": [
-            50,
-            50,
-            50,
-            50,
-            50,
-            50
-          ]
+          "default": [50, 50, 50, 50, 50, 50],
+          "values": [50, 50, 50, 50, 50, 50]
         },
         {
           "id": 3,
@@ -1498,22 +798,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ],
-          "values": [
-            5,
-            5,
-            5,
-            5,
-            5,
-            5
-          ]
+          "default": [5, 5, 5, 5, 5, 5],
+          "values": [5, 5, 5, 5, 5, 5]
         },
         {
           "id": 4,
@@ -1527,22 +813,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ],
-          "values": [
-            10,
-            10,
-            10,
-            10,
-            10,
-            10
-          ]
+          "default": [10, 10, 10, 10, 10, 10],
+          "values": [10, 10, 10, 10, 10, 10]
         },
         {
           "id": 5,
@@ -1556,22 +828,8 @@
           "reversed": false,
           "name": "Bending/Vibrato",
           "description": "Disables/enables bending and vibrato type playing techniques on every string.",
-          "default": [
-            16383,
-            16383,
-            16383,
-            16383,
-            16383,
-            16383
-          ],
-          "values": [
-            16383,
-            16383,
-            16383,
-            16383,
-            16383,
-            16383
-          ]
+          "default": [16383, 16383, 16383, 16383, 16383, 16383],
+          "values": [16383, 16383, 16383, 16383, 16383, 16383]
         },
         {
           "id": 6,
@@ -1585,22 +843,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ],
-          "values": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ]
+          "default": [60, 60, 60, 60, 60, 60],
+          "values": [60, 60, 60, 60, 60, 60]
         },
         {
           "id": 7,
@@ -1614,22 +858,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ]
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
         },
         {
           "id": 8,
@@ -1643,22 +873,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         },
         {
           "id": 9,
@@ -1672,22 +888,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         },
         {
           "id": 10,
@@ -1701,22 +903,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ],
-          "values": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ]
+          "default": [80, 80, 80, 80, 80, 80],
+          "values": [80, 80, 80, 80, 80, 80]
         },
         {
           "id": 11,
@@ -1730,22 +918,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ]
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
         }
       ]
     },
@@ -1765,22 +939,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 1,
@@ -1794,22 +954,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 2,
@@ -1823,22 +969,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -1858,22 +990,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     },
@@ -1893,22 +1011,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ],
-          "values": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ]
+          "default": [140, 140, 140, 140, 140, 140],
+          "values": [140, 140, 140, 140, 140, 140]
         },
         {
           "id": 1,
@@ -1922,22 +1026,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            60,
-            60,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            60,
-            60,
-            40,
-            40,
-            40,
-            40
-          ]
+          "default": [60, 60, 40, 40, 40, 40],
+          "values": [60, 60, 40, 40, 40, 40]
         },
         {
           "id": 2,
@@ -1951,22 +1041,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            120,
-            100,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            120,
-            100,
-            40,
-            40,
-            40,
-            40
-          ]
+          "default": [120, 100, 40, 40, 40, 40],
+          "values": [120, 100, 40, 40, 40, 40]
         },
         {
           "id": 3,
@@ -1980,22 +1056,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ],
-          "values": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ]
+          "default": [80, 80, 80, 80, 80, 80],
+          "values": [80, 80, 80, 80, 80, 80]
         },
         {
           "id": 4,
@@ -2009,22 +1071,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ],
-          "values": [
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ]
+          "default": [4, 4, 4, 4, 4, 4],
+          "values": [4, 4, 4, 4, 4, 4]
         },
         {
           "id": 5,
@@ -2038,22 +1086,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ],
-          "values": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ]
+          "default": [3, 3, 3, 3, 3, 3],
+          "values": [3, 3, 3, 3, 3, 3]
         },
         {
           "id": 6,
@@ -2067,22 +1101,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ],
-          "values": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ]
+          "default": [30, 30, 30, 30, 30, 30],
+          "values": [30, 30, 30, 30, 30, 30]
         },
         {
           "id": 7,
@@ -2096,22 +1116,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ],
-          "values": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ]
+          "default": [30, 30, 30, 30, 30, 30],
+          "values": [30, 30, 30, 30, 30, 30]
         },
         {
           "id": 8,
@@ -2125,22 +1131,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ],
-          "values": [
-            60,
-            60,
-            60,
-            60,
-            60,
-            60
-          ]
+          "default": [60, 60, 60, 60, 60, 60],
+          "values": [60, 60, 60, 60, 60, 60]
         },
         {
           "id": 9,
@@ -2154,22 +1146,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            65,
-            65,
-            65,
-            65,
-            65,
-            65
-          ],
-          "values": [
-            65,
-            65,
-            65,
-            65,
-            65,
-            65
-          ]
+          "default": [65, 65, 65, 65, 65, 65],
+          "values": [65, 65, 65, 65, 65, 65]
         },
         {
           "id": 10,
@@ -2183,22 +1161,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            160,
-            160,
-            160,
-            160,
-            160,
-            160
-          ],
-          "values": [
-            160,
-            160,
-            160,
-            160,
-            160,
-            160
-          ]
+          "default": [160, 160, 160, 160, 160, 160],
+          "values": [160, 160, 160, 160, 160, 160]
         },
         {
           "id": 11,
@@ -2212,22 +1176,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ],
-          "values": [
-            30,
-            30,
-            30,
-            30,
-            30,
-            30
-          ]
+          "default": [30, 30, 30, 30, 30, 30],
+          "values": [30, 30, 30, 30, 30, 30]
         },
         {
           "id": 12,
@@ -2241,22 +1191,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            160,
-            160,
-            160,
-            160,
-            160,
-            160
-          ],
-          "values": [
-            160,
-            160,
-            160,
-            160,
-            160,
-            160
-          ]
+          "default": [160, 160, 160, 160, 160, 160],
+          "values": [160, 160, 160, 160, 160, 160]
         },
         {
           "id": 13,
@@ -2270,22 +1206,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            45,
-            45,
-            45,
-            45,
-            45,
-            45
-          ],
-          "values": [
-            45,
-            45,
-            45,
-            45,
-            45,
-            45
-          ]
+          "default": [45, 45, 45, 45, 45, 45],
+          "values": [45, 45, 45, 45, 45, 45]
         },
         {
           "id": 14,
@@ -2299,22 +1221,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ],
-          "values": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ]
+          "default": [140, 140, 140, 140, 140, 140],
+          "values": [140, 140, 140, 140, 140, 140]
         }
       ]
     },
@@ -2334,22 +1242,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         },
         {
           "id": 1,
@@ -2363,22 +1257,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            180,
-            180,
-            180,
-            180,
-            180,
-            180
-          ],
-          "values": [
-            180,
-            180,
-            180,
-            180,
-            180,
-            180
-          ]
+          "default": [180, 180, 180, 180, 180, 180],
+          "values": [180, 180, 180, 180, 180, 180]
         },
         {
           "id": 2,
@@ -2392,22 +1272,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         }
       ]
     },
@@ -2427,22 +1293,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            6,
-            5,
-            4,
-            3,
-            2,
-            1
-          ],
-          "values": [
-            6,
-            5,
-            4,
-            3,
-            2,
-            1
-          ]
+          "default": [6, 5, 4, 3, 2, 1],
+          "values": [6, 5, 4, 3, 2, 1]
         },
         {
           "id": 1,
@@ -2456,22 +1308,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            64,
-            59,
-            55,
-            50,
-            45,
-            40
-          ],
-          "values": [
-            64,
-            59,
-            55,
-            50,
-            45,
-            40
-          ]
+          "default": [64, 59, 55, 50, 45, 40],
+          "values": [64, 59, 55, 50, 45, 40]
         },
         {
           "id": 2,
@@ -2485,22 +1323,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            2,
-            4,
-            6,
-            8,
-            10
-          ],
-          "values": [
-            0,
-            2,
-            4,
-            6,
-            8,
-            10
-          ]
+          "default": [0, 2, 4, 6, 8, 10],
+          "values": [0, 2, 4, 6, 8, 10]
         },
         {
           "id": 4,
@@ -2514,22 +1338,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "values": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ]
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
         }
       ]
     }
@@ -2551,12 +1361,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         },
         {
           "id": 3,
@@ -2570,12 +1376,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         },
         {
           "id": 4,
@@ -2589,12 +1391,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         }
       ]
     },
@@ -2614,12 +1412,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         },
         {
           "id": 1,
@@ -2633,12 +1427,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         },
         {
           "id": 2,
@@ -2652,12 +1442,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            90
-          ],
-          "values": [
-            90
-          ]
+          "default": [90],
+          "values": [90]
         },
         {
           "id": 3,
@@ -2671,12 +1457,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            14
-          ],
-          "values": [
-            14
-          ]
+          "default": [14],
+          "values": [14]
         },
         {
           "id": 4,
@@ -2690,12 +1472,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            12
-          ],
-          "values": [
-            12
-          ]
+          "default": [12],
+          "values": [12]
         },
         {
           "id": 5,
@@ -2709,12 +1487,8 @@
           "reversed": false,
           "name": "",
           "description": "",
-          "default": [
-            0
-          ],
-          "values": [
-            0
-          ]
+          "default": [0],
+          "values": [0]
         }
       ]
     }

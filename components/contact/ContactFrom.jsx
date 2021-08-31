@@ -16,11 +16,13 @@ const ContactForm = observer(() => {
   const attachFile = (e) => {
     setFile(e.target.files[0])
   }
+  const [backDialog, setbackDialog] = useState(false)
   const router = useRouter()
+  const isSensitivityForm = router.query.type === 'sensitivity'
   return (
     <>
       <Stepper
-        onPrev={() => router.back()}
+        onPrev={() => (isSensitivityForm ? setbackDialog(true) : router.back())}
         prevText={
           <div className="d-flex align-center">
             <svg
@@ -52,25 +54,31 @@ const ContactForm = observer(() => {
             name="email"
           />
           <textarea
-            placeholder="Describe the issue so we could better assist you"
+            placeholder={
+              isSensitivityForm
+                ? 'Describe the issue so we could better assist you'
+                : 'Enter your questions or concerns here'
+            }
             rows="8"
             name="message"
           ></textarea>
-          <div className="sensors_values">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 2C4.9 2 4.01 2.9 4.01 4L4 20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2H6ZM13 9V3.5L18.5 9H13Z"
-                fill="#5C5C6D"
-              />
-            </svg>
-            Sensors&apos; values automatically attached.
-          </div>
+          {isSensitivityForm && (
+            <div className="sensors_values">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 2C4.9 2 4.01 2.9 4.01 4L4 20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2H6ZM13 9V3.5L18.5 9H13Z"
+                  fill="#5C5C6D"
+                />
+              </svg>
+              Sensors&apos; values automatically attached.
+            </div>
+          )}
           <div className="file-input">
             <input type="file" onChange={attachFile} />
             <svg
@@ -115,6 +123,27 @@ const ContactForm = observer(() => {
               </button>
             </a>
           </Dialog>
+        )}
+        {backDialog && (
+          <div className="sensitivity">
+            <Dialog close={() => setShowDialog(false)}>
+              <div className="title-text text-center">
+                Proceed to <br /> MIDI settings?
+              </div>
+              <button
+                className="btn btn-primary"
+                onClick={() => router.push('/software-settings')}
+              >
+                Yes
+              </button>
+              <button
+                className="btn btn-primary__outline"
+                onClick={() => router.push('/sensitivity')}
+              >
+                {'Back to Playability settings first'}
+              </button>
+            </Dialog>
+          </div>
         )}
       </div>
     </>

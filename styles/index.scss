@@ -222,6 +222,10 @@ div {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 0;
+    max-height: 0;
+    transition: all 0.3s;
+    overflow: hidden;
     svg {
       position: relative;
       z-index: 10;
@@ -239,7 +243,6 @@ div {
       top: 0;
       left: 0;
       width: 100%;
-      height: 100%;
 
       .string {
         background: #292931;
@@ -268,8 +271,14 @@ div {
       transform: rotate(180deg);
     }
     .chords-list {
+      position: relative;
       opacity: 1;
       bottom: -1rem;
+      height: auto;
+      max-height: 15rem;
+      .string-wrapper {
+        height: 8.5rem;
+      }
     }
   }
 }

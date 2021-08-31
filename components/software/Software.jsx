@@ -2,12 +2,10 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Image from 'next/image'
-import YouTube from 'react-youtube'
 import FormsStore from '../../store/FormsStore'
 import { observer } from 'mobx-react-lite'
 export default function Software() {
   const router = useRouter()
-  const [active, setactive] = useState(null)
   const SOFTWARES = [
     { id: 1, name: 'Ableton Live', url: '/softwares/ableton.png' },
     { id: 2, name: 'Logic Pro X ', url: '/softwares/logic-pro.png' },
@@ -24,60 +22,39 @@ export default function Software() {
   return (
     <>
       <Stepper
-        onPrev={active ? () => setactive(null) : () => router.back()}
+        onPrev={() => router.push('/sound-check-2')}
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />
             Previous Step
           </div>
         }
-        onNext={active && (() => router.push('/midi-settings'))}
-        nextText="Continue"
       />
       <div className="page-container software">
-        {active ? (
-          <div className="software__video">
-            <YouTube
-              videoId="36XeB1T8l7Q"
-              opts={{ autoplay: 1, width: '100%', height: '100%' }}
-              containerClassName="software__video-container"
-            />
-          </div>
-        ) : (
-          <>
-            <div className="title-text">
-              {"Let's set up Jammy in your primary software."}
-            </div>
-            <div className="md-text">
-              Select your DAW of choice to proceed.{' '}
-            </div>
+        <div className="title-text">
+          {"Let's set up Jammy in your primary software."}
+        </div>
+        <div className="md-text">Select your DAW of choice to proceed. </div>
 
-            <div className="software-list">
-              {SOFTWARES.map((soft) => (
-                <div
-                  className="software-list__item"
-                  key={soft.id}
-                  onClick={() => setactive(soft)}
-                >
-                  <div className="software-list__item__img">
-                    <Image
-                      src={soft.url}
-                      alt={soft.name}
-                      width={46}
-                      height={46}
-                    />
-                  </div>
-                  <div className="md-text">{soft.name}</div>
-                  <div className="software-list__item__arrow">
-                    <ArrowIcon />
-                  </div>
-                </div>
-              ))}
+        <div className="software-list">
+          {SOFTWARES.map((soft) => (
+            <div
+              className="software-list__item"
+              key={soft.id}
+              onClick={() => router.push('/software-settings-2')}
+            >
+              <div className="software-list__item__img">
+                <Image src={soft.url} alt={soft.name} width={46} height={46} />
+              </div>
+              <div className="md-text">{soft.name}</div>
+              <div className="software-list__item__arrow">
+                <ArrowIcon />
+              </div>
             </div>
+          ))}
+        </div>
 
-            <Feedback />
-          </>
-        )}
+        <Feedback />
       </div>
     </>
   )

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function CustomSelect({ value, options }) {
   const [state, setstate] = useState(value)
@@ -8,9 +8,10 @@ export default function CustomSelect({ value, options }) {
     setActive(false)
   }
   const toggleSelect = () => setActive(!active)
-
+  const selectRef = useRef(null)
+  useOutClick(selectRef, active, setActive, '.select-wrapper')
   return (
-    <div className={`select-wrapper ${active ? 'active' : ''}`}>
+    <div ref={selectRef} className={`select-wrapper ${active ? 'active' : ''}`}>
       <div className="select" onClick={toggleSelect}>
         {state}
       </div>
@@ -31,4 +32,24 @@ export default function CustomSelect({ value, options }) {
       )}
     </div>
   )
+}
+
+function useOutClick(elRef, isActive, setActive, selector) {
+  const handleOutsideClick = (e) => {
+    const elem = e.target.closest(selector)
+    if (!elem || elRef.current !== elem) {
+      setActive(false)
+    }
+  }
+  useEffect(() => {
+    if (isActive) {
+      document.addEventListener('mousedown', handleOutsideClick)
+    } else {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  })
 }

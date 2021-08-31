@@ -803,8 +803,8 @@ class Configurator extends Component {
       <div className="presets-customize">
         <div className="title-text text-center">Customize the playability</div>
         <div className="md-text text-center">
-          {/* Based on “{preset?.name || 'Default'}” preset */}
-          Based on Default preset
+          Based on “{this.props.presetName || 'Default'}” preset
+          {/* Based on Default preset */}
         </div>
         <div className="presets-customize__inner">
           <div className="presets-list">
@@ -856,14 +856,14 @@ const ConfiguratorG = (props) => {
   midiService.logIncoming = true
   midiService.logOutgoing = true
   jammy = props.jammy
-  return <Configurator preset={props.preset} />
+  return <Configurator preset={props.preset} presetName={props.presetName} />
 }
 
 const ConfiguratorE = (props) => {
   midiService.logIncoming = true
   midiService.logOutgoing = true
   jammy = props.jammy
-  return <Configurator preset={props.preset} />
+  return <Configurator preset={props.preset} presetName={props.presetName} />
 }
 
 export { ConfiguratorE, ConfiguratorG }

@@ -39,6 +39,7 @@
     }
   }
   .file-input {
+    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,6 +47,7 @@
     margin: 1rem -1rem 2rem;
     position: relative;
     input {
+      cursor: pointer;
       position: absolute;
       width: 100%;
       height: 100%;

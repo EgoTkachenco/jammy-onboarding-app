@@ -22,7 +22,7 @@ export default function Sensitivity() {
     },
     {
       title: 'Try to recalibrate the sensors to improve performance. ',
-      text: `If the bar isn't in the middle, click the "Auto" button. You might need to click it several times to center the sensor.Once done, check the strings' performance by playing a few chords.`,
+      text: `If the bar isn't in the middle, click the "Auto" button. You might need to click it several times to center the sensor. Once done, check the strings' performance by playing a few chords.`,
     },
   ]
   const [step, setStep] = useState(0)
@@ -115,7 +115,12 @@ export default function Sensitivity() {
             </button>
             <button
               className="btn btn-primary__outline"
-              onClick={() => router.push('/support')}
+              onClick={() =>
+                router.push({
+                  pathname: '/support',
+                  query: { type: 'sensitivity' },
+                })
+              }
             >
               {"No. I'd like to contact support"}
             </button>
