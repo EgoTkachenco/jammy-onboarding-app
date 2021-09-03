@@ -16,7 +16,9 @@ const MyApp = observer(({ Component, pageProps }) => {
     if (process.browser && mobileAndTabletCheck()) router.push('/mobile')
   }, [])
   // router ?
-  const isInited = Store.isInited
+  const { isAdmin } = router.query
+  if (isAdmin) Store.isAdmin = true
+  const isInited = Store.isInited || Store.isAdmin
   useEffect(() => {
     if (
       !isInited &&

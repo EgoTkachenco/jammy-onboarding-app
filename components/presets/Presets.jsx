@@ -57,13 +57,13 @@ const Presets = observer(() => {
             <ConfiguratorG
               jammy={jammy}
               preset={customized.preset}
-              presetName={active.name}
+              presetName={customized?.name}
             />
           ) : (
             <ConfiguratorE
               jammy={jammy}
               preset={customized.preset}
-              presetName={active.name}
+              presetName={customized?.name}
             />
           )
         ) : (
@@ -89,13 +89,13 @@ const Presets = observer(() => {
                           PresetsStore.setActivePreset(customizedPreset, true)
                         }}
                       >
-                        Customize preset
+                        Customize
                       </button>
                     )}
                   </div>
                   <div className="sm-text white-50">
                     This preset will be overwritten when you press the button
-                    “Customize preset”
+                    “Customize”
                   </div>
                 </div>
                 <div className="custom-preset__line"></div>
@@ -120,7 +120,7 @@ const Presets = observer(() => {
                         PresetsStore.setActivePreset(preset)
                       }}
                     >
-                      Customize preset
+                      Customize
                     </button>
                   )}
                 </div>

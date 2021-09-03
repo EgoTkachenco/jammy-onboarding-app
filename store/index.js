@@ -6,6 +6,7 @@ configure({
   enforceActions: 'never',
 })
 class Store {
+  isAdmin = false
   status = null
   jammyName = null
   isRebooted = false
