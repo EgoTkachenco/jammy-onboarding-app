@@ -1,8 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { jammy } from './index'
 import * as Tone from 'tone'
-if (process.browser) {
-}
 
 const GUITAR_NOTES = {
   1: {
@@ -124,63 +122,76 @@ class MidiStore {
   async initMidiStore() {
     let params = {
       urls: {
-        C2: 'C2.mp3',
-        'C#2': 'C#2.mp3',
-        D2: 'D2.mp3',
-        'D#2': 'D#2.mp3',
         E2: 'E2.mp3',
-        F2: 'F2.mp3',
-        'F#2': 'F#2.mp3',
-        G2: 'G2.mp3',
-        'G#2': 'G#2.mp3',
-        A2: 'A2.mp3',
-        'A#2': 'A#2.mp3',
-        B2: 'B2.mp3',
-        C3: 'C3.mp3',
+        // C2: 'C2.mp3',
+        // 'C#2': 'Cb2.mp3',
+        // D2: 'D2.mp3',
+        // 'D#2': 'Db2.mp3',
+        // F2: 'F2.mp3',
+        // Fb2: 'Fb2.mp3',
+        // G2: 'G2.mp3',
+        // 'G#2': 'Gb2.mp3',
+        // A2: 'A2.mp3',
+        // 'A#2': 'Ab2.mp3',
+        // B2: 'B2.mp3',
+        // C3: 'C3.mp3',
       },
-      release: 1,
       baseUrl: '/audio/',
     }
+    // this.synth = {
+    //   1: new Tone.Sampler(params).toDestination(),
+    //   2: new Tone.Sampler(params).toDestination(),
+    //   3: new Tone.Sampler(params).toDestination(),
+    //   4: new Tone.Sampler(params).toDestination(),
+    //   5: new Tone.Sampler(params).toDestination(),
+    //   6: new Tone.Sampler(params).toDestination(),
+    // }
+    let sampler = new Tone.Sampler(params).toDestination()
     await Tone.loaded()
     this.synth = {
-      1: new Tone.Sampler(params).toDestination(),
-      2: new Tone.Sampler(params).toDestination(),
-      3: new Tone.Sampler(params).toDestination(),
-      4: new Tone.Sampler(params).toDestination(),
-      5: new Tone.Sampler(params).toDestination(),
-      6: new Tone.Sampler(params).toDestination(),
+      1: sampler,
+      2: sampler,
+      3: sampler,
+      4: sampler,
+      5: sampler,
+      6: sampler,
     }
-    debugger
     this.now = Tone.now()
+    this.synth[1].triggerAttackRelease(['E2'], '1n')
   }
   async handleMidiMessage(e) {
     let msg = this.parseMidiEvent(e.data)
-    if (msg.type && msg.type !== 'CC') {
-      this.playSound(msg, e.data)
+    if (msg.type) {
+      this.onSoundEvent(msg, e.data)
     } else if (!msg.type) {
       let data = jammy.unpackJammySysexForG(e.data)
-      //   console.log(data)
       let fret = data[5]
       let string = [6, 5, 4, 3, 2, 1][data[1]]
-      console.log('Fret', fret, string)
-      this.riff[string] = fret
+      if (fret === undefined || !string) {
+        console.log(e.data)
+      } else {
+        this.riff[string] = fret
+        this.playNote(string)
+      }
     }
   }
 
-  playSound(msg, data) {
+  onSoundEvent(msg) {
     if (msg.type === 'Note ON') {
-      let note = GUITAR_NOTES[msg.ch][this.riff[msg.ch]]
-      console.log(`%c${note} ${msg.ch}`, 'color: red')
-      debugger
-      this.synth[msg.ch].triggerAttackRelease([note], '8n')
+      jammy.sendFretRequestForG(this.stringIds[msg.ch])
     } else if (msg.type === 'Note OFF') {
       this.synth[msg.ch].triggerRelease(this.now)
     } else if (msg.type === 'Pitch Band') {
-      jammy.sendFretRequestForG(this.stringIds[msg.ch])
-      //   console.log(msg.val)
-      //   this.synth[msg.ch].synth.velocity = data[1]
-      //   console.log(`%c${msg.note} ${msg.ch} ${msg.val}`, 'color: green')
+      // jammy.sendFretRequestForG(this.stringIds[msg.ch])
+    } else if (msg.type === 'CC') {
+      // console.log(msg.ch)
+      // jammy.sendFretRequestForG(this.stringIds[msg.ch])
     }
+  }
+  playNote(ch) {
+    let note = GUITAR_NOTES[ch][this.riff[ch]]
+    console.log('Note', note)
+    this.synth[ch].triggerAttackRelease([note], '4n')
   }
   handle(string, fret, segment) {
     debugger
