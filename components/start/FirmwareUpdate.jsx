@@ -42,9 +42,8 @@ const Updating = ({ process }) => {
 
 const Reboot = ({ jammyName, isRebooted, init }) => {
   const [isStopped, setisStopped] = useState(false)
-  useEffect(() => {
-    setisStopped(false)
-  }, [isRebooted])
+  const [isPaused, setisPaused] = useState(false)
+  useEffect(() => reloadAnimation(), [isRebooted])
   const commonProps = {
     loop: false,
     autoplay: true,
@@ -52,7 +51,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
   const eventListeners = [
     {
       eventName: 'complete',
-      callback: () => setisStopped(true),
+      callback: () => setisPaused(true),
     },
   ]
   const optionsG1 = {
@@ -72,7 +71,11 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
     animationData: animationDataE2,
   }
   const router = useRouter()
-
+  const reloadAnimation = () => {
+    setisStopped(true)
+    setisPaused(false)
+    setTimeout(() => setisStopped(false), 100)
+  }
   return (
     <FirmwareUpdate>
       <div className="reboot">
@@ -86,7 +89,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
         ) : (
           <>
             <div className="animation-blank"></div>
-            <div className={`rebooted-text ${isStopped ? 'show' : ''}`}>
+            <div className={`rebooted-text ${isPaused ? 'show' : ''}`}>
               <div className="title-text text-center">
                 To make sure your first jam on Jammy is pleasant, <br />
                 you’ll need to calibrate it correctly.
@@ -110,7 +113,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
           className={`animation-screen ${isRebooted ? 'rebooted' : ''} ${
             isStopped ? 'stopped' : ''
           }`}
-          onClick={() => setisStopped(false)}
+          onClick={() => reloadAnimation()}
         >
           {jammyName === 'Jammy G' &&
             (isRebooted ? (
@@ -118,6 +121,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 options={optionsG2}
                 height="42rem"
                 width="23.4375rem"
+                isPaused={isPaused}
                 isStopped={isStopped}
                 eventListeners={eventListeners}
               />
@@ -126,6 +130,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 options={optionsG1}
                 height="40.625rem"
                 width="53.5rem"
+                isPaused={isPaused}
                 isStopped={isStopped}
                 eventListeners={eventListeners}
               />
@@ -136,6 +141,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 options={optionsE2}
                 height="40.625rem"
                 width="59.125rem"
+                isPaused={isPaused}
                 isStopped={isStopped}
                 eventListeners={eventListeners}
               />
@@ -145,6 +151,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 options={optionsE1}
                 height="40.625rem"
                 width="59.125rem"
+                isPaused={isPaused}
                 isStopped={isStopped}
                 eventListeners={eventListeners}
               />

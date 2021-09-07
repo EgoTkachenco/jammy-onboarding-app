@@ -1,7 +1,7 @@
 .midi-settings {
   padding-bottom: 10rem;
   .lg-text {
-    margin: 1.5rem 0 0.5rem;
+    margin: 2.5rem 0 0.5rem;
   }
   .midi-list {
     width: 45rem;
@@ -17,8 +17,12 @@
       background: #1b1b1f;
       padding: 0.75rem 1rem;
       display: flex;
+      margin-bottom: 1px;
       align-items: center;
-
+      // transition: all 0.3s;
+      // &:hover {
+      // background: #292931;
+      // }
       .select-wrapper {
         margin-left: auto;
       }

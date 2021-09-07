@@ -215,9 +215,13 @@ const SettingGroupParam = ({
   sendParamRequest,
   global,
   setActiveParam,
+  isActive,
 }) => {
   return (
-    <div className="presets-list__item" onClick={setActiveParam}>
+    <div
+      className={`presets-list__item ${isActive ? 'active' : ''}`}
+      onClick={setActiveParam}
+    >
       {param.title}
     </div>
   )
@@ -228,6 +232,8 @@ const SettingGroupParams = ({
   sendParamRequest,
   global,
   setActiveParam,
+  isActive,
+  activeParam,
 }) => {
   return (
     <>
@@ -238,6 +244,7 @@ const SettingGroupParams = ({
           sendParamRequest={sendParamRequest}
           global={global}
           setActiveParam={() => setActiveParam(i)}
+          isActive={isActive && i == activeParam}
         />
       ))}
     </>
@@ -249,6 +256,8 @@ const SettingGroups = ({
   sendParamRequest,
   global,
   setActiveParam,
+  activeGroup,
+  activeParam,
 }) => {
   return (
     <>
@@ -258,6 +267,8 @@ const SettingGroups = ({
           params={g.params}
           sendParamRequest={sendParamRequest}
           global={global}
+          isActive={i === activeGroup}
+          activeParam={activeParam}
           setActiveParam={(p) => setActiveParam(i, p)}
         />
       ))}
@@ -812,6 +823,8 @@ class Configurator extends Component {
               groups={this.state.data.groups}
               sendParamRequest={this.sendParamRequest}
               global={false}
+              activeGroup={this.state.activeGroup}
+              activeParam={this.state.activeParam}
               setActiveParam={(g, p) => this.onSetActiveParam(g, p)}
             />
           </div>

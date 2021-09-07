@@ -1,7 +1,7 @@
 import { makeAutoObservable, computed, configure } from 'mobx'
 import jammy, { JAMMY_E, JAMMY_G } from '../jammy-web-util/services/jammy'
 import midiService from '../jammy-web-util/services/midi'
-
+import MidiStore from './MidiStore'
 configure({
   enforceActions: 'never',
 })
@@ -54,7 +54,7 @@ class Store {
           // Midi Access and Jammy detected
           this.startScreenTab = 'CheckFirmware'
           console.log('Version: ', input.version)
-          if (!this.isRebooted) {
+          if (!!this.isRebooted) {
             setTimeout(() => {
               this.startScreenTab = 'UpdateFirmware'
               setTimeout(() => {
@@ -76,8 +76,13 @@ class Store {
               }, 4000)
             }, 4000)
           } else {
+            MidiStore.initMidiStore()
             this.isInited = true
+            jammy.requestJammyESegmentWires(() => true, [0, 1, 2, 3, 4, 5])
+
+            jammy.onJammyESegmentWired = (fret, v) => MidiStore.handle(fret, v)
             midiService.addEventListener('midimessage', (e) => {
+              MidiStore.handleMidiMessage(e)
               if (this.isPlaying && this.isPlayTime) {
                 clearTimeout(this.isPlayTime)
               } else {
@@ -88,6 +93,7 @@ class Store {
                 clearTimeout(this.isPlayTime)
               }, 1000)
             })
+
             return Promise.resolve(true)
           }
           return Promise.reject('Updating')

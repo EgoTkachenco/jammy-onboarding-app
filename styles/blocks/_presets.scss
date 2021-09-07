@@ -16,7 +16,10 @@
       padding: 1.5rem 1rem;
       margin-bottom: 1px;
       cursor: pointer;
-
+      transition: all 0.3s;
+      &:hover {
+        background: #292931;
+      }
       &.active {
         background: #1b15ff;
       }
@@ -61,13 +64,15 @@
       margin-bottom: 1rem;
       @extend .caption-text;
       padding: 0 1rem;
-      width: 15rem;
+      // width: 15rem;
+      width: 100%;
     }
   }
 }
 .presets-side-card {
   background: #292931;
   width: 33.5rem;
+  margin-left: 1px;
 
   &__btn {
     padding: 0.75rem;

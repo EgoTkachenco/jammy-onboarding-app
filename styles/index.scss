@@ -138,8 +138,6 @@ div {
   width: 100%;
   height: calc(100vh - 8rem);
   object-fit: cover;
-  animation: video-back forwards 1s;
-  animation-delay: 3.5s;
   @keyframes video-back {
     0% {
       opacity: 1;
@@ -320,6 +318,7 @@ div {
     width: 54rem;
     margin-bottom: 1px;
     @extend .md-text;
+    transition: all 0.3s;
     &:hover {
       background: #292931;
     }

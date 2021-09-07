@@ -126,7 +126,7 @@ const ContactForm = observer(() => {
         )}
         {backDialog && (
           <div className="sensitivity">
-            <Dialog close={() => setShowDialog(false)}>
+            <Dialog close={() => setbackDialog(false)}>
               <div className="title-text text-center">
                 Proceed to <br /> MIDI settings?
               </div>

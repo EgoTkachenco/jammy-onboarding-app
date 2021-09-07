@@ -1,5 +1,5 @@
 import meta from '../MetaInfo'
-import midi from './midi'
+import { midiService as midi } from '../../store/'
 import { sleep } from './utils'
 
 export const MAX_STRINGS = 6
@@ -779,7 +779,6 @@ jammy.readFretDiagnosticCallback = (event) => {
 
 jammy.requestJammyESegmentWires = async function (active) {
   midi.addEventListener('midimessage', jammy.readFretDiagnosticCallback)
-
   while (active() === true) {
     jammy.sendDiagnosticRequestForE(true, 'GET', 8)
     await sleep(100)

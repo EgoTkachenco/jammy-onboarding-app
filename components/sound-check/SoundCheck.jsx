@@ -35,7 +35,6 @@ const SoundCheck = observer(() => {
         className="video__back"
         src={videoLink}
         autoPlay
-        loop
         muted="muted"
       ></video>
     </>

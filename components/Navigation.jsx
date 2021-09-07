@@ -5,7 +5,6 @@ import Store from '../store'
 const Navigation = observer(({ process }) => {
   const isPlaying = Store.isPlaying
   const status = Store.status
-  console.log('STATUS', status)
   return (
     <div className="navigation-wrapper">
       <NavigationProcess process={process} />

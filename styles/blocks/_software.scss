@@ -21,7 +21,10 @@
       padding: 0.5rem 1.5rem;
       margin-bottom: 1px;
       cursor: pointer;
-
+      transition: all 0.3s;
+      &:hover {
+        background: #292931;
+      }
       &__img {
         margin-right: 1rem;
       }
