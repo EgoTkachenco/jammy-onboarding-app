@@ -60,23 +60,26 @@ class PresetsStore {
     },
     { id: 12, name: 'Troubleshoot Tapping', preset: Troubleshoot_Tapping },
   ]
-  isCustomize = false
+  isFetch = false
   activePreset = null
   customizedPreset = null
-  isFetch = false
+  isCustomize = false
 
   constructor() {
     makeAutoObservable(this)
   }
-
-  setActivePreset = (preset, isCustom = false) => {
-    debugger
-    this.activePreset = {
-      ...preset,
-      preset: preset.preset,
-    }
+  setCustomizedPreset = (preset) => {
     this.isCustomize = true
-    this.customizedPreset = this.activePreset
+    this.customizedPreset = preset
+    if (!preset) {
+      this.isCustomize = false
+    }
+  }
+  setActivePreset = async (preset) => {
+    this.isFetch = true
+    this.activePreset = preset
+    await this.sendAllParamsRequest('set', preset.preset)
+    this.isFetch = false
   }
   applyPreset = async (preset) => {
     debugger
@@ -84,7 +87,9 @@ class PresetsStore {
 
     this.activePreset = null
     this.isFetch = true
-    let newPreset = preset ? JammyGPreset : this.customizedPreset.preset
+    let newPreset = preset?.preset
+      ? preset.preset
+      : this.customizedPreset.preset
     await this.sendAllParamsRequest('set', newPreset, Store.jammy)
     this.isFetch = false
   }

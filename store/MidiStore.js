@@ -174,10 +174,11 @@ class MidiStore {
       let data = jammy.unpackJammySysexForG(e.data)
       let fret = data[5]
       let string = [6, 5, 4, 3, 2, 1][data[1]]
+      console.log(e.data)
       console.log(data)
       if (fret === undefined || !string) {
-        console.log(e.data)
-      } else {
+        // console.log(e.data)
+      } else if (data[0] !== 9) {
         this.riff[string] = fret
         this.playNote(string)
       }

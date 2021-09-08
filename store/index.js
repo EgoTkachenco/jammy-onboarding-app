@@ -25,7 +25,7 @@ class Store {
     })
   }
 
-  initJammy = () => {
+  initJammy = (path) => {
     this.startScreenTab = 'Waiting'
     return midiService
       .init()
@@ -67,12 +67,15 @@ class Store {
               return Promise.reject('Updating')
               // update soft
             } else {
-              if (!MidiStore.synth) MidiStore.initMidiStore()
+              console.log(path)
+              if (!MidiStore.synth && path !== '/sensitivity')
+                MidiStore.initMidiStore()
               this.isInited = true
               // jammy.requestJammyESegmentWires(() => true, [0, 1, 2, 3, 4, 5])
               // jammy.onJammyESegmentWired = (fret, v) =>
               //   MidiStore.handle(fret, v)
-              midiService.addEventListener('midimessage', this.onMidiMessage)
+              if (path !== '/sensitivity')
+                midiService.addEventListener('midimessage', this.onMidiMessage)
               return Promise.resolve(true)
             }
           }

@@ -12,23 +12,25 @@ import {
 
 const Presets = observer(() => {
   const router = useRouter()
-  const [active, setactive] = useState(null)
   const [showDialog, setShowDialog] = useState(false)
-  const isCustomize = PresetsStore.isCustomize
-  const customized = PresetsStore.activePreset
+  const active = PresetsStore.activePreset
   const customizedPreset = PresetsStore.customizedPreset
-  const isJammyG = Store.jammyName === 'Jammy G'
+  const isCustomize = PresetsStore.isCustomize
   const isFetch = PresetsStore.isFetch
+  const isJammyG = Store.jammyName === 'Jammy G'
 
   const PRESETS = PresetsStore.presets
+
+  const setActivePreset = (preset) => PresetsStore.setActivePreset(preset)
+  const setCustomizedPreset = (preset) =>
+    PresetsStore.setCustomizedPreset(preset)
   return (
     <>
       <Stepper
         onPrev={
           isCustomize
             ? () => {
-                PresetsStore.isCustomize = false
-                setactive(null)
+                setCustomizedPreset(null)
               }
             : () => router.push('/sound-check-2')
         }
@@ -42,7 +44,6 @@ const Presets = observer(() => {
           customizedPreset || active
             ? () => {
                 PresetsStore.applyPreset(active)
-                setactive(null)
                 setShowDialog(true)
               }
             : () => setShowDialog(true)
@@ -50,17 +51,23 @@ const Presets = observer(() => {
         nextText={customizedPreset || active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
-        {isFetch && <div>Saving...</div>}
+        {isFetch && (
+          <div className="loader-wrapper">
+            <div className="loader-1">
+              <span></span>
+            </div>
+          </div>
+        )}
         {isCustomize ? (
           isJammyG ? (
             <ConfiguratorG
-              preset={customized.preset}
-              presetName={customized?.name}
+              preset={customizedPreset.preset}
+              presetName={customizedPreset?.name}
             />
           ) : (
             <ConfiguratorE
-              preset={customized.preset}
-              presetName={customized?.name}
+              preset={customizedPreset.preset}
+              presetName={customizedPreset?.name}
             />
           )
         ) : (
@@ -83,7 +90,7 @@ const Presets = observer(() => {
                         className="btn btn-dark"
                         onClick={(e) => {
                           e.stopPropagation()
-                          PresetsStore.setActivePreset(customizedPreset, true)
+                          PresetsStore.setActivePreset(customizedPreset)
                         }}
                       >
                         Customize
@@ -106,7 +113,7 @@ const Presets = observer(() => {
                     active?.id == preset.id ? 'active' : ''
                   }`}
                   key={preset.id}
-                  onClick={() => setactive(preset)}
+                  onClick={() => PresetsStore.setActivePreset(preset)}
                 >
                   <div className="md-text">{preset.name}</div>
                   {active?.id == preset.id && (
@@ -114,7 +121,7 @@ const Presets = observer(() => {
                       className="btn btn-dark"
                       onClick={(e) => {
                         e.stopPropagation()
-                        PresetsStore.setActivePreset(preset)
+                        PresetsStore.setCustomizedPreset(preset)
                       }}
                     >
                       Customize

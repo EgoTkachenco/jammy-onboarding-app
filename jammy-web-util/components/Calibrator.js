@@ -176,17 +176,18 @@ class CalibrationDashboard extends Component {
   }
 
   componentDidMount() {
-    midiService.init().finally(() => {
-      midiService.loadState()
-      midiService.addEventListener('midimessage', this.onMidiMessage)
-      this.updateTimer = window.setInterval(() => {
-        if (jammy.api === JAMMY_G) {
-          this.sendNextStringDiagRequestForG()
-        } else if (jammy.api === JAMMY_E) {
-          this.sendNextStringDiagRequestForE()
-        }
-      }, UPDATE_TIMER_MS)
-    })
+    // midiService.init().finally(() => {
+    //   midiService.loadState()
+
+    // })
+    midiService.addEventListener('midimessage', this.onMidiMessage)
+    this.updateTimer = window.setInterval(() => {
+      if (jammy.api === JAMMY_G) {
+        this.sendNextStringDiagRequestForG()
+      } else if (jammy.api === JAMMY_E) {
+        this.sendNextStringDiagRequestForE()
+      }
+    }, UPDATE_TIMER_MS)
   }
 
   componentWillUnmount() {

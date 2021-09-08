@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Navigation from '../components/Navigation'
 import Stepper from '../components/Stepper'
@@ -7,8 +7,16 @@ import { useRouter } from 'next/router'
 import { CalibrationG } from '../jammy-web-util/components/Calibrator'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import '../styles/bootstrap/scss/bootstrap.scss'
+import Store, { midiService } from '../store'
+import { observer } from 'mobx-react-lite'
 
-export default function Sensitivity() {
+const Sensitivity = observer(() => {
+  useEffect(() => {
+    midiService.removeEventListener('midimessage', Store.onMidiMessage)
+    return () => {
+      midiService.addEventListener('midimessage', Store.onMidiMessage)
+    }
+  })
   const router = useRouter()
   const texts = [
     {
@@ -129,8 +137,8 @@ export default function Sensitivity() {
       </div>
     </>
   )
-}
-
+})
+export default Sensitivity
 const Icon = () => {
   return (
     <svg

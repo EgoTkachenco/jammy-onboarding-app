@@ -26,7 +26,7 @@ const MyApp = observer(({ Component, pageProps }) => {
       !isInited &&
       !['/chrome-required', '/mobile', '/'].includes(router.pathname)
     )
-      Store.initJammy().catch((e) => {
+      Store.initJammy(router.pathname).catch((e) => {
         if (!Store.isAdmin) router.push('/')
       })
   }, [router])

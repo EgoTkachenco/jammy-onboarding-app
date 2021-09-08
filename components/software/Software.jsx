@@ -22,7 +22,7 @@ export default function Software() {
   return (
     <>
       <Stepper
-        onPrev={() => router.push('/sound-check-2')}
+        onPrev={() => router.push('/advanced')}
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />
