@@ -1,0 +1,343 @@
+{
+  "version": 3,
+  "id": 0,
+  "left": 13,
+  "right": 13,
+  "name": "Tapping (Dampened Strings)",
+  "description": "Tapping (Dampened Strings) preset",
+  "groups": [
+    {
+      "groupId": 0,
+      "title": "Picking Settings",
+      "params": [
+        {
+          "id": 1,
+          "title": "Second filter",
+          "type": "INT",
+          "min": 1,
+          "max": 199,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Picking Sensitivity",
+          "description": "Defines how sensitive each string will be to picking and strumming. Increase this setting if some strings aren't sensitive enough or decrease it if they're picking up resonance from neighboring string.",
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
+        },
+        {
+          "id": 12,
+          "title": "NoteOnLimit",
+          "type": "INT",
+          "min": 300,
+          "max": 10000,
+          "left": true,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Maximum Note Duration",
+          "description": "Defines how long a picked note can ring before a Note Off message will be automatically sent.",
+          "default": [7000, 7000, 7000, 7000, 7000, 7000],
+          "values": [7000, 7000, 7000, 7000, 7000, 7000]
+        }
+      ]
+    },
+    {
+      "groupId": 5,
+      "title": "Bending settings",
+      "params": [
+        {
+          "id": 5,
+          "title": "Bending mask",
+          "type": "MASK",
+          "min": 0,
+          "max": 16383,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Bending and Vibrato Switch",
+          "description": "Enables / disables bending and vibrato for all strings.",
+          "default": [16383, 16383, 16383, 16383, 16383, 16383],
+          "values": [16383, 16383, 16383, 16383, 16383, 16383]
+        }
+      ]
+    },
+    {
+      "groupId": 2,
+      "title": "Muting settings",
+      "params": [
+        {
+          "id": 2,
+          "title": "Sharp mute",
+          "type": "INT",
+          "min": 1,
+          "max": 190,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Right-Hand Muting Sensitivity",
+          "description": "Defines how easily you can mute the sound by rapidly putting your right hand on the ringing string. Lowering the level helps to fix the problem with open strings that sometimes mute themselves.",
+          "default": [125, 125, 125, 125, 125, 125],
+          "values": [125, 125, 125, 125, 125, 125]
+        }
+      ]
+    },
+    {
+      "groupId": 3,
+      "title": "Tapping settings",
+      "params": [
+        {
+          "id": 7,
+          "title": "Touch delta",
+          "type": "INT",
+          "min": 1,
+          "max": 190,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": true,
+          "name": "Left-Hand Muting Sensitivity",
+          "description": "Defines how easily you can mute the sound by touching the string on the Jammy fretboard. If you experience sound cut-offs frequently when playing fast solos, it might be worth looking at and making it less sensitive. Same applies for situations when you play open chords and one of the fretting fingers is too close to the nearest open string making it mute.",
+          "default": [35, 35, 35, 35, 35, 35],
+          "values": [15, 10, 10, 10, 10, 10]
+        },
+        {
+          "id": 13,
+          "title": "Tap On",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Hammer-On and Pull-Off Switch",
+          "description": "Enables / disables hammer-ons, pull-offs and tapping on each string.",
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
+        },
+        {
+          "id": 9,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 0,
+          "max": 32,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": true,
+          "name": "Hammer-On and Pull-Off Loudness",
+          "description": "Defines the velocity level of hammer-ons, pull-offs and tapping.",
+          "default": [16, 16, 16, 16, 16, 16],
+          "values": [1, 1, 1, 1, 1, 1]
+        },
+        {
+          "id": 12,
+          "title": "Tap type",
+          "type": "INT",
+          "min": 0,
+          "max": 0,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Hammer-On and Pull-Off Algorithm",
+          "description": "Switches the algorithm that's being used to detect hammer-ons and pull-offs. Set this parameter to '1' for the strings that don't produce hammer-ons or pull-offs even when their sensitivity is set to the maximum.",
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
+        }
+      ]
+    },
+    {
+      "groupId": 8,
+      "title": "Modelling tap settings",
+      "params": [
+        {
+          "id": 5,
+          "title": "deltaDownFilterFretTap",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Hammer-On and Pull-Off Sensitivity",
+          "description": "Defines how easy it is to trigger hammer-ons, pull-offs and tapping.",
+          "default": [3, 3, 3, 3, 3, 3],
+          "values": [80, 80, 80, 80, 80, 80]
+        },
+        {
+          "id": 4,
+          "title": "deltaUpFilterFretTap",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Open String Pull-Off Sensitivity",
+          "description": "Defines how easy it is to trigger pull-offs to an open string. This doesn't affect pull-offs to a fret. Lowering this setting will prevent open strings from ringing when you take your fingers off the string.",
+          "default": [4, 4, 4, 4, 4, 4],
+          "values": [1, 1, 1, 1, 1, 1]
+        }
+      ]
+    },
+    {
+      "groupId": 4,
+      "title": "Slide settings",
+      "params": [
+        {
+          "id": 3,
+          "title": "Slide On",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Slide Switch",
+          "description": "Enables / disables slides on each string.",
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
+        },
+        {
+          "id": 1,
+          "title": "Slide up limit",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Slide Up Sensitivity",
+          "description": "Defines how easy it is to slide up the fretboard.",
+          "default": [22, 22, 22, 22, 22, 22],
+          "values": [15, 15, 15, 15, 15, 15]
+        },
+        {
+          "id": 0,
+          "title": "Slide down limit",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Slide Down Sensitivity",
+          "description": "Defines how easy it is to slide down the fretboard.",
+          "default": [22, 22, 22, 22, 22, 22],
+          "values": [22, 22, 22, 22, 22, 22]
+        }
+      ]
+    },
+    {
+      "groupId": 1,
+      "title": "Time-out Settings",
+      "params": [
+        {
+          "id": 1,
+          "title": "Activity Extension",
+          "type": "INT",
+          "min": 0,
+          "max": 100,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Accidental Note Prevention",
+          "description": "Defines the amount of time that hammer-ons, pull-offs, tapping and slides won't be registered after the string was picked (in milliseconds).",
+          "default": [50, 50, 50, 50, 50, 50],
+          "values": [50, 50, 50, 50, 50, 50]
+        }
+      ]
+    },
+    {
+      "groupId": 9,
+      "title": "Compression settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Switch on compressor",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Velocity Compressor Switch",
+          "description": "Enables / disables loudness compression for all picked notes.",
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
+        },
+        {
+          "id": 2,
+          "title": "Level",
+          "type": "INT",
+          "min": 0,
+          "max": 120,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Velocity Compressor Level",
+          "description": "Defines the velocity level to which the picking loudness will be compressed.",
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
+        },
+        {
+          "id": 1,
+          "title": "coefficient",
+          "type": "INT",
+          "min": 0,
+          "max": 190,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Velocity Compressor Amount",
+          "description": "Defines how heavily the picking loudness will be pushed up or down towards the selected Velocity Compressor Level.",
+          "default": [180, 180, 180, 180, 180, 180],
+          "values": [180, 180, 180, 180, 180, 180]
+        },
+        {
+          "id": 3,
+          "title": "Lower velocity limit",
+          "type": "INT",
+          "min": 0,
+          "max": 190,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Velocity Minimum",
+          "description": "Defines the minimum velocity of all picked notes. Quieter notes will have their velocity set to the minimum.",
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [0, 0, 0, 0, 0, 0]
+        },
+        {
+          "id": 4,
+          "title": "Upper velocity limit",
+          "type": "INT",
+          "min": 0,
+          "max": 190,
+          "left": false,
+          "all": false,
+          "enabled": false,
+          "reversed": false,
+          "name": "Velocity Maximum",
+          "description": "Defines the maximum velocity of all picked notes. Louder notes will have their velocity set to the maximum.",
+          "default": [127, 127, 127, 127, 127, 127],
+          "values": [127, 127, 127, 127, 127, 127]
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import '../styles/index.scss'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Store from '../store'
+import MidiStore from '../store/MidiStore'
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { mobileAndTabletCheck } from '../public/utils'
@@ -16,6 +17,7 @@ const MyApp = observer(({ Component, pageProps }) => {
     if (process.browser && mobileAndTabletCheck()) router.push('/mobile')
   }, [])
   // router ?
+  console.log(MidiStore.synth)
   const { isAdmin } = router.query
   if (isAdmin) Store.isAdmin = true
   const isInited = Store.isInited || Store.isAdmin
@@ -24,7 +26,9 @@ const MyApp = observer(({ Component, pageProps }) => {
       !isInited &&
       !['/chrome-required', '/mobile', '/'].includes(router.pathname)
     )
-      router.push('/')
+      Store.initJammy().catch((e) => {
+        if (!Store.isAdmin) router.push('/')
+      })
   }, [router])
 
   return (

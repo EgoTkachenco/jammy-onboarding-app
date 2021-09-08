@@ -17,12 +17,10 @@ const Presets = observer(() => {
   const isCustomize = PresetsStore.isCustomize
   const customized = PresetsStore.activePreset
   const customizedPreset = PresetsStore.customizedPreset
-  const jammy = Store.jammy
   const isJammyG = Store.jammyName === 'Jammy G'
   const isFetch = PresetsStore.isFetch
 
   const PRESETS = PresetsStore.presets
-  if (isFetch) return <div className="page-container presets">Saving...</div>
   return (
     <>
       <Stepper
@@ -52,16 +50,15 @@ const Presets = observer(() => {
         nextText={customizedPreset || active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
+        {isFetch && <div>Saving...</div>}
         {isCustomize ? (
           isJammyG ? (
             <ConfiguratorG
-              jammy={jammy}
               preset={customized.preset}
               presetName={customized?.name}
             />
           ) : (
             <ConfiguratorE
-              jammy={jammy}
               preset={customized.preset}
               presetName={customized?.name}
             />

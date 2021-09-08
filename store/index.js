@@ -53,6 +53,7 @@ class Store {
           }
           if (isJammyNotConnected) {
             this.startScreenTab = 'Welcome'
+            return Promise.reject()
           } else {
             // Midi Access and Jammy detected
             this.initStatusCheck()
@@ -66,35 +67,41 @@ class Store {
               return Promise.reject('Updating')
               // update soft
             } else {
-              MidiStore.initMidiStore()
+              if (!MidiStore.synth) MidiStore.initMidiStore()
               this.isInited = true
               // jammy.requestJammyESegmentWires(() => true, [0, 1, 2, 3, 4, 5])
               // jammy.onJammyESegmentWired = (fret, v) =>
               //   MidiStore.handle(fret, v)
-              midiService.addEventListener('midimessage', (e) => {
-                MidiStore.handleMidiMessage(e)
-
-                if (this.isPlaying && this.isPlayTime) {
-                  clearTimeout(this.isPlayTime)
-                } else {
-                  this.isPlaying = true
-                }
-
-                this.isPlayTime = setTimeout(() => {
-                  this.isPlaying = false
-                  clearTimeout(this.isPlayTime)
-                }, 1000)
-              })
+              midiService.addEventListener('midimessage', this.onMidiMessage)
               return Promise.resolve(true)
             }
           }
         } else {
           this.startScreenTab = 'Welcome'
+          return Promise.reject()
         }
       })
       .catch(() => {
-        this.startScreenTab = 'Denied'
+        if (this.startScreen !== 'Welcome') {
+          this.startScreenTab = 'Denied'
+          return Promise.reject()
+        }
+        return Promise.reject()
       })
+  }
+  onMidiMessage = (e) => {
+    MidiStore.handleMidiMessage(e)
+
+    if (this.isPlaying && this.isPlayTime) {
+      clearTimeout(this.isPlayTime)
+    } else {
+      this.isPlaying = true
+    }
+
+    this.isPlayTime = setTimeout(() => {
+      this.isPlaying = false
+      clearTimeout(this.isPlayTime)
+    }, 1000)
   }
   updateFirmware = () => {
     debugger
@@ -127,7 +134,8 @@ class Store {
       let newStatus =
         midiService.midiAccess.inputs.size === 1 ? 'Connected' : 'Disconnected'
       if (this.status !== newStatus && newStatus === 'Connected') {
-        // reiniti guitar
+        midiService.removeEventListener('midimessage', this.onMidiMessage)
+        midiService.addEventListener('midimessage', this.onMidiMessage)
       }
       this.status = newStatus
     }, 2000)

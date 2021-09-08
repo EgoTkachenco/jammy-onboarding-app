@@ -2,12 +2,12 @@ import React, { useState, useReducer, Component } from 'react'
 import { FormGroup, CustomInput, Input } from 'reactstrap'
 import { saveAs } from 'file-saver'
 import Range from '../../components/Range'
-import midiService from '../services/midi'
 import { JAMMY_E, JAMMY_G } from '../services/jammy'
 import { sleep, xmlToJson } from '../services/utils'
 import midi from '../services/midi'
 
-let jammy
+import { midiService, jammy } from '../../store'
+import PresetsStore from '../../store/PresetsStore'
 // const tmpData = require("../../config/jammySettings_v1.7.3_fw15.json");
 const tmpDataJammyG = require('../config/g/jammySettings_v1.8_fw19.json')
 const tmpDataJammyE = require('../config/e/jammySettings_v0.4.json')
@@ -222,7 +222,7 @@ const SettingGroupParam = ({
       className={`presets-list__item ${isActive ? 'active' : ''}`}
       onClick={setActiveParam}
     >
-      {param.title}
+      {param.name}
     </div>
   )
 }
@@ -279,6 +279,7 @@ const SettingGroups = ({
 class Configurator extends Component {
   constructor(props) {
     super(props)
+    console.log('config constructor')
     let pData = this.preprocessData(props.preset)
     this.state = {
       data: pData,
@@ -304,21 +305,20 @@ class Configurator extends Component {
       }
     }
 
-    for (let g of data.global) {
-      for (let p of g.params) {
-        p.group = g
-      }
-    }
+    // for (let g of data.global) {
+    //   for (let p of g.params) {
+    //     p.group = g
+    //   }
+    // }
     return data
   }
 
   componentDidMount() {
-    midiService.init().finally(() => {
-      midiService.loadState()
-      midiService.addEventListener('midimessage', this.onMidiMessage)
-
-      this.forceUpdate()
-    })
+    // midiService.init().finally(() => {
+    //   midiService.loadState()
+    midiService.addEventListener('midimessage', this.onMidiMessage)
+    //   this.forceUpdate()
+    // })
   }
 
   componentWillUnmount() {
@@ -792,17 +792,21 @@ class Configurator extends Component {
     }
   }
   onRangeChange(v, string) {
-    let active = this.state.active
-    active.values[string] = v
+    // let active = this.state.active
+    // active.values[string] = v
     let data = this.state.data
     data.groups[this.state.activeGroup].params[this.state.activeParam].values[
       string
     ] = v
-
-    this.setState({ data, active })
+    PresetsStore.saveParamChange(
+      data.groups[this.state.activeGroup],
+      data.groups[this.state.activeGroup].params[this.state.activeParam],
+      string
+    )
+    this.setState({ data })
   }
   onSetActiveParam(g, p) {
-    debugger
+    console.log('active param', g, p)
     this.setState({
       active: this.state.data.groups[g].params[p],
       activeGroup: g,
@@ -815,7 +819,6 @@ class Configurator extends Component {
         <div className="title-text text-center">Customize the playability</div>
         <div className="md-text text-center">
           Based on “{this.props.presetName || 'Default'}” preset
-          {/* Based on Default preset */}
         </div>
         <div className="presets-customize__inner">
           <div className="presets-list">
@@ -836,6 +839,7 @@ class Configurator extends Component {
                   this.state.active.default.map((el, i) => {
                     this.onRangeChange(el, i)
                   })
+                  // console.log(this.state.active)
                 }}
               >
                 Restore to default settings
@@ -854,7 +858,10 @@ class Configurator extends Component {
                   value={this.state.active.values[index]}
                   min={this.state.active.min}
                   max={this.state.active.max}
-                  onChange={(v) => this.onRangeChange(v, index)}
+                  onChange={(v) => {
+                    let { min, max } = this.state.active
+                    if (v !== min && v !== max) this.onRangeChange(v, index)
+                  }}
                 />
               ))}
             </div>
@@ -868,14 +875,12 @@ class Configurator extends Component {
 const ConfiguratorG = (props) => {
   midiService.logIncoming = true
   midiService.logOutgoing = true
-  jammy = props.jammy
   return <Configurator preset={props.preset} presetName={props.presetName} />
 }
 
 const ConfiguratorE = (props) => {
-  midiService.logIncoming = true
-  midiService.logOutgoing = true
-  jammy = props.jammy
+  // midiService.logIncoming = true
+  // midiService.logOutgoing = true
   return <Configurator preset={props.preset} presetName={props.presetName} />
 }
 
