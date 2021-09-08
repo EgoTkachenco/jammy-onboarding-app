@@ -9,7 +9,7 @@ const SoundCheck = observer(() => {
   const isPlaying = Store.isPlaying
   const [showMessage, setShowMessage] = useState(false)
   useEffect(() => {
-    if (isPlaying && !showMessage) setTimeout(() => setShowMessage(true), 10000)
+    if (isPlaying && !showMessage) setTimeout(() => setShowMessage(true), 20000)
   }, [isPlaying])
   const videoLink =
     jammyName === 'Jammy G' ? '/videos/Jammy G.mp4' : '/videos/Jammy_E.mp4'

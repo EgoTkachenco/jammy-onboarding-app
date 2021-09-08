@@ -228,8 +228,8 @@ div {
     svg {
       position: relative;
       z-index: 10;
-      width: 11rem;
-      height: 10.25rem;
+      width: 235px;
+      height: 220px;
     }
 
     .string-wrapper {
@@ -270,11 +270,11 @@ div {
       transform: rotate(180deg);
     }
     .chords-list {
-      position: relative;
+      // position: relative;
       opacity: 1;
-      bottom: -1rem;
+      bottom: 7rem;
       height: auto;
-      max-height: 15rem;
+      max-height: 12rem;
       .string-wrapper {
         height: 8.5rem;
       }

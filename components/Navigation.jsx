@@ -1,27 +1,39 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
+import Dialog from '../components/Dialog'
 import { observer } from 'mobx-react-lite'
 import Store from '../store'
+import { useRouter } from 'next/router'
 const Navigation = observer(({ process }) => {
   const isPlaying = Store.isPlaying
   const status = Store.status
+  const router = useRouter()
   return (
-    <div className="navigation-wrapper">
-      <NavigationProcess process={process} />
-      <div className="navigation-content">
-        <div className="navigation__logo">
-          <Image
-            src="/jammy-white-logo__small.svg"
-            layout="fill"
-            objectFit="fill"
-            alt="Logo"
-          />
-        </div>
-        <div className={`navigation__label ${status}`}>{status}</div>
+    <>
+      <div className="navigation-wrapper">
+        <NavigationProcess process={process} />
+        <div className="navigation-content">
+          <div className="navigation__logo">
+            <Image
+              src="/jammy-white-logo__small.svg"
+              layout="fill"
+              objectFit="fill"
+              alt="Logo"
+            />
+          </div>
+          <div className={`navigation__label ${status}`}>{status}</div>
 
-        <AnimatedLogo isPlaying={isPlaying} />
+          <AnimatedLogo isPlaying={isPlaying} />
+        </div>
       </div>
-    </div>
+      {Store.status === 'Disconnected' && router.pathname !== '/' && (
+        <Dialog>
+          <div className="title-text text-center">
+            Turn your Jammy on and connect it to your computer via USB cable!
+          </div>
+        </Dialog>
+      )}
+    </>
   )
 })
 export default Navigation

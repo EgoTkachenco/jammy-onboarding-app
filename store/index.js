@@ -140,6 +140,9 @@ class Store {
         midiService.removeEventListener('midimessage', this.onMidiMessage)
         midiService.addEventListener('midimessage', this.onMidiMessage)
       }
+      // if (this.status !== newStatus && newStatus === 'Disconnected') {
+
+      // }
       this.status = newStatus
     }, 2000)
   }

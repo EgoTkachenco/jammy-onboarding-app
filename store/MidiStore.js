@@ -122,7 +122,6 @@ class MidiStore {
   }
 
   async initMidiStore() {
-    debugger
     this.isIniting = true
     let params = {
       urls: {
