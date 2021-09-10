@@ -3,22 +3,12 @@ import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Image from 'next/image'
 import FormsStore from '../../store/FormsStore'
+import MidiPresetsStore from '../../store/MidiPresetsStore'
 import { observer } from 'mobx-react-lite'
-export default function Software() {
+const Software = observer(() => {
   const router = useRouter()
-  const SOFTWARES = [
-    { id: 1, name: 'Ableton Live', url: '/softwares/ableton.png' },
-    { id: 2, name: 'Logic Pro X ', url: '/softwares/logic-pro.png' },
-    { id: 3, name: 'GarageBand', url: '/softwares/garage-band.png' },
-    { id: 4, name: 'FL Studio ', url: '/softwares/fl-studio.png' },
-    { id: 5, name: 'Guitar Pro	', url: '/softwares/guitar-pro.png' },
-    {
-      id: 6,
-      name: "I'd like to learn MIDI basics first ",
-      url: '/softwares/default.png',
-    },
-  ]
-
+  const SOFTWARES = MidiPresetsStore.SOFTWARES
+  const setActive = (soft) => MidiPresetsStore.setActivePreset(soft)
   return (
     <>
       <Stepper
@@ -41,7 +31,10 @@ export default function Software() {
             <div
               className="software-list__item"
               key={soft.id}
-              onClick={() => router.push('/software-settings-2')}
+              onClick={() => {
+                setActive(soft)
+                router.push('/software-settings-2')
+              }}
             >
               <div className="software-list__item__img">
                 <Image src={soft.url} alt={soft.name} width={46} height={46} />
@@ -58,8 +51,8 @@ export default function Software() {
       </div>
     </>
   )
-}
-
+})
+export default Software
 const Feedback = observer(() => {
   const isDawFormSended = FormsStore.isDawFormSended
   const sendForm = (e) => {

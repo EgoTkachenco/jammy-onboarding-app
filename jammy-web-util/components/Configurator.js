@@ -1,5 +1,5 @@
 import React, { useState, useReducer, Component } from 'react'
-import { FormGroup, CustomInput, Input } from 'reactstrap'
+// import { FormGroup, CustomInput, Input } from 'reactstrap'
 import { saveAs } from 'file-saver'
 import Range from '../../components/Range'
 import { JAMMY_E, JAMMY_G } from '../services/jammy'

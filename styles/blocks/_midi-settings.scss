@@ -26,6 +26,30 @@
       .select-wrapper {
         margin-left: auto;
       }
+      &__input {
+        text-align: right;
+        margin-left: auto;
+        width: 10rem;
+
+        .slider {
+          padding: 0;
+          .slider-top {
+            margin: 0;
+          }
+          .slider__value {
+            font-size: 0.75rem;
+            line-height: 1rem;
+          }
+          .rc-slider-handle {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-top: -0.625rem;
+          }
+        }
+        .ant-switch-checked {
+          background-color: #1b15ff;
+        }
+      }
     }
   }
 

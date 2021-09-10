@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 
-export default function CustomSelect({ value, options }) {
+export default function CustomSelect({ value, options, onChange, getOption }) {
   const [state, setstate] = useState(value)
   const [active, setActive] = useState(false)
-  const handleOption = (option) => {
+  const handleOption = (option, i) => {
     setstate(option)
     setActive(false)
+    if (onChange) onChange(option, i)
   }
   const toggleSelect = () => setActive(!active)
   const selectRef = useRef(null)
@@ -23,9 +24,9 @@ export default function CustomSelect({ value, options }) {
                 item === state ? 'active' : ''
               }`}
               key={i}
-              onClick={() => handleOption(item)}
+              onClick={() => handleOption(item, i)}
             >
-              {item}
+              {getOption ? getOption(item) : item}
             </div>
           ))}
         </div>

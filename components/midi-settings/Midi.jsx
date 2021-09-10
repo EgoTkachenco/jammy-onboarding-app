@@ -3,137 +3,87 @@ import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Dialog from '../Dialog'
 import Select from '../Select'
-export default function Midi() {
+import Range from '../Range'
+import { observer } from 'mobx-react-lite'
+import { Switch } from 'antd'
+import 'antd/dist/antd.dark.css'
+import MidiPresetsStore from '../../store/MidiPresetsStore'
+const Midi = observer(() => {
   const router = useRouter()
   const [dialog, setDialog] = useState(false)
-  const MIDISETTINGS = [
-    {
-      id: 1,
-      name: 'MIDI Channels',
-      settings: [
-        {
-          id: 1,
-          name: 'String 1',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-        {
-          id: 2,
-          name: 'String 2',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-        {
-          id: 3,
-          name: 'String 3',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-        {
-          id: 4,
-          name: 'String 4',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-        {
-          id: 5,
-          name: 'String 5',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-        {
-          id: 6,
-          name: 'String 6',
-          value: 'Channel 6',
-          options: [
-            'Channel 1',
-            'Channel 2',
-            'Channel 3',
-            'Channel 4',
-            'Channel 5',
-            'Channel 6',
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'String Bending',
-      settings: [
-        {
-          id: 1,
-          name: 'Pitch Bending Range (divide by)',
-          value: '1',
-          options: ['1', '2', '3', '4', '5'],
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'String Bending',
-      settings: [
-        {
-          id: 1,
-          name: 'Fret Hand Muting ',
-          value: 'Don’t play notes ',
-          options: ['1', '2', '3', '4', '5'],
-        },
-      ],
-    },
-    {
-      id: 4,
-      name: 'Accelerometer',
-      settings: [
-        {
-          id: 1,
-          name: 'Accelerometer Mode ',
-          value: 'Up and Down ',
-          options: ['1', '2', '3', '4', '5'],
-        },
-        {
-          id: 2,
-          name: 'MIDI CC Number',
-          value: '127',
-          options: ['1', '2', '3', '4', '5'],
-        },
-      ],
-    },
-  ]
+  debugger
+  const activePreset = MidiPresetsStore.activePreset
+  const onChange = (param, group, value) =>
+    MidiPresetsStore.changePresetValue(param, group, value)
+
+  const getParamInput = (param, group) => {
+    switch (param.type) {
+      case 'INT':
+        return (
+          <Range
+            value={param.value}
+            min={param.min}
+            max={param.max}
+            onChange={(v) => onChange(param, group, v)}
+          />
+        )
+      case 'LIST':
+        return (
+          <Select
+            value={
+              param.options.find((option) => option.id === param.value)?.name ||
+              null
+            }
+            options={param.options}
+            getOption={(option) => option.name}
+            onChange={(v, i) => onChange(param, group, v.id)}
+          />
+        )
+      case 'BOOL':
+        return (
+          <Switch
+            defaultChecked={param.value === 1}
+            onChange={(v) => onChange(param, group, v ? 1 : 0)}
+          />
+        )
+      default:
+        return 'DEF'
+    }
+  }
+  const getParamRow = (param, group) => {
+    if (param.type === 'ARRAY') {
+      return (
+        <>
+          {[0, 1, 2, 3, 4, 5].map((string) => (
+            <div className="midi-list__item" key={string}>
+              <div className="midi-list__item__label">
+                {param.name} {string + 1}
+              </div>
+              <div className="midi-list__item__input">
+                <Select
+                  value={param.optionName + ' ' + param.value[string]}
+                  options={[1, 2, 3, 4, 5, 6, 7]}
+                  getOption={(option) => param.optionName + ' ' + option}
+                  onChange={(v, i) =>
+                    onChange(param, group, { string, value: v })
+                  }
+                />
+              </div>
+            </div>
+          ))}
+        </>
+      )
+    }
+    return (
+      <div className="midi-list__item" key={param.id}>
+        <div className="midi-list__item__label">{param.name}</div>
+        <div className="midi-list__item__input">
+          {getParamInput(param, group)}
+        </div>
+        {/* <Select value={setting.value} options={setting.options} /> */}
+      </div>
+    )
+  }
   return (
     <>
       <Stepper
@@ -154,17 +104,13 @@ export default function Midi() {
           performance.
         </div>
         <div className="midi-list">
-          {MIDISETTINGS.map((block) => (
-            <React.Fragment key={block.id}>
-              <div className="md-text white-50">{block.name}</div>
-              {block.settings.map((setting) => (
-                <div className="midi-list__item" key={setting.id}>
-                  <div className="midi-list__item__label">{setting.name}</div>
-                  <Select value={setting.value} options={setting.options} />
-                </div>
-              ))}
-            </React.Fragment>
-          ))}
+          {activePreset &&
+            activePreset.groups.map((group) => (
+              <React.Fragment key={group.id}>
+                <div className="md-text white-50">{group.name}</div>
+                {group.params.map((param) => getParamRow(param, group))}
+              </React.Fragment>
+            ))}
         </div>
 
         {dialog && (
@@ -195,8 +141,8 @@ export default function Midi() {
       </div>
     </>
   )
-}
-
+})
+export default Midi
 const ArrowIcon = () => {
   return (
     <svg

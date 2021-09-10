@@ -29,7 +29,8 @@ const Navigation = observer(({ process }) => {
       {Store.status === 'Disconnected' && router.pathname !== '/' && (
         <Dialog>
           <div className="title-text text-center">
-            Turn your Jammy on and connect it to your computer via USB cable!
+            Turn your Jammy on and connect it <br /> to your computer via USB
+            cable!
           </div>
         </Dialog>
       )}

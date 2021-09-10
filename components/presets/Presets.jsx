@@ -30,7 +30,8 @@ const Presets = observer(() => {
         onPrev={
           isCustomize
             ? () => {
-                setCustomizedPreset(null)
+                PresetsStore.isCustomize = false
+                PresetsStore.activePreset = null
               }
             : () => router.push('/sound-check-2')
         }
@@ -46,9 +47,9 @@ const Presets = observer(() => {
                 PresetsStore.applyPreset(active)
                 setShowDialog(true)
               }
-            : () => setShowDialog(true)
+            : null
         }
-        nextText={customizedPreset || active ? 'Apply Selected Preset' : 'Done'}
+        nextText={!isCustomize && active ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
         {isFetch && (
@@ -90,7 +91,7 @@ const Presets = observer(() => {
                         className="btn btn-dark"
                         onClick={(e) => {
                           e.stopPropagation()
-                          PresetsStore.setActivePreset(customizedPreset)
+                          setActivePreset(customizedPreset)
                         }}
                       >
                         Customize

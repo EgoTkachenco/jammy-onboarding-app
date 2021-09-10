@@ -95,7 +95,6 @@ class PresetsStore {
   }
   sendParamRequest = async (op, param) => {
     for (let stringId = 0; stringId < param.values.length; stringId++) {
-      // console.log(new Date(), param, stringId);
       jammy.sendParamRequest(op, {
         groupId: param.group.groupId,
         paramId: param.id,
@@ -121,22 +120,23 @@ class PresetsStore {
   }
   saveParamChange = async (group, param, string) => {
     this.isFetch = true
-    jammy.sendParamRequest('set', {
-      groupId: group.groupId,
-      paramId: param.id,
-      left: param.left,
-      string,
-      value: param.values[string],
-    })
-    await sleep(100)
-    debugger
-    jammy.sendParamRequest('get', {
-      groupId: group.groupId,
-      paramId: param.id,
-      left: param.left,
-      string,
-      value: param.values[string],
-    })
+    await this.sendParamRequest('set', { ...param, group: group })
+    // jammy.sendParamRequest('set', {
+    //   groupId: group.groupId,
+    //   paramId: param.id,
+    //   left: param.left,
+    //   string,
+    //   value: param.values[string],
+    // })
+    // await sleep(100)
+    // debugger
+    // jammy.sendParamRequest('get', {
+    //   groupId: group.groupId,
+    //   paramId: param.id,
+    //   left: param.left,
+    //   string,
+    //   value: param.values[string],
+    // })
     this.isFetch = false
   }
 }
