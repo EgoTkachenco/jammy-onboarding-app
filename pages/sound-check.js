@@ -3,6 +3,7 @@ import Navigation from '../components/Navigation'
 import SoundCheckCmp from '../components/sound-check/SoundCheck'
 import Stepper from '../components/Stepper'
 import { useRouter } from 'next/router'
+import MIDISynth from '../components/sound-check/MIDISynth'
 export default function SoundCheck() {
   const router = useRouter()
   return (
@@ -16,6 +17,8 @@ export default function SoundCheck() {
         nextText="Next step"
       />
       <SoundCheckCmp />
+      {/* Sound generator*/}
+      <MIDISynth />
     </>
   )
 }

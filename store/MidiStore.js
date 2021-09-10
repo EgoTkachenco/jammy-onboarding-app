@@ -3,6 +3,7 @@ import { jammy } from './index'
 import PresetsStore from './PresetsStore'
 import * as Tone from 'tone'
 
+
 const GUITAR_NOTES = {
   1: {
     0: 'E2',
@@ -165,40 +166,41 @@ class MidiStore {
     this.now = Tone.now()
   }
   async handleMidiMessage(e) {
-    let msg = this.parseMidiEvent(e.data)
-    if (!this.synth || this.isIniting) return
-    if (msg.type) {
-      this.onSoundEvent(msg, e.data)
-    } else if (!msg.type) {
-      let data = jammy.unpackJammySysexForG(e.data)
-      let fret = data[5]
-      let string = [6, 5, 4, 3, 2, 1][data[1]]
-      console.log(e.data)
-      console.log(data)
-      if (fret === undefined || !string) {
-        // console.log(e.data)
-      } else if (data[0] !== 9) {
-        this.riff[string] = fret
-        this.playNote(string)
-      }
-    }
+    // let msg = this.parseMidiEvent(e.data)
+    // if (!this.synth || this.isIniting) return
+    // if (msg.type) {
+    //   this.onSoundEvent(msg, e.data)
+    // } else if (!msg.type) {
+    //   let data = jammy.unpackJammySysexForG(e.data)
+    //   let fret = data[5]
+    //   let string = [6, 5, 4, 3, 2, 1][data[1]]
+    //   console.log(e.data)
+    //   console.log(data)
+    //   if (fret === undefined || !string) {
+    //     // console.log(e.data)
+    //   } else if (data[0] !== 9) {
+    //     this.riff[string] = fret
+    //     this.playNote(string)
+    //   }
+    // }
   }
 
   onSoundEvent(msg) {
-    if (msg.type === 'Note ON') {
-      jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    } else if (msg.type === 'Note OFF') {
-      console.log(msg.type, msg.ch)
-      let note = GUITAR_NOTES[msg.ch][this.riff[msg.ch]]
-      console.log('Note', note, msg.ch, this.now)
-      this.synth[msg.ch].triggerRelease(note, this.now + 1)
-    } else if (msg.type === 'Pitch Band') {
-      jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    } else if (msg.type === 'CC') {
-      // console.log(msg.ch)
-      // jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    }
+    // if (msg.type === 'Note ON') {
+    //   jammy.sendFretRequestForG(this.stringIds[msg.ch])
+    // } else if (msg.type === 'Note OFF') {
+    //   console.log(msg.type, msg.ch)
+    //   let note = GUITAR_NOTES[msg.ch][this.riff[msg.ch]]
+    //   console.log('Note', note, msg.ch, this.now)
+    //   this.synth[msg.ch].triggerRelease(note, this.now + 1)
+    // } else if (msg.type === 'Pitch Band') {
+    //   jammy.sendFretRequestForG(this.stringIds[msg.ch])
+    // } else if (msg.type === 'CC') {
+    //   // console.log(msg.ch)
+    //   // jammy.sendFretRequestForG(this.stringIds[msg.ch])
+    // }
   }
+
   playNote(ch) {
     let note = GUITAR_NOTES[ch][this.riff[ch]]
     console.log('Note', note, ch)
