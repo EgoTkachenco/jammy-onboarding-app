@@ -57,16 +57,16 @@ class Store {
           } else {
             // Midi Access and Jammy detected
             this.initStatusCheck()
-            if (this.jammyName === 'Jammy G' && input.version !== '4.1') {
-              this.updateFirmware()
-              return Promise.reject('Updating')
-            } else if (
-              this.jammyName === 'Jammy E' &&
-              input.version !== '4.1'
-            ) {
-              return Promise.reject('Updating')
-              // update soft
-            } else {
+            // if (this.jammyName === 'Jammy G' && input.version !== '4.1') {
+            //   this.updateFirmware()
+            //   return Promise.reject('Updating')
+            // } else if (
+            //   this.jammyName === 'Jammy E' &&
+            //   input.version !== '4.1'
+            // ) {
+            //   return Promise.reject('Updating')
+            //   // update soft
+            // } else {
               console.log(path)
               if (!MidiStore.synth && path !== '/sensitivity')
                 MidiStore.initMidiStore()
@@ -77,7 +77,7 @@ class Store {
               if (path !== '/sensitivity')
                 midiService.addEventListener('midimessage', this.onMidiMessage)
               return Promise.resolve(true)
-            }
+            // }
           }
         } else {
           this.startScreenTab = 'Welcome'
@@ -87,9 +87,9 @@ class Store {
       .catch(() => {
         if (this.startScreen !== 'Welcome') {
           this.startScreenTab = 'Denied'
-          return Promise.reject()
+          // return Promise.reject()
         }
-        return Promise.reject()
+        // return Promise.reject()
       })
   }
   onMidiMessage = (e) => {
