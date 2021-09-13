@@ -17,7 +17,7 @@ export default function ChromeRequired() {
         </div>
 
         <div className="lg-text text-center white">
-          Install a compatible browser - Google Chrome, and <br /> reopen{' '}
+          Install Google Chrome and reopen <br />
           <a href="#">www.playjammy.com/start</a>
         </div>
         <a href="https://www.google.com/chrome/" className="no-effect">

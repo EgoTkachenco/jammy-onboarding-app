@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react'
 function FirmwareUpdate({ children }) {
   return (
     <div className="page-container centered">
-      <Navigation process={25} />
+      <Navigation process={0} />
       {children}
     </div>
   )
@@ -79,37 +79,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
   return (
     <FirmwareUpdate>
       <div className="reboot">
-        {!isRebooted ? (
-          <>
-            <div className="title-text text-center">
-              Please reboot the guitar
-            </div>
-            <div className="sm-text text-center">Waiting for reboot</div>
-          </>
-        ) : (
-          <>
-            <div className="animation-blank"></div>
-            <div className={`rebooted-text ${isPaused ? 'show' : ''}`}>
-              <div className="title-text text-center">
-                To make sure your first jam on Jammy is pleasant, <br />
-                you’ll need to calibrate it correctly.
-              </div>
-              <div className="sm-text text-center">
-                When you push the power button to turn your Jammy on, the LED
-                turns purple for a few seconds to indicate that the sensors are
-                determining their default values. Please avoid touching the
-                strings while the LED is glowing purple — they’re in the process
-                of calibration. Once the LED is white/light blue, your Jammy is
-                ready to play.
-              </div>
-              <button className="btn btn-primary" onClick={init}>
-                Got it
-              </button>
-            </div>
-          </>
-        )}
-
-        <div
+      <div
           className={`animation-screen ${isRebooted ? 'rebooted' : ''} ${
             isStopped ? 'stopped' : ''
           }`}
@@ -146,7 +116,6 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
                 eventListeners={eventListeners}
               />
             ) : (
-              // <Lottie options={optionsE1} height="946px" width="650px" />
               <Lottie
                 options={optionsE1}
                 height="40.625rem"
@@ -157,6 +126,39 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
               />
             ))}
         </div>
+        
+        {!isRebooted ? (
+          <>
+            <div className="title-text text-center">
+              Please reboot the guitar
+            </div>
+            <div className="sm-text text-center">Waiting for reboot</div>
+          </>
+        ) : (
+          <>
+            <div className="animation-blank"></div>
+            <div className={`rebooted-text ${isPaused ? 'show' : ''}`} onClick={() => reloadAnimation()}>
+              <div className="title-text text-center">
+                To make sure your first jam on Jammy is pleasant, <br />
+                you’ll need to calibrate it correctly.
+              </div>
+              <div className="sm-text text-center">
+                When you push the power button to turn your Jammy on, the LED
+                turns purple for a few seconds to indicate that the sensors are
+                determining their default values. Please avoid touching the
+                strings while the LED is glowing purple — they’re in the process
+                of calibration. Once the LED is white/light blue, your Jammy is
+                ready to play.
+              </div>
+                <button className="btn btn-primary" onClick={e => {
+                  e.stopPropagation()
+                  router.push('/sound-check')
+                }}>
+                Got it
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </FirmwareUpdate>
   )

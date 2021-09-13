@@ -7,7 +7,7 @@ export default function AdvancedSettings() {
       <Head>
         <title>Advanced Settings</title>
       </Head>
-      <Navigation process={75} />
+      <Navigation process={50} />
       <Presets />
     </>
   )

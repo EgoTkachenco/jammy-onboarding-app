@@ -44,7 +44,7 @@ const Presets = observer(() => {
         onNext={
           customizedPreset || active
             ? () => {
-                PresetsStore.applyPreset(active)
+                // PresetsStore.applyPreset(active)
                 setShowDialog(true)
               }
             : null
@@ -82,7 +82,7 @@ const Presets = observer(() => {
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
                   <div
-                    onClick={() => setactive(null)}
+                    onClick={() => setActivePreset(null)}
                     className={`presets-list__item ${!active ? 'active' : ''}`}
                   >
                     <div className="md-text">Custom preset</div>
@@ -91,7 +91,7 @@ const Presets = observer(() => {
                         className="btn btn-dark"
                         onClick={(e) => {
                           e.stopPropagation()
-                          setActivePreset(customizedPreset)
+                          PresetsStore.isCustomize = true
                         }}
                       >
                         Customize

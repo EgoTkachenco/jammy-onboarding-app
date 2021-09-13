@@ -46,6 +46,7 @@ const ContactForm = observer(() => {
       />
       <div className="page-container support">
         <div className="title-text">Contact Jammy Support Band</div>
+        <div className="md-text text-center">Fill out this form or email us at support@playjammy.com</div>
         <form className="support-form">
           <input
             className="support-form__field"
@@ -95,7 +96,7 @@ const ContactForm = observer(() => {
             </svg>
             {file
               ? file.name
-              : 'Attach a short video demonstrating the problem (optional)'}
+              : 'Attach a short video demonstrating the problem (optional 25MB)'}
           </div>
         </form>
         {isFormSended && (
@@ -119,7 +120,7 @@ const ContactForm = observer(() => {
                   window.location.href = 'http://playjammy.com/'
                 }}
               >
-                Finish onboarding and proceed to the desktop app
+                Finish onboarding and check the companion software
               </button>
             </a>
           </Dialog>
@@ -138,7 +139,7 @@ const ContactForm = observer(() => {
               </button>
               <button
                 className="btn btn-primary__outline"
-                onClick={() => router.push('/sensitivity')}
+                onClick={() => router.push('/advanced')}
               >
                 {'Back to Playability settings first'}
               </button>

@@ -11,6 +11,7 @@ $light_font: 'PTRootUIWebLight', sans-serif;
 $medium_font: 'PTRootUIWebMedium', sans-serif;
 $regular_font: 'PTRootUIWebRegular', sans-serif;
 $secondary_font: 'Montserrat', sans-serif;
+@import '../node_modules/antd/dist/antd.dark.css';
 
 // Typography
 .title-text {
@@ -211,20 +212,18 @@ div {
     }
   }
   .chords-list {
-    transition: all 1s;
     opacity: 0;
     width: 100vw;
     position: absolute;
     left: 0;
-    bottom: 5rem;
+    bottom: 15rem;
     z-index: -1;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 0;
     max-height: 0;
-    transition: all 0.3s;
-    overflow: hidden;
+    transition: all 1s;
+    max-height: 12rem;
     svg {
       position: relative;
       z-index: 10;
@@ -273,8 +272,8 @@ div {
       // position: relative;
       opacity: 1;
       bottom: 7rem;
-      height: auto;
       max-height: 12rem;
+      height: auto;
       .string-wrapper {
         height: 8.5rem;
       }
@@ -331,4 +330,16 @@ div {
   right: 8rem;
   background: #1b1b1f;
   padding: 2rem 3.5rem;
+}
+
+.switch-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  .md-text {
+    color: #888899;
+    font-family: $regular_font;
+
+  }
 }

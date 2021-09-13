@@ -13,11 +13,13 @@ const MyApp = observer(({ Component, pageProps }) => {
     // Check browser and device
     // IF NOT Chrome ---> Screen with Chrome installation
     // IF Chrome ---> Screen with message to connect midi
-    if (process.browser && !window.chrome) router.push('/chrome-required')
-    if (process.browser && mobileAndTabletCheck()) router.push('/mobile')
+    if (process.browser && mobileAndTabletCheck()) {
+      router.push('/mobile')
+    } else if (process.browser && !window.chrome) {
+      router.push('/chrome-required')
+     }
   }, [])
   // router ?
-  console.log(MidiStore.synth)
   const { isAdmin } = router.query
   if (isAdmin) Store.isAdmin = true
   const isInited = Store.isInited || Store.isAdmin

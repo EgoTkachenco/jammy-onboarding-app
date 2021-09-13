@@ -65,7 +65,7 @@ const Sensitivity = observer(() => {
       <Head>
         <title>Sensitivity</title>
       </Head>
-      <Navigation process={60} />
+      <Navigation process={50} />
       <Stepper
         centerSlot={
           <div className="support-btns">
@@ -100,7 +100,7 @@ const Sensitivity = observer(() => {
           </div>
         }
         onNext={next}
-        nextText={step === 3 ? 'Done' : 'Next step'}
+        nextText={step === 2 ? 'Done' : 'Next step'}
       />
       <div className="page-container sensitivity">
         <div className="sensitivity-top">

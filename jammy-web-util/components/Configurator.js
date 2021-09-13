@@ -2,6 +2,7 @@ import React, { useState, useReducer, Component } from 'react'
 // import { FormGroup, CustomInput, Input } from 'reactstrap'
 import { saveAs } from 'file-saver'
 import Range from '../../components/Range'
+import { Switch } from 'antd'
 import { JAMMY_E, JAMMY_G } from '../services/jammy'
 import { sleep, xmlToJson } from '../services/utils'
 import midi from '../services/midi'
@@ -851,19 +852,29 @@ class Configurator extends Component {
                 'String 4 (D)',
                 'String 5 (A)',
                 'String 6 (low E)',
-              ].map((string, index) => (
-                <Range
-                  key={index}
-                  label={string}
-                  value={this.state.active.values[index]}
-                  min={this.state.active.min}
-                  max={this.state.active.max}
-                  onChange={(v) => {
-                    let { min, max } = this.state.active
-                    if (v !== min && v !== max) this.onRangeChange(v, index)
-                  }}
-                />
-              ))}
+              ].map((string, index) => {
+                if (this.state.active.type === 'BOOL') {
+                  return <div className="switch-wrapper">
+                    <div className="md-text">{string}</div>
+                    <Switch
+                    defaultChecked={this.state.active.values[index] === 1}
+                    onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
+                  />
+                  </div>
+                } else {
+                  return <Range
+                    key={index}
+                    label={string}
+                    value={this.state.active.values[index]}
+                    min={this.state.active.min}
+                    max={this.state.active.max}
+                    onChange={(v) => {
+                      let { min, max } = this.state.active
+                      if (v !== min && v !== max) this.onRangeChange(v, index)
+                    }}
+                  />
+                }
+              })}
             </div>
           )}
         </div>

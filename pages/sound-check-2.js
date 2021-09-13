@@ -12,7 +12,7 @@ export default function SoundCheck() {
       <Head>
         <title>Sound Check</title>
       </Head>
-      <Navigation process={60} />
+      <Navigation process={50} />
       <Stepper
         onPrev={() => router.push('/sound-check')}
         prevText={

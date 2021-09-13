@@ -7,7 +7,7 @@ export default function MidiSettings() {
       <Head>
         <title>Midi Settings</title>
       </Head>
-      <Navigation process={80} />
+      <Navigation process={100} />
       <Midi />
     </>
   )

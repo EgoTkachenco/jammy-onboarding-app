@@ -77,8 +77,12 @@ class PresetsStore {
   }
   setActivePreset = async (preset) => {
     this.isFetch = true
-    this.activePreset = preset
-    await this.sendAllParamsRequest('set', preset.preset)
+    if (preset) {
+      this.activePreset = Object.assign({}, preset)
+      await this.sendAllParamsRequest('set', preset.preset)
+    } else {
+      this.activePreset = null
+    }
     this.isFetch = false
   }
   applyPreset = async (preset) => {

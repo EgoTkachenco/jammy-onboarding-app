@@ -12,7 +12,7 @@ const Software = observer(() => {
   return (
     <>
       <Stepper
-        onPrev={() => router.push('/advanced')}
+        onPrev={() => router.back()}
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />

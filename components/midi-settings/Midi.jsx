@@ -6,12 +6,10 @@ import Select from '../Select'
 import Range from '../Range'
 import { observer } from 'mobx-react-lite'
 import { Switch } from 'antd'
-import 'antd/dist/antd.dark.css'
 import MidiPresetsStore from '../../store/MidiPresetsStore'
 const Midi = observer(() => {
   const router = useRouter()
   const [dialog, setDialog] = useState(false)
-  debugger
   const activePreset = MidiPresetsStore.activePreset
   const onChange = (param, group, value) =>
     MidiPresetsStore.changePresetValue(param, group, value)
@@ -100,8 +98,7 @@ const Midi = observer(() => {
       <div className="page-container midi-settings">
         <div className="lg-text text-center">Customize MIDI settings</div>
         <div className="md-text text-center white-50">
-          Open your DAW of choice, assign a virtual instrument and check the
-          performance.
+        We’ve already applied a MIDI preset to your Jammy so open your DAW of choice, assign a virtual instrument, and check the performance.
         </div>
         <div className="midi-list">
           {activePreset &&
@@ -126,7 +123,7 @@ const Midi = observer(() => {
                 rel="noreferrer"
               >
                 <button style={{ width: '100%' }} className="btn btn-primary">
-                  {"I'm ready to install the Jammy desktop app"}
+                  Finish onboarding and check the companion software
                 </button>
               </a>
               <button

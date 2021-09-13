@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 import Store from '../store'
 import { observer } from 'mobx-react-lite'
+import StartScreen from '../components/screens/Start'
 import WelcomeScreen from '../components/screens/Welcome'
 import WaitMidiConnect from '../components/screens/WaitMidiConnect'
 import DeniedMidiAccess from '../components/screens/DeniedMidiAccess'
@@ -18,17 +19,6 @@ const Home = observer(() => {
   // IF MIDI connection accessed ---> Screen with firmware update
   const connectMidi = async () => {
     Store.initJammy()
-      .then(() => {
-        router.push('/sound-check')
-      })
-      .catch((err) => {
-        debugger
-        // setisDenied(true)
-        // setTimeout(() => connectMidi(midiAccess), 5000)
-      })
-      .finally(() => {
-        // setisLoading(false)
-      })
   }
   const activeTab = Store.startScreenTab
   const jammyName = Store.jammyName
@@ -36,6 +26,8 @@ const Home = observer(() => {
 
   const renderScreen = (activeTab) => {
     switch (activeTab) {
+      case 'Start':
+        return <StartScreen action={() => Store.startScreenTab = 'Welcome'} />
       case 'Welcome':
         return <WelcomeScreen action={connectMidi} />
       case 'Waiting':

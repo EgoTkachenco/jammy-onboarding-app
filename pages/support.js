@@ -11,7 +11,7 @@ const Support = observer(() => {
       <Head>
         <title>Settings</title>
       </Head>
-      <Navigation process={75} />
+      <Navigation process={50} />
       <ContactFrom sendForm={sendForm} isSended={isFormSended} />
     </>
   )

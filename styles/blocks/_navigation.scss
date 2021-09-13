@@ -7,6 +7,7 @@
 
   .process-wrapper {
     height: 1rem;
+    display: flex;
     background: #1b1b1f;
     border-bottom: calc(1rem / 16) solid #292931;
     .process-value {
@@ -14,7 +15,11 @@
       margin-bottom: calc(1rem / 16);
       height: 100%;
       transition: all 1s linear;
-      width: 0;
+      width: 25%;
+      margin-right: 1px;
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 
@@ -50,10 +55,14 @@
       display: flex;
       align-items: center;
       height: 100%;
-      svg {
-        margin-right: 0.75rem;
+      &__text {
+        text-align: right;
+        color: #888888;
+        @extend .caption-text;
+        margin-right: 1rem;
       }
       &__inner {
+        margin-left: 0.75rem;
         display: flex;
         align-items: flex-end;
         height: 100%;
@@ -61,7 +70,7 @@
       &__line {
         transition: all 0.6s;
         width: calc((1 / 16) * 1rem);
-        background: #ff00ff;
+        background: #00FFF0;
         margin-right: 2px;
       }
     }

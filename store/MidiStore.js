@@ -165,6 +165,7 @@ class MidiStore {
     this.now = Tone.now()
   }
   async handleMidiMessage(e) {
+    // console.log(e.data)
     let msg = this.parseMidiEvent(e.data)
     if (!this.synth || this.isIniting) return
     if (msg.type) {
