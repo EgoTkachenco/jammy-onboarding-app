@@ -241,6 +241,7 @@ div {
       top: 0;
       left: 0;
       width: 100%;
+      height: 8.5rem;
 
       .string {
         background: #292931;
@@ -274,9 +275,6 @@ div {
       bottom: 7rem;
       max-height: 12rem;
       height: auto;
-      .string-wrapper {
-        height: 8.5rem;
-      }
     }
   }
 }
@@ -340,6 +338,8 @@ div {
   .md-text {
     color: #888899;
     font-family: $regular_font;
-
+  }
+  .ant-switch-checked {
+    background: #1b15ff;
   }
 }

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Stepper from '../Stepper'
 import Image from 'next/image'
@@ -24,7 +23,9 @@ const Software = observer(() => {
         <div className="title-text">
           {"Let's set up Jammy in your primary software."}
         </div>
-        <div className="md-text">Select your DAW of choice to proceed. </div>
+        <div className="md-text white-50">
+          Select your DAW of choice to proceed.
+        </div>
 
         <div className="software-list">
           {SOFTWARES.map((soft) => (

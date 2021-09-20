@@ -96,9 +96,10 @@ const Midi = observer(() => {
         nextText="Done"
       />
       <div className="page-container midi-settings">
-        <div className="lg-text text-center">Customize MIDI settings</div>
+        <div className="lg-text text-center">MIDI settings</div>
         <div className="md-text text-center white-50">
-        We’ve already applied a MIDI preset to your Jammy so open your DAW of choice, assign a virtual instrument, and check the performance.
+          We’ve already applied a MIDI preset to your Jammy so open your DAW of
+          choice, <br /> assign a virtual instrument, and check the performance.
         </div>
         <div className="midi-list">
           {activePreset &&

@@ -3,6 +3,53 @@ import { jammy } from './index'
 import PresetsStore from './PresetsStore'
 import * as Tone from 'tone'
 
+const GUITAR_NOTES_CODE = {
+  40: 'E2',
+  41: 'F2',
+  42: 'F#2',
+  43: 'G2',
+  44: 'G#2',
+  45: 'A2',
+  46: 'A#2',
+  47: 'B2',
+  48: 'C3',
+  49: 'C#3',
+  50: 'D3',
+  51: 'D#3',
+  52: 'E3',
+  53: 'F3',
+  54: 'F#3',
+  55: 'G3',
+  56: 'G#3',
+  57: 'A3',
+  58: 'A#3',
+  59: 'B3',
+  60: 'C4',
+  61: 'C#4',
+  62: 'D4',
+  63: 'D#4',
+  64: 'E4',
+  65: 'F4',
+  66: 'F#4',
+  67: 'G4',
+  68: 'G#4',
+  69: 'A4',
+  70: 'A#4',
+  71: 'B4',
+  72: 'C5',
+  73: 'C#5',
+  74: 'D5',
+  75: 'D#5',
+  76: 'E5',
+  77: 'F5',
+  78: 'F#5',
+  79: 'G5',
+  80: 'G#5',
+  81: 'A5',
+  82: 'A#5',
+  83: 'B5',
+}
+
 const GUITAR_NOTES = {
   1: {
     0: 'E2',
@@ -125,8 +172,8 @@ class MidiStore {
     this.isIniting = true
     let params = {
       urls: {
-        E2: 'E2.mp3',
-        // C2: 'C2.mp3',
+        // E2: 'E2.mp3',
+        C2: 'C2.mp3',
         // 'C#2': 'Cb2.mp3',
         // D2: 'D2.mp3',
         // 'D#2': 'Db2.mp3',
@@ -141,122 +188,26 @@ class MidiStore {
       },
       baseUrl: '/audio/',
     }
-    let sampler = new Tone.Sampler(params).toDestination()
-    // await PresetsStore.sendAllParamsRequest('get')
-    // await Tone.loaded()
-    // sampler.triggerAttackRelease('C3', '1n')
-    this.synth = {
-      1: new Tone.Sampler(params).toDestination(),
-      2: new Tone.Sampler(params).toDestination(),
-      3: new Tone.Sampler(params).toDestination(),
-      4: new Tone.Sampler(params).toDestination(),
-      5: new Tone.Sampler(params).toDestination(),
-      6: new Tone.Sampler(params).toDestination(),
-    }
-    // this.synth = {
-    //   1: sampler,
-    //   2: sampler,
-    //   3: sampler,
-    //   4: sampler,
-    //   5: sampler,
-    //   6: sampler,
-    // }
+    this.synth = new Tone.Sampler(params).toDestination()
     this.isIniting = false
     this.now = Tone.now()
   }
+
   async handleMidiMessage(e) {
-    // console.log(e.data)
-    let msg = this.parseMidiEvent(e.data)
-    if (!this.synth || this.isIniting) return
-    if (msg.type) {
-      this.onSoundEvent(msg, e.data)
-    } else if (!msg.type) {
-      let data = jammy.unpackJammySysexForG(e.data)
-      let fret = data[5]
-      let string = [6, 5, 4, 3, 2, 1][data[1]]
-      console.log(e.data)
-      console.log(data)
-      if (fret === undefined || !string) {
-        // console.log(e.data)
-      } else if (data[0] !== 9) {
-        this.riff[string] = fret
-        this.playNote(string)
-      }
-    }
+    let type = e.data[0] & 0xf0
+    let note = e.data[1]
+    let velocity = e.data[2]
+
+    if (type === 144) this.playNote(note, velocity)
+    if (type === 128) this.stopNote(note)
   }
 
-  onSoundEvent(msg) {
-    if (msg.type === 'Note ON') {
-      jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    } else if (msg.type === 'Note OFF') {
-      console.log(msg.type, msg.ch)
-      let note = GUITAR_NOTES[msg.ch][this.riff[msg.ch]]
-      console.log('Note', note, msg.ch, this.now)
-      this.synth[msg.ch].triggerRelease(note, this.now + 1)
-    } else if (msg.type === 'Pitch Band') {
-      jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    } else if (msg.type === 'CC') {
-      // console.log(msg.ch)
-      // jammy.sendFretRequestForG(this.stringIds[msg.ch])
-    }
+  stopNote = (note) => {
+    this.synth.triggerRelease(GUITAR_NOTES_CODE[note], this.now + 10)
   }
-  playNote(ch) {
-    let note = GUITAR_NOTES[ch][this.riff[ch]]
-    console.log('Note', note, ch)
-    this.synth[ch].triggerAttack(note)
-  }
-  // handle(string, fret, segment) {
-  //   debugger
-  //   // jammy.requestJammyESegmentWires(() => { return this.launched }, [0, 1, 2, 3, 4, 5]).then(() => {
-  //   //     // Finish
-  //   // })
-  // }
-
-  parseMidiEvent = (midiData) => {
-    if (midiData.length === 3) {
-      const cmd = midiData[0] >> 4
-      const ch = midiData[0] & 0x0f
-
-      switch (cmd) {
-        case 8:
-          return {
-            type: 'Note OFF',
-            ch: ch,
-            note: midiData[1],
-            val: midiData[2],
-          }
-        case 9:
-          return {
-            type: 'Note ON',
-            ch: ch,
-            note: midiData[1],
-            val: midiData[2],
-          }
-        case 0xb:
-          return {
-            type: 'CC',
-            ch: ch,
-            Ctrl: midiData[1],
-            val: midiData[2],
-          }
-        case 0xe:
-          let val = (midiData[2] << 7) + midiData[1]
-          return {
-            type: 'Pitch Band',
-            ch: ch,
-            val: val,
-            note: midiData[1],
-          }
-        default:
-          break
-      }
-    }
-
-    if (midiData[0] === 0xf0) {
-      return 'Sysex'
-    }
-
-    return 'Unknown'
+  playNote(note, velocity) {
+    console.log(GUITAR_NOTES_CODE[note])
+    this.synth.triggerAttack(GUITAR_NOTES_CODE[note])
   }
 }
 

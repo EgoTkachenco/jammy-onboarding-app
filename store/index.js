@@ -32,9 +32,7 @@ class Store {
         input = inp[1]
       }
       if (
-        ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(
-          input.name
-        )
+        ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(input.name)
       ) {
         jammy.api = JAMMY_G
         this.jammyName = 'Jammy G'
@@ -42,9 +40,9 @@ class Store {
         jammy.api = JAMMY_E
         this.jammyName = 'Jammy E'
       }
-      
+
       if (!this.jammyName) {
-         Promise.reject()
+        Promise.reject()
       } else {
         return Promise.resolve()
       }
@@ -74,24 +72,24 @@ class Store {
         }
       })
       .catch(() => {
-        if (this.startScreenTab !== 'Welcome')
-          this.startScreenTab = 'Denied'
+        if (this.startScreenTab !== 'Welcome') this.startScreenTab = 'Denied'
         return Promise.reject()
       })
   }
   onMidiMessage = (e) => {
+    let type = e.data[0] & 0xf0
     MidiStore.handleMidiMessage(e)
-
-    if (this.isPlaying && this.isPlayTime) {
-      clearTimeout(this.isPlayTime)
-    } else {
-      this.isPlaying = true
+    if (type === 144) {
+      if (this.isPlaying && this.isPlayTime) {
+        clearTimeout(this.isPlayTime)
+      } else {
+        this.isPlaying = true
+      }
+      this.isPlayTime = setTimeout(() => {
+        this.isPlaying = false
+        clearTimeout(this.isPlayTime)
+      }, 1000)
     }
-
-    this.isPlayTime = setTimeout(() => {
-      this.isPlaying = false
-      clearTimeout(this.isPlayTime)
-    }, 1000)
   }
   updateFirmware = async () => {
     this.startScreenTab = 'CheckFirmware'
@@ -100,10 +98,9 @@ class Store {
     await setTimeout(() => {
       this.startScreenTab = 'Reboot'
       this.isRebooted = true
-    }, 1000);
-    
+    }, 1000)
 
-    // // Update Firmware 
+    // // Update Firmware
     // setTimeout(() => {
     //   this.startScreenTab = 'UpdateFirmware'
     //   setTimeout(() => {

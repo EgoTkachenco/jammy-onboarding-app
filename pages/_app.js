@@ -9,16 +9,22 @@ import { mobileAndTabletCheck } from '../public/utils'
 
 const MyApp = observer(({ Component, pageProps }) => {
   const router = useRouter()
+  const welcomeTab = Store.startScreenTab
   useEffect(() => {
     // Check browser and device
     // IF NOT Chrome ---> Screen with Chrome installation
     // IF Chrome ---> Screen with message to connect midi
-    if (process.browser && mobileAndTabletCheck()) {
+    let isBrowserCheck =
+      process.browser &&
+      (!['/', '/mobile', '/chrome-required'].includes(router.pathname) ||
+        welcomeTab !== 'Start')
+
+    if (isBrowserCheck && mobileAndTabletCheck()) {
       router.push('/mobile')
-    } else if (process.browser && !window.chrome) {
+    } else if (isBrowserCheck && !window.chrome) {
       router.push('/chrome-required')
-     }
-  }, [])
+    }
+  }, [welcomeTab])
   // router ?
   const { isAdmin } = router.query
   if (isAdmin) Store.isAdmin = true

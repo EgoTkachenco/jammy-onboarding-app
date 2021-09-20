@@ -69,16 +69,22 @@ class PresetsStore {
     makeAutoObservable(this)
   }
   setCustomizedPreset = (preset) => {
-    this.isCustomize = true
-    this.customizedPreset = preset
     if (!preset) {
       this.isCustomize = false
+    } else {
+      this.isCustomize = true
+      this.customizedPreset = JSON.parse(JSON.stringify(preset))
     }
   }
-  setActivePreset = async (preset) => {
+  setActivePreset = async (preset, isCustom) => {
+    if (
+      (!this.activePreset && isCustom) ||
+      (this.activePreset && this.activePreset.id === preset.id)
+    )
+      return
     this.isFetch = true
     if (preset) {
-      this.activePreset = Object.assign({}, preset)
+      this.activePreset = isCustom ? null : Object.assign({}, preset)
       await this.sendAllParamsRequest('set', preset.preset)
     } else {
       this.activePreset = null
@@ -86,16 +92,14 @@ class PresetsStore {
     this.isFetch = false
   }
   applyPreset = async (preset) => {
-    debugger
     this.isCustomize = false
-
     this.activePreset = null
-    this.isFetch = true
-    let newPreset = preset?.preset
-      ? preset.preset
-      : this.customizedPreset.preset
-    await this.sendAllParamsRequest('set', newPreset, Store.jammy)
-    this.isFetch = false
+    // this.isFetch = true
+    // let newPreset = preset?.preset
+    //   ? preset.preset
+    //   : this.customizedPreset.preset
+    // await this.sendAllParamsRequest('set', newPreset, Store.jammy)
+    // this.isFetch = false
   }
   sendParamRequest = async (op, param) => {
     for (let stringId = 0; stringId < param.values.length; stringId++) {

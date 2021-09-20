@@ -21,7 +21,8 @@ const Presets = observer(() => {
 
   const PRESETS = PresetsStore.presets
 
-  const setActivePreset = (preset) => PresetsStore.setActivePreset(preset)
+  const setActivePreset = (preset, isCustom) =>
+    PresetsStore.setActivePreset(preset, isCustom)
   const setCustomizedPreset = (preset) =>
     PresetsStore.setCustomizedPreset(preset)
   return (
@@ -49,7 +50,7 @@ const Presets = observer(() => {
               }
             : null
         }
-        nextText={!isCustomize && active ? 'Apply Selected Preset' : 'Done'}
+        nextText={!isCustomize ? 'Apply Selected Preset' : 'Done'}
       />
       <div className="page-container presets">
         {isFetch && (
@@ -82,7 +83,7 @@ const Presets = observer(() => {
                 <div className="presets-list">
                   <div className="sm-text white-50">User presets </div>
                   <div
-                    onClick={() => setActivePreset(null)}
+                    onClick={() => setActivePreset(customizedPreset, true)}
                     className={`presets-list__item ${!active ? 'active' : ''}`}
                   >
                     <div className="md-text">Custom preset</div>

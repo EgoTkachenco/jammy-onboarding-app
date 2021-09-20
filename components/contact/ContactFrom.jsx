@@ -7,6 +7,7 @@ import { observer } from 'mobx-react-lite'
 const ContactForm = observer(() => {
   const isFormSended = FormsStore.isSupportFormSended
   const [file, setFile] = useState(null)
+  const [fileError, setFileError] = useState(null)
   const handleForm = () => {
     var formData = new FormData(document.querySelector('.support-form'))
     let email = formData.get('email')
@@ -14,7 +15,15 @@ const ContactForm = observer(() => {
     FormsStore.sendSupportForm({ email, message, file })
   }
   const attachFile = (e) => {
-    setFile(e.target.files[0])
+    let file = e.target.files[0]
+    if (file.size < 25000000) {
+      setFileError(null)
+      setFile(file)
+    } else {
+      setFileError(
+        'File size limit exceeded. Please upload it to any storage platform (like Google Drive) and provide us with the corresponding link'
+      )
+    }
   }
   const [backDialog, setbackDialog] = useState(false)
   const router = useRouter()
@@ -46,7 +55,9 @@ const ContactForm = observer(() => {
       />
       <div className="page-container support">
         <div className="title-text">Contact Jammy Support Band</div>
-        <div className="md-text text-center">Fill out this form or email us at support@playjammy.com</div>
+        <div className="md-text white-50 text-center">
+          Fill out this form or email us at support@playjammy.com
+        </div>
         <form className="support-form">
           <input
             className="support-form__field"
@@ -96,8 +107,9 @@ const ContactForm = observer(() => {
             </svg>
             {file
               ? file.name
-              : 'Attach a short video demonstrating the problem (optional 25MB)'}
+              : 'Attach a short video demonstrating the problem (25MB)'}
           </div>
+          {fileError && <div className="file-error">{fileError}</div>}
         </form>
         {isFormSended && (
           <Dialog>

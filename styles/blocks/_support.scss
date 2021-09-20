@@ -50,6 +50,9 @@
     color: #ff00ff;
     margin: 1rem -1rem 2rem;
     position: relative;
+    &:hover {
+      color: #ff00ff8a;
+    }
     input {
       cursor: pointer;
       position: absolute;
@@ -63,6 +66,11 @@
       margin-right: 0.5rem;
     }
   }
+  .file-error {
+    text-align: center;
+    color: #ff00ff;
+    @extend .caption-text;
+  }
 
   .dialog {
     max-width: 50%;
@@ -70,7 +78,7 @@
       margin: 0 0 1.5rem 0;
     }
     .no-effect {
-      margin: 2.5rem auto 0;
+      margin: 0 auto 0;
     }
   }
 }
