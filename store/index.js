@@ -78,7 +78,7 @@ class Store {
   }
   onMidiMessage = (e) => {
     let type = e.data[0] & 0xf0
-    MidiStore.handleMidiMessage(e)
+    // MidiStore.handleMidiMessage(e)
     if (type === 144) {
       if (this.isPlaying && this.isPlayTime) {
         clearTimeout(this.isPlayTime)

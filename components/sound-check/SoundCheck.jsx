@@ -4,6 +4,7 @@ import MusicVisualizer from './MusicVisualizer'
 import HelpTooltip from '../HelpTooltip'
 import { observer } from 'mobx-react-lite'
 import Store from '../../store'
+
 const SoundCheck = observer(() => {
   const jammyName = Store.jammyName || 'Jammy E'
   const isPlaying = Store.isPlaying

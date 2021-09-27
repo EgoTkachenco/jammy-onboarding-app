@@ -2,10 +2,17 @@ import '../styles/index.scss'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Store from '../store'
-import MidiStore from '../store/MidiStore'
 import { useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { mobileAndTabletCheck } from '../public/utils'
+import MIDISynth from '../components/sounds/MIDISynth'
+
+const DISABLE_SOUND_ROUTES = [
+  '/chrome-required',
+  '/mobile',
+  '/',
+  '/sensitivity',
+]
 
 const MyApp = observer(({ Component, pageProps }) => {
   const router = useRouter()
@@ -39,6 +46,9 @@ const MyApp = observer(({ Component, pageProps }) => {
       })
   }, [router])
 
+  const isAllowSound =
+    process.browser && !DISABLE_SOUND_ROUTES.includes(router.pathname)
+
   return (
     <>
       <Head>
@@ -46,6 +56,9 @@ const MyApp = observer(({ Component, pageProps }) => {
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <Component {...pageProps} />
+
+      {/* Sound generator*/}
+      {isAllowSound && <MIDISynth />}
     </>
   )
 })
