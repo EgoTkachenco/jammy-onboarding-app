@@ -1,10 +1,6 @@
 import React from 'react'
-import { Col, Row } from 'reactstrap'
 import { jammy, midiService as midi } from '../../../store'
 import { sleep } from '../../services/utils'
-import ProgressIndicator from '../widget/ProgressIndicator'
-
-// import './Test.css'
 
 class ConnectionTest extends React.Component {
   constructor(props) {

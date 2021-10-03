@@ -6,7 +6,8 @@ import { MenuItem } from './tests/NavigationMenu'
 import ConnectionTest from './tests/ConnectionTest'
 import FailedTest from './tests/FailedTest'
 import PassedTest from './tests/PassedTest'
-import { midiService as midi } from '../../store'
+import Store, { midiService as midi } from '../../store'
+import { observer } from 'mobx-react-lite'
 import FirmwareUpdate from './FirmwareUpdate'
 
 class FactoryTest extends Component {
@@ -32,33 +33,14 @@ class FactoryTest extends Component {
   }
 
   componentDidMount() {
-    if (this.midiStatusListener === undefined) {
-      this.midiStatusListener = () => {
-        this.setState({
-          connected:
-            midi.activeInputs.length > 0 && midi.activeOutputs.length > 0,
-        })
-        console.log(this.state)
-      }
-    }
-
-    midi.removeEventListener('midistatus', this.midiStatusListener)
-
-    midi.addEventListener('midistatus', this.midiStatusListener)
-
-    try {
-      this.setState({
-        connected:
-          midi.activeInputs.length > 0 && midi.activeOutputs.length > 0,
-      })
-      console.log(this.state)
-    } catch (e) {
-      console.log(e)
-    }
+    this.setState({
+      connected: Store.status === 'Connected',
+    })
+    console.log(this.state)
   }
 
   componentWillUnmount() {
-    midi.removeEventListener('midistatus', this.midiStatusListener)
+    // midi.removeEventListener('midistatus', this.midiStatusListener)
   }
 
   currentTestIndex = () => {

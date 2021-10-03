@@ -269,9 +269,8 @@ midi.dispatchEvent = function (event) {
     return true
   }
   var stack = midi.listeners[event.type].slice()
-
   for (var i = 0, l = stack.length; i < l; i++) {
-    stack[i].call(null, event)
+    if (stack[i]) stack[i].call(null, event)
   }
   return !event.defaultPrevented
 }
