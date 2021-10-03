@@ -5,11 +5,7 @@ import StartScreen from '../components/screens/Start'
 import WelcomeScreen from '../components/screens/Welcome'
 import WaitMidiConnect from '../components/screens/WaitMidiConnect'
 import DeniedMidiAccess from '../components/screens/DeniedMidiAccess'
-import {
-  CheckingForUpdate,
-  Updating,
-  Reboot,
-} from '../components/start/FirmwareUpdate'
+import { Firmware, Reboot } from '../components/start/FirmwareUpdate'
 
 const Home = observer(() => {
   const router = useRouter()
@@ -27,7 +23,7 @@ const Home = observer(() => {
   const renderScreen = (activeTab) => {
     switch (activeTab) {
       case 'Start':
-        return <StartScreen action={() => Store.startScreenTab = 'Welcome'} />
+        return <StartScreen action={() => (Store.startScreenTab = 'Welcome')} />
       case 'Welcome':
         return <WelcomeScreen action={connectMidi} />
       case 'Waiting':
@@ -35,9 +31,7 @@ const Home = observer(() => {
       case 'Denied':
         return <DeniedMidiAccess action={() => window.location.reload(true)} />
       case 'CheckFirmware':
-        return <CheckingForUpdate process={50} />
-      case 'UpdateFirmware':
-        return <Updating />
+        return <Firmware />
       case 'Reboot':
         return (
           <Reboot

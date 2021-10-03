@@ -31,24 +31,15 @@ class Store {
       for (const inp of midiService.midiAccess.inputs) {
         input = inp[1]
       }
-      if (
-        ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(input.name)
-      ) {
-        jammy.api = JAMMY_G
-        this.jammyName = 'Jammy G'
-      } else if (['Jammy EVO', 'Jammy E'].includes(input.name)) {
+      if (['Jammy EVO', 'Jammy E'].includes(input.name)) {
         jammy.api = JAMMY_E
         this.jammyName = 'Jammy E'
-      }
-
-      if (!this.jammyName) {
-        Promise.reject()
       } else {
-        return Promise.resolve()
+        // jammy G names ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(input.name)
+        jammy.api = JAMMY_G
+        this.jammyName = 'Jammy G'
       }
     }
-    debugger
-    return !this.jammyName ? Promise.reject() : Promise.resolve(input)
   }
   initJammy = (path) => {
     this.startScreenTab = 'Waiting'
@@ -57,48 +48,47 @@ class Store {
       .then(async () => {
         midiService.loadState()
         try {
-          let input = await this.defineGuitar()
+          this.defineGuitar()
+          if (!this.jammyName) this.startScreenTab = 'Welcome'
           this.initStatusCheck()
-          await this.updateFirmware()
-          if (!MidiStore.synth && path !== '/sensitivity')
-            MidiStore.initMidiStore()
+          if (this.jammyName === 'Jammy E') await this.updateFirmware()
+          // if (!MidiStore.synth && path !== '/sensitivity')
+          // MidiStore.initMidiStore()
           this.isInited = true
-          if (path !== '/sensitivity')
-            midiService.addEventListener('midimessage', this.onMidiMessage)
+          // if (path !== '/sensitivity')
+          // midiService.addEventListener('midimessage', this.onMidiMessage)
           return Promise.resolve(true)
         } catch (err) {
           this.startScreenTab = 'Welcome'
-          return Promise.reject()
         }
       })
       .catch(() => {
         if (this.startScreenTab !== 'Welcome') this.startScreenTab = 'Denied'
-        return Promise.reject()
+        // return Promise.reject()
       })
   }
-  onMidiMessage = (e) => {
-    let type = e.data[0] & 0xf0
-    // MidiStore.handleMidiMessage(e)
-    if (type === 144) {
-      if (this.isPlaying && this.isPlayTime) {
-        clearTimeout(this.isPlayTime)
-      } else {
-        this.isPlaying = true
-      }
-      this.isPlayTime = setTimeout(() => {
-        this.isPlaying = false
-        clearTimeout(this.isPlayTime)
-      }, 1000)
-    }
-  }
+  // onMidiMessage = (e) => {
+  //   let type = e.data[0] & 0xf0
+  //   // MidiStore.handleMidiMessage(e)
+  //   if (type === 144) {
+  //     if (this.isPlaying && this.isPlayTime) {
+  //       clearTimeout(this.isPlayTime)
+  //     } else {
+  //       this.isPlaying = true
+  //     }
+  //     this.isPlayTime = setTimeout(() => {
+  //       this.isPlaying = false
+  //       clearTimeout(this.isPlayTime)
+  //     }, 1000)
+  //   }
+  // }
   updateFirmware = async () => {
     this.startScreenTab = 'CheckFirmware'
-    console.log('Version: ', midiService.activeInputs[0].version)
     // Check firmware
-    await setTimeout(() => {
-      this.startScreenTab = 'Reboot'
-      this.isRebooted = true
-    }, 1000)
+    // await setTimeout(() => {
+    //   this.startScreenTab = 'Reboot'
+    //   this.isRebooted = true
+    // }, 1000)
 
     // // Update Firmware
     // setTimeout(() => {

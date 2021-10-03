@@ -1,6 +1,6 @@
 import meta from '../MetaInfo'
 import { midiService as midi } from '../../store/'
-import { sleep } from './utils'
+import { sleep, crc16 } from './utils'
 
 export const MAX_STRINGS = 6
 export const MAX_FRETS = 15
@@ -740,6 +740,7 @@ jammy.sendFretRequestForG = (stringIdx) => {
 jammy.readFretDiagnosticCallback = (event) => {
   if (event.data.length === 61) {
     const jammyData = event.data
+    console.log('Frets data: ', midi.toHexString(jammyData.slice(0, 14)))
     var result = ''
     result = (jammyData[50] & 0x1f).toString(2)
     if (result.length === 4) {
@@ -757,9 +758,11 @@ jammy.readFretDiagnosticCallback = (event) => {
       result = result + binary
     }
 
+    const string = 12 - jammyData[6]
+
     const frets = result.split(/(.{11})/).filter((O) => O)
 
-    console.log('Frets: ', frets)
+    // console.log('Frets: ', frets)
 
     for (var j = 14; j >= 0; j--) {
       const fretId = 14 - j
@@ -771,29 +774,89 @@ jammy.readFretDiagnosticCallback = (event) => {
           ', segment: ',
           10 - foundIndex
         )
-        jammy.onJammyESegmentWired(fretId, foundIndex)
+        jammy.onJammyESegmentWired(string, fretId, foundIndex)
       }
     }
   }
 }
 
-jammy.requestJammyESegmentWires = async function (active) {
+jammy.onDebugMidiResponse = function (response) {}
+
+jammy.debugTouches = false
+
+jammy.readTouchDiagnosticCallback = (event) => {
+  if (jammy.debugTouches) {
+    jammy.onDebugMidiResponse(
+      '[ ' +
+        midi.toHexString(event.data) +
+        '] , size = (' +
+        event.data.length +
+        ')'
+    )
+  }
+  if (event.data.length === 35) {
+    const jammyData = event.data
+
+    var result = []
+    for (var i = 10; i < 34; i += 4) {
+      result.push(midi.to14BitInt(jammyData, i))
+    }
+    // console.log('Touches: ', result)
+    jammy.onJammyETouchWired(result)
+  }
+}
+
+jammy.requestJammyESegmentWires = async function (active, strings = [4]) {
+  console.log('Register: readFretDiagnosticCallback')
   midi.addEventListener('midimessage', jammy.readFretDiagnosticCallback)
+
   while (active() === true) {
-    jammy.sendDiagnosticRequestForE(true, 'GET', 8)
-    await sleep(100)
-    // jammy.sendDiagnosticRequestForE(true, 'GET', 8)
-    // await sleep(50)
-    // jammy.sendDiagnosticRequestForE(true, 'GET', 9)
-    // await sleep(50)
-    // jammy.sendDiagnosticRequestForE(true, 'GET', 10)
-    // await sleep(50)
-    // jammy.sendDiagnosticRequestForE(true, 'GET', 11)
-    // await sleep(50)
-    // jammy.sendDiagnosticRequestForE(true, 'GET', 12)
+    console.log('Request for strings: ', strings)
+    for (const string in strings) {
+      const id = 5 - string + 7
+      console.log('Request for string id: ', id)
+      jammy.sendDiagnosticRequestForE(true, 'GET', id)
+      await sleep(100)
+    }
   }
 
+  console.log('Unregister: readFretDiagnosticCallback')
   midi.removeEventListener('midimessages', jammy.readFretDiagnosticCallback)
+}
+
+jammy.requestJammyETouches = async function (left, active, onSend) {
+  midi.addEventListener('midimessage', jammy.readTouchDiagnosticCallback)
+
+  while (active() === true) {
+    jammy.sendDiagnosticRequestForE(left, 'GET', 5)
+    if (onSend !== undefined) onSend()
+    await sleep(100)
+  }
+  midi.removeEventListener('midimessages', jammy.readTouchDiagnosticCallback)
+}
+
+jammy.readMidiMessagesCallback = (event) => {
+  if (event.data.length === 3) {
+    const jammyData = event.data
+
+    if (jammyData[0] >> 4 === 0x09) {
+      const string = (6 - jammyData[0]) & 0x0f
+      const note = jammyData[1]
+      const velocity = jammyData[2]
+      // if (velocity > 5) {
+      // console.log('Note on: ', midi.toHexString(jammyData), ", st: ", string, ", n: ", note, "v: ", velocity);
+      jammy.onJammyEStringWired(string, note, velocity)
+      // }
+    }
+  }
+}
+
+jammy.registerJammyEMessages = function () {
+  midi.addEventListener('midimessage', jammy.readMidiMessagesCallback)
+}
+
+jammy.unregisterJammyEMessages = function () {
+  midi.removeEventListener('midimessage', jammy.readMidiMessagesCallback)
 }
 
 jammy.onJammyEMacAddress = function (macAddress) {
@@ -801,21 +864,54 @@ jammy.onJammyEMacAddress = function (macAddress) {
 }
 
 jammy.readBLEMACCallback = function (event) {
-  if (true) {
-    midi.logIncoming = false
+  midi.logIncoming = false
 
-    const data = event.data
-    var macAddress = midi.toHex(midi.to14BitInt(data, 10))
-    for (var i = 12; i < 22; i = i + 2) {
-      macAddress += ':'
-      macAddress += midi.toHex(midi.to14BitInt(data, i))
-    }
-
-    console.log('Mac address: ', macAddress)
-
-    midi.removeEventListener('midimessage', jammy.readBLEMACCallback)
-    jammy.onJammyEMacAddress(macAddress)
+  const data = event.data
+  var macAddress = midi.toHex(midi.to14BitInt(data, 10))
+  for (var i = 12; i < 22; i = i + 2) {
+    macAddress += ':'
+    macAddress += midi.toHex(midi.to14BitInt(data, i))
   }
+
+  console.log('Mac address: ', macAddress)
+
+  midi.removeEventListener('midimessage', jammy.readBLEMACCallback)
+  jammy.onJammyEMacAddress(macAddress)
+}
+
+jammy.metaDataStore = []
+
+jammy.onJammyEMetaData = function (event) {
+  const data = event.data
+  if (data.length === 267 && data[5] === 0x18) {
+    const header = midi.to16BitInt(data, 10)
+    if (header === 0x4c50 && data[7] === 0x00) {
+      jammy.metaDataStore = []
+    }
+    for (var i = 10; i < 266; i = i + 1) {
+      jammy.metaDataStore.push(data[i])
+    }
+    if (data[7] === 0x02) {
+      var serial = []
+      for (var k = 4; k < 32; k = k + 2) {
+        serial.push(midi.to14BitInt(jammy.metaDataStore, k))
+      }
+      // console.log("Meta data: ", midi.toHexString(jammy.metaDataStore))
+      jammy.onJammyESerial(String.fromCharCode(...serial))
+    }
+  }
+}
+
+jammy.registerJammyEMetaData = function () {
+  midi.addEventListener('midimessage', jammy.onJammyEMetaData)
+}
+
+jammy.unregisterJammyEMetaData = function () {
+  midi.removeEventListener('midimessage', jammy.onJammyEMetaData)
+}
+
+jammy.sendJammyEMetaDataRequest = function () {
+  jammy.sendDiagnosticRequestForE(false, 'GET', 0x01)
 }
 
 jammy.requestJammyEBLEMacAddress = async function () {
@@ -824,7 +920,86 @@ jammy.requestJammyEBLEMacAddress = async function () {
   jammy.sendDiagnosticRequestForE(false, 'GET', 0x0e)
 }
 
-jammy.onJammyESegmentWired = function (fret, value) {}
+jammy.updateJammyEMetaData = async (serial, date, time) => {
+  let data = [
+    0x4c,
+    0x4c,
+    0x50,
+    0x50, // header
+  ]
+  Array.prototype.map.call(serial, (c) => {
+    let char = c.charCodeAt()
+    midi.from14BitInt(char).forEach((e) => data.push(e)) // Serial
+  })
+
+  // data.push(0x00) // flags
+  // data.push(0x00) // date
+  // data.push(0x00) // time
+  // data.push(0x00);  // num
+
+  for (var j = 0; j < 476; j++) {
+    data.push(0x00)
+  }
+
+  midi.from16BitInt(crc16(data)).forEach((e) => data.push(e)) // CRC16
+
+  var data1 = data.slice(0, data.length / 2)
+  var data2 = data.slice(data.length / 2)
+  //console.log("Data: ", midi.toHexString(data), data.length);
+  //console.log("Data 1: ", midi.toHexString(data1), data1.length);
+  //console.log("Data 2: ", midi.toHexString(data2), data2.length);
+
+  var message1 = jammy.generateJammyEMetaMessage(true, data1)
+  var message2 = jammy.generateJammyEMetaMessage(false, data2)
+
+  // console.log("Message1: ", midi.toHexString(message1), message1.length);
+  // console.log("Message2: ", midi.toHexString(message2), message2.length);
+
+  midi.sendMidiMessage(message1)
+  await sleep(500)
+  midi.sendMidiMessage(message2)
+  await sleep(500)
+}
+
+jammy.generateJammyEMetaMessage = (first, data) => {
+  let partId = first ? 0x00 : 0x02
+  let message = [
+    0xf0,
+    0x00,
+    0x02,
+    0x27,
+    0x0a,
+    0x01,
+    partId,
+    0x40,
+    0x00, // prefix
+  ]
+
+  data.forEach((e) => message.push(e))
+
+  message.push(0xf7) // postfix
+  return message
+}
+
+jammy.onJammyESegmentWired = function (string, fret, value) {}
+
+jammy.onJammyEFretWired = function (string, fret) {}
+
+jammy.onJammyETouchWired = function (touches) {}
+
+jammy.onJammyEStringWired = function (string, note, velocity) {}
+
+jammy.onJammyESerial = function (serial) {}
+
+jammy.rebootJammyEInDFU = function () {
+  jammy.sendParamRequest('setget', {
+    groupId: 4,
+    paramId: 1,
+    stringId: 6,
+    left: false,
+    value: 1,
+  })
+}
 
 // !!!! Jammy E methods
 
