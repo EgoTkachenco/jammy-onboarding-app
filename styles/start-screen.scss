@@ -186,3 +186,17 @@
     }
   }
 }
+
+.start-screen {
+  position: relative;
+  video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .btn {
+    position: relative;
+    margin-top: 25%;
+  }
+}
