@@ -39,8 +39,9 @@ class Store {
         jammy.api = JAMMY_G
         this.jammyName = 'Jammy G'
       }
+    } else {
+      return Promise.reject()
     }
-    return Promise.reject()
   }
   initJammy = (path) => {
     this.startScreenTab = 'Waiting'
