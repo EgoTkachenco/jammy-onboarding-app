@@ -51,13 +51,13 @@ class Store {
           this.defineGuitar()
           if (!this.jammyName) this.startScreenTab = 'Welcome'
           this.initStatusCheck()
-          if (this.jammyName === 'Jammy E') await this.updateFirmware()
-          // if (!MidiStore.synth && path !== '/sensitivity')
-          // MidiStore.initMidiStore()
-          this.isInited = true
-          // if (path !== '/sensitivity')
-          // midiService.addEventListener('midimessage', this.onMidiMessage)
-          return Promise.resolve(true)
+          if (this.jammyName === 'Jammy E') {
+            this.updateFirmware()
+          } else {
+            this.isInited = true
+            this.isRebooted = true
+            this.startScreenTab = 'Reboot'
+          }
         } catch (err) {
           this.startScreenTab = 'Welcome'
         }
@@ -67,21 +67,21 @@ class Store {
         // return Promise.reject()
       })
   }
-  // onMidiMessage = (e) => {
-  //   let type = e.data[0] & 0xf0
-  //   // MidiStore.handleMidiMessage(e)
-  //   if (type === 144) {
-  //     if (this.isPlaying && this.isPlayTime) {
-  //       clearTimeout(this.isPlayTime)
-  //     } else {
-  //       this.isPlaying = true
-  //     }
-  //     this.isPlayTime = setTimeout(() => {
-  //       this.isPlaying = false
-  //       clearTimeout(this.isPlayTime)
-  //     }, 1000)
-  //   }
-  // }
+  onMidiMessage = (e) => {
+    let type = e.data[0] & 0xf0
+    // MidiStore.handleMidiMessage(e)
+    if (type === 144) {
+      if (this.isPlaying && this.isPlayTime) {
+        clearTimeout(this.isPlayTime)
+      } else {
+        this.isPlaying = true
+      }
+      this.isPlayTime = setTimeout(() => {
+        this.isPlaying = false
+        clearTimeout(this.isPlayTime)
+      }, 1000)
+    }
+  }
   updateFirmware = async () => {
     this.startScreenTab = 'CheckFirmware'
     // Check firmware
