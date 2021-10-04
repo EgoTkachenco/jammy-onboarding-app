@@ -40,6 +40,7 @@ class Store {
         this.jammyName = 'Jammy G'
       }
     }
+    return Promise.reject()
   }
   initJammy = (path) => {
     this.startScreenTab = 'Waiting'
@@ -48,7 +49,7 @@ class Store {
       .then(async () => {
         midiService.loadState()
         try {
-          this.defineGuitar()
+          await this.defineGuitar()
           if (!this.jammyName) this.startScreenTab = 'Welcome'
           this.initStatusCheck()
           if (this.jammyName === 'Jammy E') {
