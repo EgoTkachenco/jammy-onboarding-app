@@ -27,6 +27,6 @@ pipelines:
             - (umask  077 ; echo $SSH_PRODUCTION_PRIVATE_KEY | base64 --decode > www.key)
             - chmod 600 www.key
             - scp -i www.key $BUILD_FILE $PRODUCTION_USER@$PRODUCTION_SERVER:/tmp/
-            - ssh -i www.key $PRODUCTION_USER@$PRODUCTION_SERVER "find $PRODUCTION_PATH -mindepth 1 -delete && cd $PRODUCTION_PATH && tar -xzf /tmp/$BUILD_FILE && rm /tmp/$BUILD_FILE"
+            - ssh -i www.key $PRODUCTION_USER@$PRODUCTION_SERVER "find $PRODUCTION_PATH -mindepth 1 -delete && cd $PRODUCTION_PATH && tar -xzf /tmp/$BUILD_FILE && rm /tmp/$BUILD_FILE && pm2 restart nextjs"
             - >-
               curl -X POST -H 'Content-type: application/json' --data '{"text":":zap: [START.PJ] Commit *'"${BITBUCKET_COMMIT:0:8}"'* was deployed to *'"${PRODUCTION_URL}"'*!"}' $SLACK_WEBHOOK_URL
