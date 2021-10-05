@@ -244,7 +244,9 @@ class FirmwareUpdate extends React.Component {
             const remote = 'https://start.playjammy.com'
             const host = 'http://localhost:3000'
 
-            const je_fw_latest_path = (window.location.hostname === 'localhost') ? host : remote + '/fw/je_fw_latest.bin'
+            const je_fw_latest_path = ((window.location.hostname === 'localhost') ? host : remote) + '/fw/je_fw_latest.bin';
+
+            console.log("Fetch firmware from: ", je_fw_latest_path);
 
             fetch(je_fw_latest_path)
               .then((response) => {
@@ -298,8 +300,10 @@ class FirmwareUpdate extends React.Component {
       }
 
       this.device.logProgress = (p, t) => {
+        const percentage = ((p / t) * 100) | 0;
+        console.log("Update progress: ", p, "from: ", t, "percentage: ", percentage)
         this.setState({
-          progress: ((p / t) * 100) | 0,
+          progress: percentage,
         })
       }
 
@@ -417,9 +421,12 @@ class FirmwareUpdate extends React.Component {
       return (
         <>
           <div className="title-text text-center">
-            Firmware update in progress
+            Installing the latest firmware
           </div>
-          <LoaderLine progress={this.state.progress + '%'} />
+          <LoaderLine width={this.state.progress + '%'} />
+          <div className="lg-text white text-center">
+            {this.state.progress + '%'}
+          </div>
         </>
       )
     } else if (this.state.error && this.state.error.length > 0) {
