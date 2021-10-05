@@ -256,13 +256,13 @@ class ConnectionCase extends Component {
             }
 
             if (desc.DFUVersion === 0x011a && device.settings.alternate.interfaceProtocol === 0x02) {
-                if(!device.settings.name){
+                if (!device.settings.name) {
                     // device.settings.name = "Jammy E DFU"
                     let interfaces = DFU.findDeviceDfuInterfaces(device.device_);
                     await fixInterfaceNames(device.device_, interfaces);
                     device.settings.name = interfaces[0].name;
                     console.log("Name: ", interfaces.name);
-                } 
+                }
                 device = new DFUse.Device(device.device_, device.settings);
                 if (device.memoryInfo) {
                     let totalSize = 0;

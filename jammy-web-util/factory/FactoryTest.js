@@ -27,7 +27,6 @@ class FactoryTest extends Component {
     }
 
     this.nextState = this.nextState.bind(this)
-    this.currentTestIndex = this.currentTestIndex.bind(this)
     this.currentMenuIndex = this.currentMenuIndex.bind(this)
     this.onTestResultCallback = this.onTestResultCallback.bind(this)
   }
@@ -41,12 +40,6 @@ class FactoryTest extends Component {
 
   componentWillUnmount() {
     // midi.removeEventListener('midistatus', this.midiStatusListener)
-  }
-
-  currentTestIndex = () => {
-    return this.state.test === undefined
-      ? -1
-      : this.currentTests(this.props.tests).indexOf(this.state.test)
   }
 
   currentMenuIndex = () => {
@@ -91,7 +84,6 @@ class FactoryTest extends Component {
 
   onTestResultCallback = (passed) => {
     let currentTest = this.state.test
-    let t = this.currentTestIndex()
     let currentMenu = this.state.menuItem
     let m = this.currentMenuIndex()
     console.log(
@@ -101,8 +93,6 @@ class FactoryTest extends Component {
       currentTest.menu.length,
       ', test = ',
       currentTest.title,
-      ' - ',
-      t,
       ', menu = ',
       currentMenu.title,
       ' - ',
@@ -175,14 +165,6 @@ class FactoryTest extends Component {
       ),
     ],
   }
-
-  functionalTests = [
-    this.functionalRightBoardTests,
-    this.functionalLeftBoardTests,
-    // this.functionalLeftTouchBoardTests,
-    this.serialNumberTest,
-    this.firmwareUpdateTest,
-  ]
 }
 
 export { FactoryTest }
