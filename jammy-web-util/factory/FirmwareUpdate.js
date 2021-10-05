@@ -5,8 +5,7 @@ import { sleep } from '../services/utils'
 import dfu from './dfu/dfu'
 import dfuse from './dfu/dfuse'
 
-import je_fw_latest from '../../public/je_fw_latest.bin'
-// import ProgressIndicator from './widget/ProgressIndicator'
+import je_fw_latest from '../../public/fw/je_fw_latest.bin'
 
 const LEFT_FIRMWARE = 4
 const RIGHT_FIRMWARE = 5
@@ -52,7 +51,6 @@ class FirmwareUpdate extends React.Component {
       test: 'EMPTY',
       memorySummary: '',
       error: '',
-      usbInfo: '',
       deviceInfo: '',
       inProgress: false,
       progress: 0,
@@ -240,7 +238,15 @@ class FirmwareUpdate extends React.Component {
           }
 
           if (update === true) {
-            fetch(je_fw_latest)
+
+
+            // TODO: Migrate to common way
+            const remote = 'https://start.playjammy.com'
+            const host = 'http://localhost:3000'
+
+            const je_fw_latest_path = (window.location.hostname === 'localhost') ? host : remote + '/fw/je_fw_latest.bin'
+
+            fetch(je_fw_latest_path)
               .then((response) => {
                 return response.arrayBuffer()
               })
@@ -259,20 +265,6 @@ class FirmwareUpdate extends React.Component {
         }
       }
     }
-
-    this.setState({
-      usbInfo:
-        'USB Info: \n' +
-        'Name: ' +
-        device.device_.productName +
-        '\n' +
-        'MFG: ' +
-        device.device_.manufacturerName +
-        '\n' +
-        'Serial: ' +
-        device.device_.serialNumber +
-        '\n',
-    })
 
     if (device.memoryInfo) {
       let segment = device.getFirstWritableSegment()
@@ -299,7 +291,7 @@ class FirmwareUpdate extends React.Component {
       }
 
       this.device.flashState = (s) => {
-        console.log("Flash state to: ",s)
+        console.log("Flash state to: ", s)
         this.setState({
           flashState: s,
         })

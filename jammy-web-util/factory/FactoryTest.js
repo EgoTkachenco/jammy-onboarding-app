@@ -1,4 +1,3 @@
-import { Badge, Col, Container, Row, Button } from 'reactstrap'
 import React, { Component } from 'react'
 
 // import './FactoryTest.css'
@@ -9,6 +8,7 @@ import PassedTest from './tests/PassedTest'
 import Store, { midiService as midi } from '../../store'
 import { observer } from 'mobx-react-lite'
 import FirmwareUpdate from './FirmwareUpdate'
+import { useRouter } from 'next/router'
 
 class FactoryTest extends Component {
   constructor(props) {
@@ -110,12 +110,14 @@ class FactoryTest extends Component {
           this.setState({
             menuItem: MenuItem(-1, 'Passed', test),
           })
+          this.props.router.push('/sound-check');
         }
       } else {
         let test = this.failedTest(this.state.menuItem, this.state.test)
         this.setState({
           menuItem: MenuItem(-1, 'Failed', test),
         })
+        this.props.router.push('/sound-check');
       }
     }
   }

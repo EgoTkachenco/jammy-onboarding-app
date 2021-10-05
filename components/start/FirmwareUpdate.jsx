@@ -20,14 +20,9 @@ function FirmwareUpdate({ children }) {
 
 const Firmware = () => {
   const router = useRouter()
-
-  useEffect(() => {
-    router.push('/sound-check');
-  });
-
   return (
     <FirmwareUpdate>
-      <FactoryTest />
+      <FactoryTest router={router}/>
     </FirmwareUpdate>
   )
 }
@@ -73,9 +68,8 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
     <FirmwareUpdate>
       <div className="reboot">
         <div
-          className={`animation-screen ${isRebooted ? 'rebooted' : ''} ${
-            isStopped ? 'stopped' : ''
-          }`}
+          className={`animation-screen ${isRebooted ? 'rebooted' : ''} ${isStopped ? 'stopped' : ''
+            }`}
           onClick={() => reloadAnimation()}
         >
           {jammyName === 'Jammy G' &&
