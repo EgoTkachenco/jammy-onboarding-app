@@ -561,10 +561,11 @@ dfu.Device.prototype.poll_until = async function (state_predicate) {
                 dfu_status = await this.getStatus();
                 break;
             } catch (error) {
+                console.log("poll_until", error);
             }
         }
         if (dfu_status !== undefined)
-            await async_sleep(dfu_status.pollTimeout);
+            await async_sleep(dfu_status.pollTimeout);             
     } while ((dfu_status === undefined || !state_predicate(dfu_status.state)) && dfu_status.state !== dfu.dfuERROR);
 
     return dfu_status;

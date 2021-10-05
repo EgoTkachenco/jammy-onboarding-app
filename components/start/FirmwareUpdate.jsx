@@ -19,6 +19,12 @@ function FirmwareUpdate({ children }) {
 }
 
 const Firmware = () => {
+  const router = useRouter()
+
+  useEffect(() => {
+    router.push('/sound-check');
+  });
+
   return (
     <FirmwareUpdate>
       <FactoryTest />
@@ -56,6 +62,7 @@ const Reboot = ({ jammyName, isRebooted, init }) => {
     ...commonProps,
     animationData: animationDataE2,
   }
+
   const router = useRouter()
   const reloadAnimation = () => {
     setisStopped(true)

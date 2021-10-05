@@ -18,7 +18,7 @@ const myCustomSampledInstrument = {
     },
   ],
 }
-const DEFAULT_INSTRUMENT = 253
+const DEFAULT_INSTRUMENT = 572
 const SHOW_INSTRUMENTS = false
 const SHOW_STATUS = false
 

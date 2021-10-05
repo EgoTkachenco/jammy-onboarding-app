@@ -159,7 +159,7 @@ class FirmwareUpdate extends React.Component {
           return {}
         }
       },
-      (error) => {}
+      (error) => { }
     )
   }
 
@@ -182,13 +182,10 @@ class FirmwareUpdate extends React.Component {
 
     if (desc && Object.keys(desc).length > 0) {
       device.properties = desc
-      let info = `WillDetach=${desc.WillDetach}, ManifestationTolerant=${
-        desc.ManifestationTolerant
-      }, CanUpload=${desc.CanUpload}, CanDnload=${
-        desc.CanDnload
-      }, TransferSize=${desc.TransferSize}, DetachTimeOut=${
-        desc.DetachTimeOut
-      }, Version=${hex4(desc.DFUVersion)}`
+      let info = `WillDetach=${desc.WillDetach}, ManifestationTolerant=${desc.ManifestationTolerant
+        }, CanUpload=${desc.CanUpload}, CanDnload=${desc.CanDnload
+        }, TransferSize=${desc.TransferSize}, DetachTimeOut=${desc.DetachTimeOut
+        }, Version=${hex4(desc.DFUVersion)}`
       this.setState({
         test: info,
       })
@@ -216,9 +213,8 @@ class FirmwareUpdate extends React.Component {
             totalSize += segment.end - segment.start
           }
           this.setState({
-            memorySummary: `Selected memory region: ${
-              device.memoryInfo.name
-            } (${niceSize(totalSize)})`,
+            memorySummary: `Selected memory region: ${device.memoryInfo.name
+              } (${niceSize(totalSize)})`,
           })
           for (let segment of device.memoryInfo.segments) {
             let properties = []
@@ -303,6 +299,7 @@ class FirmwareUpdate extends React.Component {
       }
 
       this.device.flashState = (s) => {
+        console.log("Flash state to: ",s)
         this.setState({
           flashState: s,
         })
@@ -313,37 +310,35 @@ class FirmwareUpdate extends React.Component {
           progress: ((p / t) * 100) | 0,
         })
       }
-      await this.device
-        .do_download(
-          this.transferSize,
-          this.firmwareFile,
-          this.manifestationTolerant
-        )
-        .then(
-          () => {
-            console.log(
-              'Done! s: ' +
-                this.transferSize +
-                ', t: ' +
-                this.manifestationTolerant
-            )
-            if (!this.manifestationTolerant) {
-              this.device.waitDisconnected(5000).then(
-                (dev) => {
-                  this.onDisconnect()
-                  this.device = null
-                },
-                (error) => {
-                  // It didn't reset and disconnect for some reason...
-                  console.log('Device unexpectedly tolerated manifestation.')
-                }
-              )
-            }
+
+      try {
+        await this.device
+          .do_download(
+            this.transferSize,
+            this.firmwareFile,
+            this.manifestationTolerant
+          )
+      } catch (error) {
+        console.log(error)
+      }
+      console.log(
+        'Done! s: ' +
+        this.transferSize +
+        ', t: ' +
+        this.manifestationTolerant
+      )
+      if (!this.manifestationTolerant) {
+        this.device.waitDisconnected(5000).then(
+          (dev) => {
+            this.onDisconnect()
+            this.device = null
           },
           (error) => {
-            console.error(error)
+            // It didn't reset and disconnect for some reason...
+            console.log('Device unexpectedly tolerated manifestation.')
           }
         )
+      }
     }
   }
 
@@ -381,8 +376,6 @@ class FirmwareUpdate extends React.Component {
             new dfu.Device(selectedDevice, interfaces[0]),
             update
           )
-        } else {
-          this.testFailed()
         }
       })
       .catch((error) => {
@@ -432,7 +425,7 @@ class FirmwareUpdate extends React.Component {
       return (
         <>
           <div className="title-text text-center">
-            Checking for firmware updates
+            Firmware update in progress
           </div>
           <LoaderLine progress={this.state.progress + '%'} />
         </>
