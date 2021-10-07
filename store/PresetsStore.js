@@ -55,7 +55,7 @@ class PresetsStore {
     this.isFetch = true
     if (preset) {
       this.activePreset = isCustom ? null : Object.assign({}, preset)
-      await this.sendAllParamsRequest('set', preset.preset)
+      await this.sendAllParamsRequest('setget', preset.preset)
     } else {
       this.activePreset = null
     }
@@ -80,7 +80,8 @@ class PresetsStore {
         stringId,
         value: param.values[stringId],
       })
-      await sleep(10)
+      await sleep(20)
+      console.log("Send param: ", param.id, "for string: ", stringId, param.values[stringId])
     }
   }
 
@@ -96,6 +97,7 @@ class PresetsStore {
       }
     }
   }
+  
   saveParamChange = async (group, param, string) => {
     this.isFetch = true
     await this.sendParamRequest('set', { ...param, group: group })

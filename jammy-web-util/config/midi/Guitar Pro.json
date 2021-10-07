@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "id": 2,
+  "name": "Guitar Pro",
+  "description": "",
+  "left": 9,
+  "right": 3,
+  "groups": [
+    {
+      "groupId": 10,
+      "params": [
+        {
+          "id": 0,
+          "left": false,
+          "values": [
+            {
+              "string": 0,
+              "value": 1
+            },
+            {
+              "string": 1,
+              "value": 2
+            },
+            {
+              "string": 2,
+              "value": 3
+            },
+            {
+              "string": 3,
+              "value": 4
+            },
+            {
+              "string": 4,
+              "value": 5
+            },
+            {
+              "string": 5,
+              "value": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "global": [
+    {
+      "groupId": 1,
+      "params": [
+        {
+          "id": 0,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "id": 1,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 0
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 90
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 26
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 24
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": 5,
+      "params": [
+        {
+          "id": 3,
+          "left": false,
+          "values": [
+            {
+              "string": 6,
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

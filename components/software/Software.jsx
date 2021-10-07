@@ -4,6 +4,7 @@ import Image from 'next/image'
 import FormsStore from '../../store/FormsStore'
 import MidiPresetsStore from '../../store/MidiPresetsStore'
 import { observer } from 'mobx-react-lite'
+import { sleep } from '../../jammy-web-util/services/utils'
 const Software = observer(() => {
   const router = useRouter()
   const SOFTWARES = MidiPresetsStore.SOFTWARES
@@ -32,8 +33,9 @@ const Software = observer(() => {
             <div
               className="software-list__item"
               key={soft.id}
-              onClick={() => {
+              onClick={async () => {
                 setActive(soft)
+                await sleep(1000)
                 router.push('/software-settings-2')
               }}
             >

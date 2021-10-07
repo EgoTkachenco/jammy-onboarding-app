@@ -121,8 +121,6 @@ class Configurator extends Component {
         }
       }
     }
-    console.log("Preset: ", JSON.stringify(preset))
-
     // for (let g of data.global) {
     //   for (let p of g.params) {
     //     p.group = g
@@ -329,7 +327,7 @@ class Configurator extends Component {
         stringId,
         value: param.values[stringId],
       })
-      await sleep(10)
+      await sleep(20)
     }
   }
 
