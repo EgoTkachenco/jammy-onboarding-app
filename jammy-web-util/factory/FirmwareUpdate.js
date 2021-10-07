@@ -7,8 +7,8 @@ import dfuse from './dfu/dfuse'
 
 import je_fw_latest from '../../public/fw/je_fw_latest.bin'
 
-const LEFT_FIRMWARE = 4
-const RIGHT_FIRMWARE = 5
+const LEFT_FIRMWARE = 9
+const RIGHT_FIRMWARE = 3
 
 function hex4(n) {
   let s = n.toString(16)
@@ -78,7 +78,7 @@ class FirmwareUpdate extends React.Component {
     this.setState({
       ready: false,
     })
-    if (this.props.lf() < LEFT_FIRMWARE || this.props.rf() < RIGHT_FIRMWARE) {
+    if (this.props.lf() !== LEFT_FIRMWARE || this.props.rf() !== RIGHT_FIRMWARE) {
       this.rebootInDFU().then(() => {
         // Finish
       })

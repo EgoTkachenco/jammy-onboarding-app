@@ -20,11 +20,7 @@ class NavigationMenu extends React.Component {
         </Row>
         {this.props.test.menu.map((element) => (
           <Row
-            className={
-              element.id === this.props.menu.id
-                ? 'nav-menu-item-selected'
-                : 'nav-menu-item'
-            }
+            key={element}
             onClick={() => this.props.onSelected(element)}
           >
             {element.id}. {element.title}
