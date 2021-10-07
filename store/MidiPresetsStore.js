@@ -92,7 +92,8 @@ class MidiPresetsStore {
   }
 
   sendParamRequest = async (op, param, group) => {
-    for (var e in param.values) {
+    for (var i = 0; i < soft.preset.global.length; i++) {
+      var e = soft.preset.values[i]
       jammy.sendParamRequest(op, {
         groupId: group.groupId,
         paramId: param.id,
@@ -100,8 +101,8 @@ class MidiPresetsStore {
         stringId: e.string,
         value: e.value,
       })
-      await sleep(20)
-      console.log("Send param: ", param.id, "for string: ", e.string, e.value)
+      await sleep(50)
+      console.log("Send param: ", param.id, "for string: ", e.string, "value: ", e.value)
     }
 
   }

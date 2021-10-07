@@ -73,15 +73,17 @@ class PresetsStore {
   }
   sendParamRequest = async (op, param) => {
     for (let stringId = 0; stringId < param.values.length; stringId++) {
+      const element = param.values.find(e => e.string === stringId)
+      const value = element.value
       jammy.sendParamRequest(op, {
         groupId: param.group.groupId,
         paramId: param.id,
         left: param.left,
-        stringId,
-        value: param.values[stringId],
+        stringId: stringId,
+        value: value,
       })
       await sleep(20)
-      console.log("Send param: ", param.id, "for string: ", stringId, param.values[stringId])
+      console.log("Send param: ", param.id, "for string: ", stringId, "value: ", value)
     }
   }
 
@@ -97,7 +99,7 @@ class PresetsStore {
       }
     }
   }
-  
+
   saveParamChange = async (group, param, string) => {
     this.isFetch = true
     await this.sendParamRequest('set', { ...param, group: group })
