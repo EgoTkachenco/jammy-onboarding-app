@@ -17,15 +17,6 @@ const strings = [1, 2, 3, 4, 5, 6]
 const globalStrings = [1]
 const globalString = 7
 
-function roundOf(n, p) {
-  const n1 = n * Math.pow(10, p + 1)
-  const n2 = Math.floor(n1 / 10)
-  if (n1 >= n2 * 10 + 5) {
-    return (n2 + 1) / Math.pow(10, p)
-  }
-  return n2 / Math.pow(10, p)
-}
-
 const SettingGroupParam = ({
   param,
   sendParamRequest,
@@ -96,7 +87,7 @@ class Configurator extends Component {
   constructor(props) {
     super(props)
     console.log('config constructor')
-    let config = this.preprocessConfig(props.config)
+    let config = this.preprocessConfig(props.config, props.preset)
     this.state = {
       data: config,
       active: config.groups[0].params[0],
@@ -114,12 +105,23 @@ class Configurator extends Component {
     // this.sendAllParamsRequest('get')
   }
 
-  preprocessConfig = (data) => {
+  preprocessConfig = (data, preset) => {
+
     for (let g of data.groups) {
       for (let p of g.params) {
         p.group = g
+        const foundGroup = preset.groups.find((e) => e.groupId === g.groupId)
+        if (foundGroup) {
+          const foundParam = foundGroup.params.find((e) => e.id == p.id)
+          if (foundParam) {
+            foundParam.values.forEach((e) => [
+              p.values[e.string] = e.value
+            ])
+          }
+        }
       }
     }
+    console.log("Preset: ", JSON.stringify(preset))
 
     // for (let g of data.global) {
     //   for (let p of g.params) {
@@ -569,28 +571,28 @@ class Configurator extends Component {
                       onChange={(v) => this.onRangeChange(v ? 16383 : 0, index)}
                     />
                   </div>
-                }else
-                if (this.state.active.type === 'BOOL') {
-                  return <div className="switch-wrapper">
-                    <div className="md-text">{string}</div>
-                    <Switch
-                      defaultChecked={this.state.active.values[index] === 1}
-                      onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
+                } else
+                  if (this.state.active.type === 'BOOL') {
+                    return <div className="switch-wrapper">
+                      <div className="md-text">{string}</div>
+                      <Switch
+                        defaultChecked={this.state.active.values[index] === 1}
+                        onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
+                      />
+                    </div>
+                  } else {
+                    return <Range
+                      key={index}
+                      label={string}
+                      value={this.state.active.values[index]}
+                      min={this.state.active.min}
+                      max={this.state.active.max}
+                      onChange={(v) => {
+                        let { min, max } = this.state.active
+                        if (v !== min && v !== max) this.onRangeChange(v, index)
+                      }}
                     />
-                  </div>
-                } else {
-                  return <Range
-                    key={index}
-                    label={string}
-                    value={this.state.active.values[index]}
-                    min={this.state.active.min}
-                    max={this.state.active.max}
-                    onChange={(v) => {
-                      let { min, max } = this.state.active
-                      if (v !== min && v !== max) this.onRangeChange(v, index)
-                    }}
-                  />
-                }
+                  }
               })}
             </div>
           )}

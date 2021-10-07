@@ -6,6 +6,10 @@ import { sleep } from '../jammy-web-util/services/utils'
 import { jammy } from './index'
 
 import Clean_Picking_and_Strumming from '../jammy-web-util/config/presets/Clean Picking and Strumming.json'
+import All_Techniques from '../jammy-web-util/config/presets/All Techniques.json'
+import Super_Tapping from '../jammy-web-util/config/presets/Super Tapping.json'
+
+
 
 class PresetsStore {
   config = JammyEConfig // TODO: Change logic for support Jammy G
@@ -14,6 +18,16 @@ class PresetsStore {
       id: 1,
       name: 'Clean Picking and Strumming',
       preset: Clean_Picking_and_Strumming,
+    },
+    {
+      id: 2,
+      name: 'All Techniques',
+      preset: All_Techniques,
+    },
+    {
+      id: 3,
+      name: 'Super Tapping',
+      preset: Super_Tapping,
     },
   ]
   isFetch = false
