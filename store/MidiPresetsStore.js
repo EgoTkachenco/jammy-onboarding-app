@@ -92,8 +92,8 @@ class MidiPresetsStore {
   }
 
   sendParamRequest = async (op, param, group) => {
-    for (var i = 0; i < soft.preset.global.length; i++) {
-      var e = soft.preset.values[i]
+    for (var i = 0; i < param.values.length; i++) {
+      var e = param.values[i]
       jammy.sendParamRequest(op, {
         groupId: group.groupId,
         paramId: param.id,
