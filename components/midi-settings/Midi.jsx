@@ -11,59 +11,64 @@ const Midi = observer(() => {
   const router = useRouter()
   const [dialog, setDialog] = useState(false)
   const activePreset = MidiPresetsStore.activePreset
-  const onChange = (param, group, value) =>
-    MidiPresetsStore.changePresetValue(param, group, value)
+  const onChange = (param, group, value, global) =>
+    MidiPresetsStore.changePresetValue(param, group, value, global)
 
-  const getParamInput = (param, group) => {
+  const getParamInput = (param, group, global) => {
     switch (param.type) {
       case 'INT':
         return (
           <Range
-            value={param.value}
+            value={param.values[0]}
             min={param.min}
             max={param.max}
-            onChange={(v) => onChange(param, group, v)}
+            onChange={(v) => onChange(param, group, v, global)}
           />
         )
       case 'LIST':
         return (
           <Select
             value={
-              param.options.find((option) => option.id === param.value)?.name ||
-              null
+              param.options.find((option) => option.id === param.values[0])?.name || null
             }
             options={param.options}
             getOption={(option) => option.name}
-            onChange={(v, i) => onChange(param, group, v.id)}
+            onChange={(v, i) => onChange(param, group, v.id, global)}
           />
         )
       case 'BOOL':
         return (
           <Switch
             defaultChecked={param.value === 1}
-            onChange={(v) => onChange(param, group, v ? 1 : 0)}
+            onChange={(v) => onChange(param, group, v ? 1 : 0, global)}
           />
         )
       default:
         return 'DEF'
     }
   }
-  const getParamRow = (param, group) => {
-    if (param.type === 'ARRAY') {
+
+  const range = (start, end) => {
+    return Array.apply(0, Array(end - 1))
+      .map((element, index) => index + start);
+  }
+
+  const getParamRow = (param, group, global) => {
+    if (!global) {
       return (
         <>
           {[0, 1, 2, 3, 4, 5].map((string) => (
             <div className="midi-list__item" key={string}>
               <div className="midi-list__item__label">
-                {param.name} {string + 1}
+                String {string + 1}
               </div>
               <div className="midi-list__item__input">
                 <Select
-                  value={param.optionName + ' ' + param.value[string]}
-                  options={[1, 2, 3, 4, 5, 6, 7]}
-                  getOption={(option) => param.optionName + ' ' + option}
+                  value={param.name + ' ' + param.values[string]}
+                  options={range(param.min, param.max)}
+                  getOption={(option) => param.name + ' ' + option}
                   onChange={(v, i) =>
-                    onChange(param, group, { string, value: v })
+                    onChange(param, group, { string, value: v - 1 }, global)
                   }
                 />
               </div>
@@ -71,17 +76,24 @@ const Midi = observer(() => {
           ))}
         </>
       )
-    }
-    return (
-      <div className="midi-list__item" key={param.id}>
-        <div className="midi-list__item__label">{param.name}</div>
-        <div className="midi-list__item__input">
-          {getParamInput(param, group)}
+    } else {
+      return (
+        <div className="midi-list__item" key={param.id}>
+          <div className="midi-list__item__label">{param.name}</div>
+          <div className="midi-list__item__input">
+            {getParamInput(param, group, global)}
+          </div>
+          {/* <Select value={setting.value} options={setting.options} /> */}
         </div>
-        {/* <Select value={setting.value} options={setting.options} /> */}
-      </div>
-    )
+      )
+    }
   }
+  var result = ""
+  for(var i = 33; i< 127; i++){
+      result += i + ", "
+  }
+  console.log(result)
+
   return (
     <>
       <Stepper
@@ -105,8 +117,15 @@ const Midi = observer(() => {
           {activePreset &&
             activePreset.groups.map((group) => (
               <React.Fragment key={group.id}>
-                <div className="md-text white-50">{group.name}</div>
-                {group.params.map((param) => getParamRow(param, group))}
+                <div className="md-text white-50">{group.title}</div>
+                {group.params.map((param) => getParamRow(param, group, false))}
+              </React.Fragment>
+            ))}
+          {activePreset &&
+            activePreset.global.map((group) => (
+              <React.Fragment key={group.id}>
+                <div className="md-text white-50">{group.title}</div>
+                {group.params.map((param) => getParamRow(param, group, true))}
               </React.Fragment>
             ))}
         </div>

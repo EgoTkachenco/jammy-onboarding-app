@@ -3,6 +3,9 @@ import MidiPresets from './MidiPresets'
 import { jammy } from './index'
 import { sleep } from '../jammy-web-util/services/utils'
 
+import Config from '../jammy-web-util/config/e/jammyMidi_v0.1.json'
+
+
 import Default from '../jammy-web-util/config/midi/Default.json'
 import GarageBand_Guitar_and_Bass from '../jammy-web-util/config/midi/GarageBand (Guitar and Bass).json'
 import Guitar_Pro from '../jammy-web-util/config/midi/Guitar Pro.json'
@@ -64,8 +67,49 @@ class MidiPresetsStore {
     makeAutoObservable(this)
   }
 
+  prepareConfig(preset) {
+
+    var data = Config
+
+    for (var i = 0; i < preset.groups.length; i++) {
+      var gr = preset.groups[i]
+      for (var j = 0; j < gr.params.length; j++) {
+        var pr = gr.params[j]
+        var foundGroup = data.groups.find(g => g.groupId === gr.groupId)
+        if (foundGroup) {
+          var foundParam = foundGroup.params.find(p => p.id === pr.id)
+          if (foundParam) {
+            for (var k = 0; k < pr.values.length; k++) {
+              var vl = pr.values[k]
+              foundParam.values[vl.string] = vl.value
+            }
+          }
+        };
+      }
+    }
+
+    for (var i = 0; i < preset.global.length; i++) {
+      var gr = preset.global[i]
+      for (var j = 0; j < gr.params.length; j++) {
+        var pr = gr.params[j]
+        var foundGroup = data.global.find(g => g.groupId === gr.groupId)
+        if (foundGroup) {
+          var foundParam = foundGroup.params.find(p => p.id === pr.id)
+          if (foundParam) {
+            var vl = pr.values[0]
+            foundParam.values[0] = vl.value
+          }
+        };
+      }
+    }
+
+    return data
+  }
+
   setActivePreset(soft) {
-    this.activePreset = soft.preset
+    this.activePreset = this.prepareConfig(soft.preset)
+
+    console.log("Current preset: ", JSON.stringify(this.activePreset))
 
     this.processPreset(soft).then(() => {
       // Ignore
@@ -107,18 +151,20 @@ class MidiPresetsStore {
 
   }
 
-  changePresetValue = async (param, group, value) => {
-    let gIndex = this.activePreset.groups.findIndex((g) => g.id === group.id)
-    let pIndex = this.activePreset.groups[gIndex].params.findIndex(
-      (p) => p.id === param.id
-    )
+  changePresetValue = async (param, group, value, global) => {
+
     let string = 6
     if (value.value) {
       string = value.string
       value = value.value
     }
-    console.log(gIndex, pIndex, value)
-    if (param.type === 'ARRAY') {
+    
+    if (!global) {
+      let gIndex = this.activePreset.groups.findIndex((g) => g.id === group.id)
+      let pIndex = this.activePreset.groups[gIndex].params.findIndex(
+        (p) => p.id === param.id
+      )
+      console.log(gIndex, pIndex, value)
       for (let i = 0; i < 6; i++) {
         jammy.sendParamRequest('setget', {
           groupId: group.groupId,
@@ -128,22 +174,25 @@ class MidiPresetsStore {
           value:
             string === i
               ? value
-              : this.activePreset.groups[gIndex].params[pIndex].value,
+              : this.activePreset.groups[gIndex].params[pIndex].values[i],
         })
-        await sleep(10)
+        await sleep(20)
       }
-      this.activePreset.groups[gIndex].params[pIndex].value[string] = value
+      this.activePreset.groups[gIndex].params[pIndex].values[string] = value
     } else {
+      let gIndex = this.activePreset.global.findIndex((g) => g.id === group.id)
+      let pIndex = this.activePreset.global[gIndex].params.findIndex(
+        (p) => p.id === param.id
+      )
       jammy.sendParamRequest('setget', {
         groupId: group.groupId,
         paramId: param.id,
-        left: param.part === 'left',
-        stringId: string,
+        left: param.part,
+        stringId: 6,
         value: value,
       })
-
-      await sleep(10)
-      this.activePreset.groups[gIndex].params[pIndex].value = value
+      await sleep(20)
+      this.activePreset.global[gIndex].params[pIndex].values[0] = value
     }
     this.activePreset = { ...this.activePreset }
   }

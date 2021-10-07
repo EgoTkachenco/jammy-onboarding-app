@@ -1,0 +1,155 @@
+{
+  "left": 9,
+  "right": 3,
+  "groups": [
+    {
+      "groupId": 10,
+      "title": "Midi settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Midi channel",
+          "type": "INT",
+          "min": 0,
+          "max": 15,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Channel",
+          "description": "Midi channel",
+          "default": [7, 6, 5, 4, 3, 2],
+          "values": [7, 6, 5, 4, 3, 2]
+        }
+      ]
+    },
+    {
+      "groupId": 5,
+      "title": "Bending settings",
+      "params": [
+        {
+          "id": 3,
+          "title": "Pitch Bending Range (Divide By)",
+          "type": "INT",
+          "min": 1,
+          "max": 127,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Divider",
+          "description": "Pitch Bending Range (Divide By)",
+          "default": [1,1,1,1,1,1],
+          "values": [1,1,1,1,1,1]
+        }
+      ]
+    }
+  ],
+  "global": [
+    {
+      "groupId": 1,
+      "title": "Right muting",
+      "params": [
+        {
+          "id": 0,
+          "title": "Palm muting: Mode",
+          "type": "INT",
+          "min": 0,
+          "max": 2,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: Mode",
+          "description": "Palm muting: Mode",
+          "default": [0],
+          "values": [0],
+          "options": [
+            { "id": 0, "name": "OFF" },
+            { "id": 1, "name": "MIDI CC" },
+            { "id": 2, "name": "Keyswitch" }
+          ]
+        },
+        {
+          "id": 1,
+          "title": "Palm muting: Channel",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: Channel",
+          "description": "Palm muting: Channel",
+          "default": [0],
+          "values": [0]
+        },
+        {
+          "id": 2,
+          "title": "Palm muting: MIDI CC Number",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: MIDI CC Number",
+          "description": "Palm muting: MIDI CC Number",
+          "default": [90],
+          "values": [90]
+        },
+        {
+          "id": 3,
+          "title": "Palm muting: Primary Keyswitch",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: Primary Keyswitch",
+          "description": "Palm muting: Primary Keyswitch",
+          "default": [26],
+          "values": [26]
+        },
+        {
+          "id": 4,
+          "title": "Palm muting: Secondary Keyswitch",
+          "type": "INT",
+          "min": 0,
+          "max": 127,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: Secondary Keyswitch",
+          "description": "Palm muting: Secondary Keyswitch",
+          "default": [24],
+          "values": [24]
+        },
+        {
+          "id": 5,
+          "title": "Palm muting: Notes mode",
+          "type": "INT",
+          "min": 0,
+          "max": 1,
+          "left": false,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Palm muting: Notes mode",
+          "description": "Palm muting: Notes mode",
+          "default": [0],
+          "values": [0],
+          "options": [
+            { "id": 0, "name": "1 note" },
+            { "id": 1, "name": "2 note" }
+          ]
+        }
+      ]
+    }
+  ]
+}

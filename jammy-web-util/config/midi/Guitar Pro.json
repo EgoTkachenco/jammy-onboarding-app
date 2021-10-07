@@ -40,6 +40,41 @@
           ]
         }
       ]
+    },
+    {
+      "groupId": 5,
+      "params": [
+        {
+          "id": 3,
+          "left": false,
+          "values": [
+            {
+              "string": 0,
+              "value": 1
+            },
+            {
+              "string": 1,
+              "value": 1
+            },
+            {
+              "string": 2,
+              "value": 1
+            },
+            {
+              "string": 3,
+              "value": 1
+            },
+            {
+              "string": 4,
+              "value": 1
+            },
+            {
+              "string": 5,
+              "value": 1
+            }
+          ]
+        }
+      ]
     }
   ],
   "global": [
@@ -103,21 +138,6 @@
             {
               "string": 6,
               "value": 0
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": 5,
-      "params": [
-        {
-          "id": 3,
-          "left": false,
-          "values": [
-            {
-              "string": 6,
-              "value": 1
             }
           ]
         }
