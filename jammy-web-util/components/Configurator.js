@@ -4,114 +4,18 @@ import { saveAs } from 'file-saver'
 import Range from '../../components/Range'
 import { Switch } from 'antd'
 import { JAMMY_E, JAMMY_G } from '../services/jammy'
-import { sleep, xmlToJson } from '../services/utils'
+import { sleep } from '../services/utils'
 import midi from '../services/midi'
 
 import { midiService, jammy } from '../../store'
 import PresetsStore from '../../store/PresetsStore'
-// const tmpData = require("../../config/jammySettings_v1.7.3_fw15.json");
 const tmpDataJammyG = require('../config/g/jammySettings_v1.8_fw19.json')
-const tmpDataJammyE = require('../config/e/jammySettings_v0.4.json')
+const tmpDataJammyE = require('../config/e/jammySettings_v0.1.json')
 const ruleData = require('../config/jammyRules_v2.0_fw20.json')
 
 const strings = [1, 2, 3, 4, 5, 6]
 const globalStrings = [1]
 const globalString = 7
-
-const MaskParamEditor = ({ param, string, global }) => {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0)
-  const [tmpText, setTmpText] = useState('')
-  const [error, setError] = useState(false)
-
-  const onCheckboxChanged = (bit, checked) => {
-    setTmpText('')
-    const mask = 1 << bit
-    if (checked) {
-      param.values[string] |= mask
-    } else {
-      param.values[string] &= ~mask
-    }
-    forceUpdate()
-  }
-
-  const onTextChange = (e) => {
-    const v = Number(e.target.value)
-    setTmpText(e.target.value)
-
-    if (!isNaN(v) && v >= param.min && v <= param.max) {
-      param.values[string] = v
-      setError(false)
-      forceUpdate()
-    } else {
-      setError(true)
-    }
-  }
-
-  const onKeyDown = (e) => {
-    if (e.keyCode === 27) {
-      e.stopPropagation()
-      setTmpText('')
-      setError(false)
-    }
-  }
-
-  const onBlur = () => {
-    setTmpText('')
-  }
-
-  const changed =
-    parseInt(param.values[string]) !== parseInt(param.default[string])
-  return (
-    <FormGroup className="mb-0">
-      <div className="d-flex align-items-center">
-        <div className="mr-3" style={{ width: '2rem' }}>
-          S{global ? globalString : string + 1}
-        </div>
-        <div
-          className={
-            'mr-3 text-info text-center small' +
-            (changed ? ' border border-warning' : '')
-          }
-          style={{ width: '3rem' }}
-        >
-          {param['default'][string]}
-        </div>
-
-        <div className="mr-3 text-primary" style={{ width: '6rem' }}>
-          <Input
-            className="text-center"
-            value={tmpText || param.values[string]}
-            onChange={onTextChange}
-            onKeyDown={onKeyDown}
-            onBlur={onBlur}
-            invalid={error}
-          />
-        </div>
-        <div className="flex-fill d-flex justify-content-between align-items-center">
-          {Array(14)
-            .fill(0)
-            .map((_, i) => {
-              return (
-                <div
-                  key={i}
-                  className="text-center m-1"
-                  style={{ lineHeight: '100%' }}
-                >
-                  <div className="small">{i}</div>
-                  <input
-                    className="m-0 "
-                    type="checkbox"
-                    checked={param.values[string] & (1 << i)}
-                    onChange={(e) => onCheckboxChanged(i, e.target.checked)}
-                  />
-                </div>
-              )
-            })}
-        </div>
-      </div>
-    </FormGroup>
-  )
-}
 
 function roundOf(n, p) {
   const n1 = n * Math.pow(10, p + 1)
@@ -120,95 +24,6 @@ function roundOf(n, p) {
     return (n2 + 1) / Math.pow(10, p)
   }
   return n2 / Math.pow(10, p)
-}
-
-const RangeParamEditor = ({ param, string, global }) => {
-  const [, forceUpdate] = useReducer((x) => x + 1, 0)
-  const [tmpText, setTmpText] = useState('')
-  const [error, setError] = useState(false)
-
-  // if (param.title.startsWith("First f"))
-  //   console.log("rp", param.title, string, param.values, tmpText);
-
-  const onRangeChange = (e) => {
-    // console.log(e.target, e.target.value);
-    setTmpText('')
-    param.values[string] = parseFloat(e.target.value)
-    forceUpdate()
-  }
-
-  const onBlur = () => {
-    setTmpText('')
-  }
-
-  const onTextChange = (e) => {
-    const v = Number(e.target.value)
-    setTmpText(e.target.value)
-    if (!isNaN(v) && v >= param.min && v <= param.max) {
-      param.values[string] = v
-      setError(false)
-      forceUpdate()
-    } else {
-      setError(true)
-    }
-  }
-
-  const onKeyDown = (e) => {
-    if (e.keyCode === 27) {
-      e.stopPropagation()
-      setTmpText('')
-      setError(false)
-    }
-  }
-
-  const changed =
-    parseInt(param.values[string]) !== parseInt(param.default[string])
-
-  return (
-    <FormGroup className="mb-0">
-      <div className="d-flex align-items-center">
-        <div className="" style={{ width: '2rem' }}>
-          S{global ? globalString : string + 1}
-        </div>
-        <div
-          className={
-            'mr-3 text-info text-center small' +
-            (changed ? ' border border-warning' : '')
-          }
-          style={{ width: '3rem' }}
-        >
-          {param['default'][string]}
-        </div>
-        <div className="mr-2 text-primary" style={{ width: '6rem' }}>
-          <Input
-            className="text-center"
-            value={tmpText || param.values[string]}
-            onChange={onTextChange}
-            onKeyDown={onKeyDown}
-            onBlur={onBlur}
-            invalid={error}
-          />
-        </div>
-        <div className="mr-2 text-primary" style={{ width: '4rem' }}>
-          {param.type.toUpperCase() === 'FLOAT'
-            ? '(' + roundOf(param.values[string] * 0.005, 3) + ')'
-            : ''}
-        </div>
-        <div className="flex-fill d-flex justify-content-between align-items-center">
-          <div className="text-muted mr-1 small">{param.min}</div>
-          <CustomInput
-            id={`input_p_${param.id}_s_${string}`}
-            type="range"
-            onChange={onRangeChange}
-            min={param.min}
-            max={param.max}
-            value={param.values[string]}
-          />
-          <div className="text-muted ml-1 text-right small">{param.max}</div>
-        </div>
-      </div>
-    </FormGroup>
-  )
 }
 
 const SettingGroupParam = ({
@@ -281,10 +96,10 @@ class Configurator extends Component {
   constructor(props) {
     super(props)
     console.log('config constructor')
-    let pData = this.preprocessData(props.preset)
+    let config = this.preprocessConfig(props.config)
     this.state = {
-      data: pData,
-      active: pData.groups[0].params[0],
+      data: config,
+      active: config.groups[0].params[0],
       activeGroup: 0,
       activeParam: 0,
       // Versions
@@ -299,7 +114,7 @@ class Configurator extends Component {
     // this.sendAllParamsRequest('get')
   }
 
-  preprocessData = (data) => {
+  preprocessConfig = (data) => {
     for (let g of data.groups) {
       for (let p of g.params) {
         p.group = g
@@ -473,7 +288,6 @@ class Configurator extends Component {
         break
       }
     }
-
     return null
   }
 
@@ -664,41 +478,6 @@ class Configurator extends Component {
     saveAs(blob, 'jammy_preset.json')
   }
 
-  parseXml = (text) => {
-    function int(v) {
-      return parseInt(v)
-    }
-
-    const parser = new DOMParser().parseFromString(text, 'text/xml')
-    const res = xmlToJson(parser)
-
-    const root = res['Full_configuration']
-    const out = {}
-    if (!root) {
-      alert('Invalid settigs XML')
-    }
-
-    // console.log(JSON.stringify(res));
-
-    out.left = int(root['@attributes']['LeftPartFw'])
-    out.right = int(root['@attributes']['RightPartFw'])
-    out.groups = []
-    out.global = []
-
-    for (let i = 0; i <= 6; i++) {
-      const string = root[`String_${i}`]
-      if (string !== undefined) {
-        const srcGroups = string['Group']
-        for (let srcG of srcGroups) {
-          // console.log("src", srcG);
-          this.extractGroup(int, srcG, i, out)
-        }
-      }
-    }
-    // return ;
-    return out
-  }
-
   onFileChanged = async () => {
     if (this.inputFile.current.files.length === 0) return
     const file = this.inputFile.current.files[0]
@@ -707,23 +486,11 @@ class Configurator extends Component {
     console.log(file.name, file.type)
 
     switch (ext) {
-      case 'xml':
-        const text = await file.text()
-        // alert(".xml");
-        try {
-          const data = this.parseXml(text)
-          this.setState({ data: this.preprocessData(data) })
-        } catch (ex) {
-          console.error(ex)
-          alert('Failed to load file')
-        }
-
-        break
       case 'json':
         try {
           const text = await file.text()
           const data = JSON.parse(text)
-          this.setState({ data: this.preprocessData(data) })
+          this.setState({ data: this.preprocessConfig(data) })
         } catch (ex) {
           console.error(ex)
           alert('Failed to load file')
@@ -736,65 +503,7 @@ class Configurator extends Component {
     this.inputFile.current.value = ''
   }
 
-  extractGroup(int, srcG, i, out) {
-    // console.log("Extract: " + JSON.stringify(srcG));
-
-    const groupId = int(srcG['@attributes']['GroupId'])
-    let g
-
-    let srcParams = srcG['Parameter']
-    if (!Array.isArray(srcParams)) {
-      srcParams = [srcParams]
-    }
-    let isGlobalGroup = i === 6
-    if (i === 0 || isGlobalGroup) {
-      g = {}
-      g.groupId = groupId
-      g.title = (srcG['#text'] || []).find((x) => !!x) || ''
-      g.params = []
-      for (let srcP of srcParams) {
-        let p = {
-          id: int(srcP['@attributes']['id']),
-          title: srcP['#text'],
-          type: srcP['@attributes']['Type'].toUpperCase(),
-          min: int(srcP['@attributes']['minValue']),
-          max: int(srcP['@attributes']['maxValue']),
-          left: srcP['@attributes']['isLeftPart'] === '1',
-          all: srcP['@attributes']['isForAll'] === '1',
-          enabled: srcP['@attributes']['isVisible'] === '1',
-          reversed: srcP['@attributes']['isReverse'] === '1',
-          name: srcP['@attributes']['UName'],
-          description: srcP['@attributes']['UAnnotation'],
-          default: isGlobalGroup ? Array(1) : Array(6),
-          values: isGlobalGroup ? Array(1) : Array(6),
-        }
-
-        if (isGlobalGroup) {
-          p.default[0] = int(srcP['@attributes']['CurrentValue'])
-          p.values[0] = int(srcP['@attributes']['CurrentValue'])
-        }
-
-        g.params.push(p)
-      }
-      if (isGlobalGroup) {
-        out.global.push(g)
-      } else {
-        out.groups.push(g)
-      }
-    } else {
-      g = out.groups.find((x) => x.groupId === groupId)
-    }
-    if (!isGlobalGroup) {
-      srcParams.forEach((srcP) => {
-        let p = g.params.find((x) => x.id === int(srcP['@attributes']['id']))
-        p.default[i] = int(srcP['@attributes']['CurrentValue'])
-        p.values[i] = int(srcP['@attributes']['CurrentValue'])
-      })
-    }
-  }
   onRangeChange(v, string) {
-    // let active = this.state.active
-    // active.values[string] = v
     let data = this.state.data
     data.groups[this.state.activeGroup].params[this.state.activeParam].values[
       string
@@ -840,7 +549,6 @@ class Configurator extends Component {
                   this.state.active.default.map((el, i) => {
                     this.onRangeChange(el, i)
                   })
-                  // console.log(this.state.active)
                 }}
               >
                 Restore to default settings
@@ -853,13 +561,22 @@ class Configurator extends Component {
                 'String 5 (A)',
                 'String 6 (low E)',
               ].map((string, index) => {
+                if (this.state.active.type === 'MASK') {
+                  return <div className="switch-wrapper">
+                    <div className="md-text">{string}</div>
+                    <Switch
+                      defaultChecked={this.state.active.values[index] === 16383}
+                      onChange={(v) => this.onRangeChange(v ? 16383 : 0, index)}
+                    />
+                  </div>
+                }else
                 if (this.state.active.type === 'BOOL') {
                   return <div className="switch-wrapper">
                     <div className="md-text">{string}</div>
                     <Switch
-                    defaultChecked={this.state.active.values[index] === 1}
-                    onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
-                  />
+                      defaultChecked={this.state.active.values[index] === 1}
+                      onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
+                    />
                   </div>
                 } else {
                   return <Range
@@ -884,15 +601,11 @@ class Configurator extends Component {
 }
 
 const ConfiguratorG = (props) => {
-  midiService.logIncoming = true
-  midiService.logOutgoing = true
-  return <Configurator preset={props.preset} presetName={props.presetName} />
+  return <Configurator config={props.config} preset={props.preset} presetName={props.presetName} />
 }
 
 const ConfiguratorE = (props) => {
-  // midiService.logIncoming = true
-  // midiService.logOutgoing = true
-  return <Configurator preset={props.preset} presetName={props.presetName} />
+  return <Configurator config={props.config} preset={props.preset} presetName={props.presetName} />
 }
 
 export { ConfiguratorE, ConfiguratorG }

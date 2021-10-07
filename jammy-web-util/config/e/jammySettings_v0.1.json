@@ -1,488 +1,186 @@
 {
-  "version": 1,
-  "id": 0,
-  "left": 13,
-  "right": 13,
-  "name": "Jammy E: Default",
-  "description": "Jammy E: Default preset",
+  "left": 9,
+  "right": 3,
   "groups": [
     {
-      "groupId": 0,
+      "groupId": 5,
+      "title": "Bending settings",
       "params": [
         {
-          "id": 0,
-          "title": "First filter",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": false,
-          "all": false,
-          "enabled": false,
+          "id": 5,
+          "title": "Bending mask",
+          "type": "MASK",
+          "min": 0,
+          "max": 16383,
+          "left": true,
+          "all": true,
+          "enabled": true,
           "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            184,
-            184,
-            184,
-            184,
-            184,
-            184
-          ],
-          "values": [
-            184,
-            184,
-            184,
-            184,
-            184,
-            184
-          ]
-        },
+          "name": "Bending and Vibrato Switch",
+          "description": "Enables / disables bending and vibrato for all strings.",
+          "default": [0, 0, 0, 0, 0, 0],
+          "values": [16383, 16383, 16383, 16383, 16383, 16383]
+        }
+      ]
+    },
+    {
+      "groupId": 4,
+      "title": "Tapping settings",
+      "params": [
+        {
+          "id": 2,
+          "title": "Tap Off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": false,
+          "name": "Hammer-On and Pull-Off Switch",
+          "description": "Enables / disables hammer-ons, pull-offs and tapping on each string.",
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
+        }
+      ]
+    },
+    {
+      "groupId": 8,
+      "title": "Modelling tap settings",
+      "params": [
         {
           "id": 1,
-          "title": "Second filter",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": false,
-          "all": false,
-          "enabled": false,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            40,
-            40,
-            40,
-            40,
-            40,
-            40
-          ]
-        },
-        {
-          "id": 3,
-          "title": "OSC",
-          "type": "INT",
-          "min": 1,
-          "max": 23,
-          "left": false,
-          "all": false,
-          "enabled": false,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8
-          ],
-          "values": [
-            8,
-            8,
-            8,
-            8,
-            8,
-            8
-          ]
-        },
-        {
-          "id": 4,
-          "title": "OSC step",
-          "type": "INT",
-          "min": 1,
-          "max": 10,
-          "left": false,
-          "all": false,
-          "enabled": false,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ],
-          "values": [
-            2,
-            2,
-            2,
-            2,
-            2,
-            2
-          ]
-        },
-        {
-          "id": 8,
-          "title": "Resonance suppresion time",
+          "title": "UpFretTap",
           "type": "INT",
           "min": 1,
           "max": 100,
-          "left": false,
+          "left": true,
           "all": false,
           "enabled": true,
           "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ],
-          "values": [
-            3,
-            3,
-            3,
-            3,
-            3,
-            3
-          ]
+          "name": "Pull-Off from Open String Sensitivity",
+          "description": "Defines how easy it is to trigger pull-offs from an open string",
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
         },
         {
-          "id": 9,
-          "title": "Resonance suppresion window",
+          "id": 2,
+          "title": "DownFretTap",
           "type": "INT",
           "min": 1,
-          "max": 1000,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Pull-Off from Open String Sensitivity",
+          "description": "Defines how easy it is to trigger pull-offs from an open string",
+          "default": [40, 40, 40, 40, 40, 40],
+          "values": [40, 40, 40, 40, 40, 40]
+        },
+        {
+          "id": 3,
+          "title": "internalFretTap",
+          "type": "INT",
+          "min": 1,
+          "max": 100,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": false,
+          "name": "Hammer-On and Pull-Off Sensitivity",
+          "description": "Defines how easy it is to trigger regular hammer-ons and pull-offs",
+          "default": [60, 60, 60, 60, 60, 60],
+          "values": [60, 60, 60, 60, 60, 60]
+        }
+      ]
+    },
+    {
+      "groupId": 3,
+      "title": "Slide settings",
+      "params": [
+        {
+          "id": 9,
+          "title": "Velocity divider",
+          "type": "INT",
+          "min": 1,
+          "max": 32,
+          "left": true,
+          "all": false,
+          "enabled": true,
+          "reversed": true,
+          "name": "Hammer-On and Pull-Off Loudness",
+          "description": "Defines the velocity level of hammer-ons, pull-offs and tapping.",
+          "default": [8, 8, 8, 8, 8, 8],
+          "values": [8, 8, 8, 8, 8, 8]
+        },
+        {
+          "id": 8,
+          "title": "Slide Off",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
+          "left": true,
+          "all": true,
+          "enabled": true,
+          "reversed": true,
+          "name": "Slide Switch",
+          "description": "Enables / disables slides on each string.",
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
+        }
+      ]
+    },
+    {
+      "groupId": 9,
+      "title": "Compression settings",
+      "params": [
+        {
+          "id": 0,
+          "title": "Switch on compressor",
+          "type": "BOOL",
+          "min": 0,
+          "max": 1,
           "left": false,
           "all": false,
           "enabled": true,
           "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ],
-          "values": [
-            100,
-            100,
-            100,
-            100,
-            100,
-            100
-          ]
+          "name": "Velocity Compressor Switch",
+          "description": "Enables / disables loudness compression for all picked notes.",
+          "default": [1, 1, 1, 1, 1, 1],
+          "values": [1, 1, 1, 1, 1, 1]
         },
         {
-          "id": 10,
-          "title": "Resonance suppresion delta",
+          "id": 2,
+          "title": "Level",
           "type": "INT",
-          "min": 5,
+          "min": 1,
           "max": 127,
           "left": false,
           "all": false,
           "enabled": true,
           "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ],
-          "values": [
-            35,
-            35,
-            35,
-            35,
-            35,
-            35
-          ]
-        },
-        {
-          "id": 11,
-          "title": "UpCalmLimit",
-          "type": "INT",
-          "min": 0,
-          "max": 400,
-          "left": false,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            300,
-            300,
-            300,
-            300,
-            300,
-            300
-          ],
-          "values": [
-            300,
-            300,
-            300,
-            300,
-            300,
-            300
-          ]
-        },
-        {
-          "id": 14,
-          "title": "trigDiffLimit",
-          "type": "INT",
-          "min": 0,
-          "max": 512,
-          "left": false,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
-        }
-      ],
-      "title": "Picking Settings"
-    },
-    {
-      "groupId": 8,
-      "params": [
-        {
-          "id": 0,
-          "title": "firstFretTap",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": true,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ],
-          "values": [
-            140,
-            140,
-            140,
-            140,
-            140,
-            140
-          ]
+          "name": "Velocity Compressor Level",
+          "description": "Defines the velocity level to which the picking loudness will be compressed.",
+          "default": [100, 100, 100, 100, 100, 100],
+          "values": [100, 100, 100, 100, 100, 100]
         },
         {
           "id": 1,
-          "title": "UpFretTap",
-          "type": "FLOAT",
+          "title": "coefficient",
+          "type": "INT",
           "min": 1,
           "max": 199,
-          "left": true,
+          "left": false,
           "all": false,
           "enabled": true,
           "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            60,
-            60,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            60,
-            60,
-            40,
-            40,
-            40,
-            40
-          ]
-        },
-        {
-          "id": 2,
-          "title": "DownFretTap",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": true,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            120,
-            100,
-            40,
-            40,
-            40,
-            40
-          ],
-          "values": [
-            120,
-            100,
-            40,
-            40,
-            40,
-            40
-          ]
-        },
-        {
-          "id": 3,
-          "title": "internalFretTap",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": true,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ],
-          "values": [
-            80,
-            80,
-            80,
-            80,
-            80,
-            80
-          ]
-        },
-        {
-          "id": 4,
-          "title": "deltaUpFilterFretTap",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": true,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ],
-          "values": [
-            4,
-            4,
-            4,
-            4,
-            4,
-            4
-          ]
-        },
-        {
-          "id": 5,
-          "title": "deltaDownFilterFretTap",
-          "type": "FLOAT",
-          "min": 1,
-          "max": 199,
-          "left": true,
-          "all": false,
-          "enabled": true,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            30,
-            3,
-            3,
-            3,
-            3,
-            3
-          ],
-          "values": [
-            30,
-            3,
-            3,
-            3,
-            3,
-            3
-          ]
-        },
-        {
-          "id": 6,
-          "title": "Switch on tap modelling",
-          "type": "BOOL",
-          "min": 0,
-          "max": 1,
-          "left": true,
-          "all": false,
-          "enabled": false,
-          "reversed": false,
-          "name": "",
-          "description": "",
-          "default": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ],
-          "values": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
+          "name": "Velocity Compressor Amount",
+          "description": "Defines how heavily the picking loudness will be pushed up or down towards the selected Velocity Compressor Level.",
+          "default": [180, 180, 180, 180, 180, 180],
+          "values": [180, 180, 180, 180, 180, 180]
         }
-      ],
-      "title": "Modelling tap settings"
+      ]
     }
-  ],
-  "global": []
-
+  ]
 }

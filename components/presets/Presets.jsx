@@ -19,6 +19,7 @@ const Presets = observer(() => {
   const isFetch = PresetsStore.isFetch
   const isJammyG = Store.jammyName === 'Jammy G'
 
+  const CONFIG = PresetsStore.config
   const PRESETS = PresetsStore.presets
 
   const setActivePreset = (preset, isCustom) =>
@@ -31,9 +32,9 @@ const Presets = observer(() => {
         onPrev={
           isCustomize
             ? () => {
-                PresetsStore.isCustomize = false
-                PresetsStore.activePreset = null
-              }
+              PresetsStore.isCustomize = false
+              PresetsStore.activePreset = null
+            }
             : () => router.push('/sound-check-2')
         }
         prevText={
@@ -45,9 +46,9 @@ const Presets = observer(() => {
         onNext={
           customizedPreset || active
             ? () => {
-                // PresetsStore.applyPreset(active)
-                setShowDialog(true)
-              }
+              // PresetsStore.applyPreset(active)
+              setShowDialog(true)
+            }
             : null
         }
         nextText={!isCustomize ? 'Apply Selected Preset' : 'Done'}
@@ -63,11 +64,13 @@ const Presets = observer(() => {
         {isCustomize ? (
           isJammyG ? (
             <ConfiguratorG
+              config={CONFIG}
               preset={customizedPreset.preset}
               presetName={customizedPreset?.name}
             />
           ) : (
             <ConfiguratorE
+              config={CONFIG}
               preset={customizedPreset.preset}
               presetName={customizedPreset?.name}
             />
@@ -111,9 +114,8 @@ const Presets = observer(() => {
               <div className="sm-text white-50">Original </div>
               {PRESETS.map((preset) => (
                 <div
-                  className={`presets-list__item ${
-                    active?.id == preset.id ? 'active' : ''
-                  }`}
+                  className={`presets-list__item ${active?.id == preset.id ? 'active' : ''
+                    }`}
                   key={preset.id}
                   onClick={() => PresetsStore.setActivePreset(preset)}
                 >

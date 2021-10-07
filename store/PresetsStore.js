@@ -1,64 +1,20 @@
 import { makeAutoObservable } from 'mobx'
 import Store from './index'
-import JammyGPreset from '../jammy-web-util/config/g/jammySettings_v1.8_fw19.json'
-import JammyEPreset from '../jammy-web-util/config/e/jammySettings_v0.1.json'
+import JammyGConfig from '../jammy-web-util/config/g/jammySettings_v1.8_fw19.json'
+import JammyEConfig from '../jammy-web-util/config/e/jammySettings_v0.1.json'
 import { sleep } from '../jammy-web-util/services/utils'
 import { jammy } from './index'
 
 import Clean_Picking_and_Strumming from '../jammy-web-util/config/presets/Clean Picking and Strumming.json'
-import DefaultPreset from '../jammy-web-util/config/presets/Default.json'
-import Rock_n_Roll from "../jammy-web-util/config/presets/Rock'n'Roll.json"
-import Shredding from '../jammy-web-util/config/presets/Shredding.json'
-import Tapping from '../jammy-web-util/config/presets/Tapping.json'
-import Tapping_Dampened_Strings from '../jammy-web-util/config/presets/Tapping (Dampened Strings).json'
-import Increased_Picking_Sensitivity from '../jammy-web-util/config/presets/Increased Picking Sensitivity.json'
-import Increased_Tapping_Sensitivity from '../jammy-web-util/config/presets/Increased Tapping Sensitivity.json'
-import Increased_Right_Hand_Muting_Sensitivity from '../jammy-web-util/config/presets/Increased Right Hand Muting Sensitivity.json'
-import Increased_Left_Hand_Muting_Sensitivity from '../jammy-web-util/config/presets/Increased Left Hand Muting Sensitivity.json'
-import Troubleshoot_Self_Muting_Strings from '../jammy-web-util/config/presets/Troubleshoot Self-Muting Strings.json'
-import Troubleshoot_Tapping from '../jammy-web-util/config/presets/Troubleshoot Tapping.json'
+
 class PresetsStore {
+  config = JammyEConfig // TODO: Change logic for support Jammy G
   presets = [
     {
       id: 1,
       name: 'Clean Picking and Strumming',
       preset: Clean_Picking_and_Strumming,
     },
-    { id: 2, name: 'Default (All Techniques)	', preset: DefaultPreset },
-    { id: 3, name: 'Rock’n’Roll', preset: Rock_n_Roll },
-    { id: 4, name: 'Shredding', preset: Shredding },
-    { id: 5, name: 'Tapping', preset: Tapping },
-    {
-      id: 6,
-      name: 'Tapping (Dampened Strings)',
-      preset: Tapping_Dampened_Strings,
-    },
-    {
-      id: 7,
-      name: 'Increased Picking Sensitivity',
-      preset: Increased_Picking_Sensitivity,
-    },
-    {
-      id: 8,
-      name: 'Increased Tapping Sensitivity ',
-      preset: Increased_Tapping_Sensitivity,
-    },
-    {
-      id: 9,
-      name: 'Increased Right Hand Muting Sensitivity',
-      preset: Increased_Right_Hand_Muting_Sensitivity,
-    },
-    {
-      id: 10,
-      name: 'Increased Left Hand Muting Sensitivity',
-      preset: Increased_Left_Hand_Muting_Sensitivity,
-    },
-    {
-      id: 11,
-      name: 'Troubleshoot Self-Muting Strings',
-      preset: Troubleshoot_Self_Muting_Strings,
-    },
-    { id: 12, name: 'Troubleshoot Tapping', preset: Troubleshoot_Tapping },
   ]
   isFetch = false
   activePreset = null
