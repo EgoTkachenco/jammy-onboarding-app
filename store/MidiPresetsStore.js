@@ -57,7 +57,7 @@ class MidiPresetsStore {
     },
     {
       id: 6,
-      name: "I'd like to learn MIDI basics first ",
+      name: "I’d like to configure MIDI myself",
       url: '/softwares/default.png',
       preset: Default,
     },
