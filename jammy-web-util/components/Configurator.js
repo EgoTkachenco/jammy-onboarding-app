@@ -516,13 +516,30 @@ class Configurator extends Component {
     this.setState({ data })
   }
   onSetActiveParam(g, p) {
-    console.log('active param', g, p)
+    console.log('active param', g, p, this.state.data.groups[g].params[p])
     this.setState({
       active: this.state.data.groups[g].params[p],
       activeGroup: g,
       activeParam: p,
     })
   }
+
+  positiveValue(param) {
+    if (param.reversed) {
+      return param.min;
+    } else {
+      return param.max;
+    }
+  }
+
+  negativeValue(param) {
+    if (param.reversed) {
+      return param.max;
+    } else {
+      return param.min;
+    }
+  }
+
   render() {
     return (
       <div className="presets-customize">
@@ -538,7 +555,10 @@ class Configurator extends Component {
               global={false}
               activeGroup={this.state.activeGroup}
               activeParam={this.state.activeParam}
-              setActiveParam={(g, p) => this.onSetActiveParam(g, p)}
+              setActiveParam={(g, p) => {
+                console.log("Click!")
+                this.onSetActiveParam(g, p)
+              }}
             />
           </div>
           {this.state.active && (
@@ -562,7 +582,7 @@ class Configurator extends Component {
                 'String 6 (low E)',
               ].map((string, index) => {
                 if (this.state.active.type === 'MASK') {
-                  return <div className="switch-wrapper">
+                  return <div className="switch-wrapper" key={index}>
                     <div className="md-text">{string}</div>
                     <Switch
                       defaultChecked={this.state.active.values[index] === 16383}
@@ -571,11 +591,14 @@ class Configurator extends Component {
                   </div>
                 } else
                   if (this.state.active.type === 'BOOL') {
-                    return <div className="switch-wrapper">
+                    console.log("Params: ", this.state.active.values[index])
+                    return <div className="switch-wrapper" key={
+                      this.state.active.group.groupId * 1000 + this.state.active.id * 100 + index
+                    }>
                       <div className="md-text">{string}</div>
                       <Switch
-                        defaultChecked={this.state.active.values[index] === 1}
-                        onChange={(v) => this.onRangeChange(v ? 1 : 0, index)}
+                        defaultChecked={this.state.active.values[index] === this.positiveValue(this.state.active)}
+                        onChange={(v) => this.onRangeChange(v ? this.positiveValue(this.state.active) : this.negativeValue(this.state.active), index)}
                       />
                     </div>
                   } else {
