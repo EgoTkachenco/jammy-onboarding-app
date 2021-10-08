@@ -18,8 +18,8 @@ const SoundCheck = observer(() => {
     <>
       <div className="page-container sound-check centered">
         <div className={`message ${showMessage ? 'show' : ''}`}>
-          We recommend playing closer to the sensors (where both parts of your
-          guitar connect) to increase the stability of note picking.{' '}
+          To optimize the responsiveness, adjust the string tension to match a
+          regular guitar feel (use the hex key from the box).{' '}
         </div>
         <div className="lg-text text-center">
           Play some chords to check the responsiveness
