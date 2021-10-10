@@ -1,6 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-import { jammy } from './index'
-import PresetsStore from './PresetsStore'
 import * as Tone from 'tone'
 
 const GUITAR_NOTES_CODE = {

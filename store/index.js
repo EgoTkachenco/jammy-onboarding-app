@@ -89,11 +89,11 @@ class Store {
   }
   initStatusCheck = () => {
     // Check jammy status
-    console.log(123)
     this.statusCheckInterval = setInterval(() => {
       let newStatus =
         midiService.midiAccess.inputs.size === 1 ? 'Connected' : 'Disconnected'
       if (this.status !== newStatus && newStatus === 'Connected') {
+        console.log('reinit')
         midiService.removeEventListener('midimessage', this.onMidiMessage)
         midiService.addEventListener('midimessage', this.onMidiMessage)
       }
