@@ -29,7 +29,8 @@ const Midi = observer(() => {
         return (
           <Select
             value={
-              param.options.find((option) => option.id === param.values[0])?.name || null
+              param.options.find((option) => option.id === param.values[0])
+                ?.name || null
             }
             options={param.options}
             getOption={(option) => option.name}
@@ -49,8 +50,7 @@ const Midi = observer(() => {
   }
 
   const range = (start, end) => {
-    return Array.apply(0, Array(end - 1))
-      .map((element, index) => index + start);
+    return Array.apply(0, Array(end - 1)).map((element, index) => index + start)
   }
 
   const getParamRow = (param, group, global) => {
@@ -59,9 +59,7 @@ const Midi = observer(() => {
         <>
           {[0, 1, 2, 3, 4, 5].map((string) => (
             <div className="midi-list__item" key={string}>
-              <div className="midi-list__item__label">
-                String {string + 1}
-              </div>
+              <div className="midi-list__item__label">String {string + 1}</div>
               <div className="midi-list__item__input">
                 <Select
                   value={param.name + ' ' + param.values[string]}
@@ -88,16 +86,16 @@ const Midi = observer(() => {
       )
     }
   }
-  var result = ""
-  for(var i = 33; i< 127; i++){
-      result += i + ", "
+  var result = ''
+  for (var i = 33; i < 127; i++) {
+    result += i + ', '
   }
   console.log(result)
 
   return (
     <>
       <Stepper
-        onPrev={() => router.push('/software-settings-2')}
+        onPrev={() => router.push('/software-settings')}
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />
@@ -136,7 +134,7 @@ const Midi = observer(() => {
               Congrats on getting your <br /> Jammy all set up!
             </div>
             <div>
-              <a
+              {/* <a
                 className="no-effect"
                 href="https://playjammy.com/plugin/"
                 target="_blank"
@@ -145,7 +143,7 @@ const Midi = observer(() => {
                 <button style={{ width: '100%' }} className="btn btn-primary">
                   Finish onboarding and check the companion software
                 </button>
-              </a>
+              </a> */}
               <button
                 className="btn btn-primary__outline"
                 onClick={() => router.push('/support')}

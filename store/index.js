@@ -1,7 +1,7 @@
 import { makeAutoObservable, computed, configure } from 'mobx'
 import jammy, { JAMMY_E, JAMMY_G } from '../jammy-web-util/services/jammy'
 import midiService from '../jammy-web-util/services/midi'
-import MidiStore from './MidiStore'
+// import MidiStore from './MidiStore'
 configure({
   enforceActions: 'never',
 })
@@ -86,33 +86,6 @@ class Store {
   }
   updateFirmware = async () => {
     this.startScreenTab = 'CheckFirmware'
-    // Check firmware
-    // await setTimeout(() => {
-    //   this.startScreenTab = 'Reboot'
-    //   this.isRebooted = true
-    // }, 1000)
-
-    // // Update Firmware
-    // setTimeout(() => {
-    //   this.startScreenTab = 'UpdateFirmware'
-    //   setTimeout(() => {
-    //     this.startScreenTab = 'Reboot'
-    //     // Wait untill jammy off
-    //     let interval = setInterval(() => {
-    //       if (!this.isRebooted && this.status === 'Disconnected') {
-    //         clearInterval(interval)
-    //         // wait until jammy on
-    //         this.isRebooted = true
-    //         interval = setInterval(() => {
-    //           if (this.status === 'Connected') {
-    //             clearInterval(interval)
-    //             clearInterval(statusCheckInterval)
-    //           }
-    //         }, 1000)
-    //       }
-    //     }, 1000)
-    //   }, 4000)
-    // }, 4000)
   }
   initStatusCheck = () => {
     // Check jammy status
@@ -124,9 +97,6 @@ class Store {
         midiService.removeEventListener('midimessage', this.onMidiMessage)
         midiService.addEventListener('midimessage', this.onMidiMessage)
       }
-      // if (this.status !== newStatus && newStatus === 'Disconnected') {
-
-      // }
       this.status = newStatus
     }, 500)
   }
@@ -134,6 +104,9 @@ class Store {
     clearInterval(this.statusCheckInterval)
     this.statusCheckInterval = null
   }
+  // For software-settings page back link
+  isPresetsSkipped = false
+
   get midiService() {
     return midiService
   }

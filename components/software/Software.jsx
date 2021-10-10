@@ -3,8 +3,10 @@ import Stepper from '../Stepper'
 import Image from 'next/image'
 import FormsStore from '../../store/FormsStore'
 import MidiPresetsStore from '../../store/MidiPresetsStore'
+import Store from '../../store'
 import { observer } from 'mobx-react-lite'
 import { sleep } from '../../jammy-web-util/services/utils'
+
 const Software = observer(() => {
   const router = useRouter()
   const SOFTWARES = MidiPresetsStore.SOFTWARES
@@ -12,7 +14,9 @@ const Software = observer(() => {
   return (
     <>
       <Stepper
-        onPrev={() => router.back()}
+        onPrev={() =>
+          router.push(Store.isPresetsSkipped ? '/sound-check-2' : '/advanced')
+        }
         prevText={
           <div className="d-flex align-center">
             <ArrowIcon />
@@ -36,7 +40,7 @@ const Software = observer(() => {
               onClick={async () => {
                 setActive(soft)
                 await sleep(1000)
-                router.push('/software-settings-2')
+                router.push('/midi-settings')
               }}
             >
               <div className="software-list__item__img">

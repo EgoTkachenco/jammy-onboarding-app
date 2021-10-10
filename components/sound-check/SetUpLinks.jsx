@@ -1,12 +1,17 @@
 import Link from 'next/link'
-export default function SetUpLinks() {
+import Store from '../../store'
+import { observer } from 'mobx-react-lite'
+const SetUpLinks = observer(() => {
   return (
     <div className="page-container set-up-links">
       <div className="title-text text-center">
         Great! <br /> Would you like to...
       </div>
       <Link href="/advanced" passHref>
-        <div className="link-block">
+        <div
+          className="link-block"
+          onClick={() => (Store.isPresetsSkipped = false)}
+        >
           <div>
             Set up advanced guitar techniques (hammer-ons, slides, bending...)?
           </div>
@@ -14,7 +19,10 @@ export default function SetUpLinks() {
         </div>
       </Link>
       <Link href="/software-settings" passHref>
-        <div className="link-block">
+        <div
+          className="link-block"
+          onClick={() => (Store.isPresetsSkipped = true)}
+        >
           <div>
             Proceed to MIDI settings now and set up advanced guitar techniques
             later on
@@ -24,7 +32,8 @@ export default function SetUpLinks() {
       </Link>
     </div>
   )
-}
+})
+export default SetUpLinks
 
 const ArrowIcon = () => {
   return (

@@ -32,9 +32,9 @@ const Presets = observer(() => {
         onPrev={
           isCustomize
             ? () => {
-              PresetsStore.isCustomize = false
-              PresetsStore.activePreset = null
-            }
+                PresetsStore.isCustomize = false
+                PresetsStore.activePreset = null
+              }
             : () => router.push('/sound-check-2')
         }
         prevText={
@@ -46,9 +46,9 @@ const Presets = observer(() => {
         onNext={
           customizedPreset || active
             ? () => {
-              // PresetsStore.applyPreset(active)
-              setShowDialog(true)
-            }
+                // PresetsStore.applyPreset(active)
+                setShowDialog(true)
+              }
             : null
         }
         nextText={!isCustomize ? 'Apply Selected Preset' : 'Done'}
@@ -114,8 +114,9 @@ const Presets = observer(() => {
               <div className="sm-text white-50">Original </div>
               {PRESETS.map((preset) => (
                 <div
-                  className={`presets-list__item ${active?.id == preset.id ? 'active' : ''
-                    }`}
+                  className={`presets-list__item ${
+                    active?.id == preset.id ? 'active' : ''
+                  }`}
                   key={preset.id}
                   onClick={() => PresetsStore.setActivePreset(preset)}
                 >
@@ -147,12 +148,12 @@ const Presets = observer(() => {
             >
               Yes
             </button>
-            <button
+            {/* <button
               className="btn btn-primary__outline"
               onClick={() => router.push('/sensitivity')}
             >
               {'No, I’d like to troubleshoot playability'}
-            </button>
+            </button> */}
           </Dialog>
         )}
       </div>
