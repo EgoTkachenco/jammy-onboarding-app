@@ -1,23 +1,23 @@
 import React from 'react'
 import WebAudioFontPlayer from 'webaudiofont'
-import audioFile from './audio_base64.json'
-const myCustomSampledInstrument = {
-  zones: [
-    {
-      midi: 0, //MIDI program
-      originalPitch: 37 * 100 - 36 * 100, //root pitch in cent, may be transpose up/down
-      keyRangeLow: 12 * 3 + 6, //zone low key
-      keyRangeHigh: 127, //zone high key
-      loopStart: 0, //loop tart in seconds
-      loopEnd: 763998, //loop end in seconds
-      coarseTune: 0, //use fine tune
-      fineTune: -5, //tune correction in cents
-      sampleRate: 48000, //file sample rate
-      ahdsr: true, // see example
-      file: audioFile.audio.data,
-    },
-  ],
-}
+// import audioFile from './audio_base64.json'
+// const myCustomSampledInstrument = {
+//   zones: [
+//     {
+//       midi: 0, //MIDI program
+//       originalPitch: 37 * 100 - 36 * 100, //root pitch in cent, may be transpose up/down
+//       keyRangeLow: 12 * 3 + 6, //zone low key
+//       keyRangeHigh: 127, //zone high key
+//       loopStart: 0, //loop tart in seconds
+//       loopEnd: 763998, //loop end in seconds
+//       coarseTune: 0, //use fine tune
+//       fineTune: -5, //tune correction in cents
+//       sampleRate: 48000, //file sample rate
+//       ahdsr: true, // see example
+//       file: audioFile.audio.data,
+//     },
+//   ],
+// }
 class CustomMIDISounds extends React.Component {
   constructor(props) {
     super(props)
@@ -207,13 +207,13 @@ class CustomMIDISounds extends React.Component {
   }
   playDrum(when, drum) {
     var info = this.player.loader.drumInfo(drum)
-    if (myCustomSampledInstrument) {
-      var pitch = myCustomSampledInstrument.zones[0].keyRangeLow
+    if (window[info.variable]) {
+      var pitch = window[info.variable].zones[0].keyRangeLow
       var volume = this.volumeDrumAdjust(drum)
       this.player.queueWaveTable(
         this.audioContext,
         this.equalizer.input,
-        myCustomSampledInstrument,
+        window[info.variable],
         when,
         pitch,
         3,
@@ -223,6 +223,24 @@ class CustomMIDISounds extends React.Component {
       this.cacheDrum(drum)
     }
   }
+  // playDrum(when, drum) {
+  //   var info = this.player.loader.drumInfo(drum)
+  //   if (myCustomSampledInstrument) {
+  //     var pitch = myCustomSampledInstrument.zones[0].keyRangeLow
+  //     var volume = this.volumeDrumAdjust(drum)
+  //     this.player.queueWaveTable(
+  //       this.audioContext,
+  //       this.equalizer.input,
+  //       myCustomSampledInstrument,
+  //       when,
+  //       pitch,
+  //       3,
+  //       volume
+  //     )
+  //   } else {
+  //     this.cacheDrum(drum)
+  //   }
+  // }
   playDrumsAt(when, drums) {
     for (var i = 0; i < drums.length; i++) {
       this.playDrum(when, drums[i])
@@ -369,7 +387,7 @@ class CustomMIDISounds extends React.Component {
       var envelope = this.player.queueWaveTable(
         this.audioContext,
         this.audioContext.destination,
-        myCustomSampledInstrument,
+        this.tone,
         0,
         pitch,
         123456789,
@@ -382,6 +400,25 @@ class CustomMIDISounds extends React.Component {
       this.midiNotes.push(note)
     }
   }
+  // midNoteOn(pitch, velocity) {
+  //   this.midiNoteOff(pitch)
+  //   if (this.miditone) {
+  //     var envelope = this.player.queueWaveTable(
+  //       this.audioContext,
+  //       this.audioContext.destination,
+  //       myCustomSampledInstrument,
+  //       0,
+  //       pitch,
+  //       123456789,
+  //       velocity / 100
+  //     )
+  //     var note = {
+  //       pitch: pitch,
+  //       envelope: envelope,
+  //     }
+  //     this.midiNotes.push(note)
+  //   }
+  // }
   midiNoteOff(pitch) {
     for (var i = 0; i < this.midiNotes.length; i++) {
       if (this.midiNotes[i].pitch === pitch) {
