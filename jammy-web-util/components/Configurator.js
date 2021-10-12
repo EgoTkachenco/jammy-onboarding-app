@@ -10,7 +10,7 @@ import midi from '../services/midi'
 import { midiService, jammy } from '../../store'
 import PresetsStore from '../../store/PresetsStore'
 const tmpDataJammyG = require('../config/g/jammySettings_v1.8_fw19.json')
-const tmpDataJammyE = require('../config/e/jammySettings_v0.1.json')
+const tmpDataJammyE = require('../config/e/jammySettings_v0.2.json')
 const ruleData = require('../config/jammyRules_v2.0_fw20.json')
 
 const strings = [1, 2, 3, 4, 5, 6]

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import Store from './index'
 import JammyGConfig from '../jammy-web-util/config/g/jammySettings_v1.8_fw19.json'
-import JammyEConfig from '../jammy-web-util/config/e/jammySettings_v0.1.json'
+import JammyEConfig from '../jammy-web-util/config/e/jammySettings_v0.2.json'
 import { sleep } from '../jammy-web-util/services/utils'
 import { jammy } from './index'
 
