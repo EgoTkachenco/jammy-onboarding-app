@@ -515,10 +515,12 @@ class Configurator extends Component {
     )
     this.setState({ data })
   }
+
   onSetActiveParam(g, p) {
-    console.log('active param', g, p, this.state.data.groups[g].params[p])
+    const param = this.state.data.groups[g].params[p]
+    console.log('Activate param: ', p, " from group: ", g)
     this.setState({
-      active: this.state.data.groups[g].params[p],
+      active: param,
       activeGroup: g,
       activeParam: p,
     })
@@ -593,7 +595,7 @@ class Configurator extends Component {
                   if (this.state.active.type === 'BOOL') {
                     console.log("Params: ", this.state.active.values[index])
                     return <div className="switch-wrapper" key={
-                      this.state.active.group.groupId * 1000 + this.state.active.id * 100 + index
+                      this.state.active.id * 10000 + this.state.active.group.groupId * 1000 + this.state.active.id * 100 + index * 10 + this.state.active.values[index]
                     }>
                       <div className="md-text">{string}</div>
                       <Switch
