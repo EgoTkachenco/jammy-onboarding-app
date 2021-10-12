@@ -34,10 +34,15 @@ class Store {
       if (['Jammy EVO', 'Jammy E'].includes(input.name)) {
         jammy.api = JAMMY_E
         this.jammyName = 'Jammy E'
-      } else {
-        // jammy G names ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(input.name)
+      } else if (
+        ['MIDI function', 'MIDI Gadget', 'USB MIDI Device'].includes(input.name)
+      ) {
         jammy.api = JAMMY_G
         this.jammyName = 'Jammy G'
+      } else {
+        // default guitar
+        jammy.api = JAMMY_E
+        this.jammyName = 'Jammy E'
       }
     } else {
       return Promise.reject()
