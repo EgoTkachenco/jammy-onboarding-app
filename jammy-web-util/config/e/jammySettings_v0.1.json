@@ -73,8 +73,8 @@
           "all": false,
           "enabled": true,
           "reversed": false,
-          "name": "Pull-Off from Open String Sensitivity",
-          "description": "Defines how easy it is to trigger pull-offs from an open string",
+          "name": "Hammer-On from Open String Sensitivity",
+          "description": "Defines how easy it is to trigger hammer-ons from an open string",
           "default": [40, 40, 40, 40, 40, 40],
           "values": [40, 40, 40, 40, 40, 40]
         },
