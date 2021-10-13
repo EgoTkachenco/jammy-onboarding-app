@@ -139,7 +139,7 @@ class FactoryTest extends Component {
         'Connection (连接)',
         <ConnectionTest
           functional
-          left={true}
+          left={false}
           onTestResult={this.onTestResultCallback}
           onSerial={this.onSerial}
           onVersion={this.onVersion}
@@ -159,7 +159,7 @@ class FactoryTest extends Component {
         'Verification',
         <ConnectionTest
           functional
-          left={true}
+          left={false}
           onTestResult={this.onTestResultCallback}
           onSerial={this.onSerial}
           onVersion={this.onVersion}

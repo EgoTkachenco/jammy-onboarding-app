@@ -6,6 +6,7 @@ class ConnectionTest extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      rfw: undefined,
       lfw: undefined,
     }
     this.startTest.bind(this.startTest)
@@ -17,6 +18,8 @@ class ConnectionTest extends React.Component {
     midi.activeInputs.length > 0 && midi.activeOutputs.length > 0
 
   isLeftIsConnected = () => this.state.lfw !== undefined && this.state.lfw >= 0
+
+  isRightIsConnected = () => this.state.rfw !== undefined && this.state.rfw >= 0
 
   getFirmwareVersions = () => {
     console.log('getFirmwareVersions for left = ', this.props.left)
@@ -139,7 +142,7 @@ class ConnectionTest extends React.Component {
       this.getFirmwareVersions()
       await sleep(1000)
       if (this.isMidiConnected() === true) {
-        if (this.props.left !== true) {
+        if (this.props.left !== true && this.isRightIsConnected()) {
           this.testPassed()
           return
         }

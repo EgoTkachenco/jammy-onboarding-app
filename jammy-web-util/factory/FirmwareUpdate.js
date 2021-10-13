@@ -74,11 +74,15 @@ class FirmwareUpdate extends React.Component {
     await this.device.do_leave()
   }
 
+  isNeedToUpdate = () => {
+    return /*this.props.lf() !== LEFT_FIRMWARE ||*/ this.props.rf() !== RIGHT_FIRMWARE;
+  }
+
   componentDidMount() {
     this.setState({
       ready: false,
     })
-    if (this.props.lf() !== LEFT_FIRMWARE || this.props.rf() !== RIGHT_FIRMWARE) {
+    if (this.isNeedToUpdate()) {
       this.rebootInDFU().then(() => {
         // Finish
       })
