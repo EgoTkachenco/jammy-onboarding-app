@@ -8,7 +8,7 @@ import dfuse from './dfu/dfuse'
 import je_fw_latest from '../../public/fw/je_fw_latest.bin'
 
 const LEFT_FIRMWARE = 9
-const RIGHT_FIRMWARE = 3
+const RIGHT_FIRMWARE = 4
 
 function hex4(n) {
   let s = n.toString(16)
@@ -304,7 +304,10 @@ class FirmwareUpdate extends React.Component {
       }
 
       this.device.logProgress = (p, t) => {
-        const percentage = ((p / t) * 100) | 0;
+        var percentage = ((p / t) * 50) | 0;
+        if (this.state.flashState == "download") {
+          percentage = percentage + 50;
+        }
         console.log("Update progress: ", p, "from: ", t, "percentage: ", percentage)
         this.setState({
           progress: percentage,
