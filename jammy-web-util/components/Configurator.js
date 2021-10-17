@@ -588,9 +588,7 @@ class Configurator extends Component {
                     <div className="switch-wrapper" key={index}>
                       <div className="md-text">{string}</div>
                       <Switch
-                        defaultChecked={
-                          this.state.active.values[index] === 16383
-                        }
+                        checked={this.state.active.values[index] === 16383}
                         onChange={(v) =>
                           this.onRangeChange(v ? 16383 : 0, index)
                         }
