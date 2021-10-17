@@ -7,6 +7,8 @@ configure({
 })
 class Store {
   isAdmin = false
+  isPlaySound = true
+  versions = null
   status = null
   jammyName = null
   isRebooted = false

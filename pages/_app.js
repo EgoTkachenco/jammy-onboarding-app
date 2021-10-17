@@ -17,6 +17,7 @@ const DISABLE_SOUND_ROUTES = [
 const MyApp = observer(({ Component, pageProps }) => {
   const router = useRouter()
   const welcomeTab = Store.startScreenTab
+  const isPlaySound = Store.isPlaySound
   useEffect(() => {
     // Check browser and device
     // IF NOT Chrome ---> Screen with Chrome installation
@@ -82,7 +83,7 @@ const MyApp = observer(({ Component, pageProps }) => {
       <Component {...pageProps} />
 
       {/* Sound generator*/}
-      {isAllowSound && <MIDISynth />}
+      {isAllowSound && isPlaySound && <MIDISynth />}
     </>
   )
 })

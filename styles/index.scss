@@ -367,3 +367,33 @@ div {
     }
   }
 }
+.sound-switch {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  border: 1px solid #363640;
+  border-radius: 114px;
+  padding: 4px 8px;
+  margin-right: 1.5rem;
+  &__label {
+    margin-right: 0.5rem;
+    line-height: 20px;
+  }
+  .ant-switch {
+    background: #363640 !important;
+  }
+  .ant-switch-checked {
+    background: unset;
+    .ant-switch-handle::before {
+      background: #1b15ff;
+    }
+  }
+}
+.fw-versions {
+  margin-left: 1rem;
+  display: flex;
+  width: 100px;
+  flex-direction: column;
+  color: #888899;
+  @extend .caption-text;
+}

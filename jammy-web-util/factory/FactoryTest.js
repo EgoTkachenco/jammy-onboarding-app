@@ -62,6 +62,7 @@ class FactoryTest extends Component {
     this.setState({
       versions: { lf: lf, lh: lh, rf: rf, rh: rh },
     })
+    Store.versions = { lf: lf, lh: lh, rf: rf, rh: rh }
   }
 
   onSerial = (serial) => {
@@ -110,14 +111,14 @@ class FactoryTest extends Component {
           this.setState({
             menuItem: MenuItem(-1, 'Passed', test),
           })
-          this.props.router.push('/sound-check');
+          this.props.router.push('/sound-check')
         }
       } else {
         let test = this.failedTest(this.state.menuItem, this.state.test)
         this.setState({
           menuItem: MenuItem(-1, 'Failed', test),
         })
-        this.props.router.push('/sound-check');
+        this.props.router.push('/sound-check')
       }
     }
   }

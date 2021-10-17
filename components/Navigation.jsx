@@ -4,7 +4,11 @@ import Dialog from '../components/Dialog'
 import { observer } from 'mobx-react-lite'
 import Store from '../store'
 import { useRouter } from 'next/router'
+import { Switch } from 'antd'
 const Navigation = observer(({ process }) => {
+  const isPlaySound = Store.isPlaySound
+  const versions = Store.versions
+  const changeSound = (v) => (Store.isPlaySound = v)
   const isPlaying = Store.isPlaying
   const status = Store.status
   const router = useRouter()
@@ -23,12 +27,27 @@ const Navigation = observer(({ process }) => {
           </div>
           <div className={`navigation__label ${status}`}>{status}</div>
 
+          {versions && (
+            <div className="fw-versions">
+              <span>FW Left v.{versions.lf}</span>
+              <span>FW Right v.{versions.rf}</span>
+            </div>
+          )}
+
+          <div className="switch-wrapper sound-switch">
+            <div className="sound-switch__label">SOUND</div>
+            <Switch checked={isPlaySound} onChange={(v) => changeSound(v)} />
+          </div>
+
           <AnimatedLogo isPlaying={isPlaying} />
         </div>
       </div>
       {Store.status === 'Disconnected' && router.pathname !== '/' && (
         <Dialog>
-          <div className="title-text text-center" style={{lineHeight: '4rem'}}>
+          <div
+            className="title-text text-center"
+            style={{ lineHeight: '4rem' }}
+          >
             Turn your Jammy on and connect it <br /> to your computer via USB
             cable!
           </div>
@@ -44,7 +63,7 @@ function NavigationProcess({ process }) {
     <div className="process-wrapper">
       {process >= 0 && <div className="process-value" />}
       {process >= 25 && <div className="process-value" />}
-      {process >= 50  && <div className="process-value" />}
+      {process >= 50 && <div className="process-value" />}
       {process >= 75 && <div className="process-value" />}
     </div>
   )
@@ -69,14 +88,9 @@ function AnimatedLogo({ isPlaying }) {
   return (
     <div className="navigation-animated-logo">
       <div className="navigation-animated-logo__text">
-      Software instrument is <br/> powered by Arturia
+        Software instrument is <br /> powered by Arturia
       </div>
-      <Image
-        src="/arturia.png"
-        alt="Logo"
-        width="24"
-        height="24"
-      />
+      <Image src="/arturia.png" alt="Logo" width="24" height="24" />
       <div className="navigation-animated-logo__inner">
         {lines?.map((line, i) => (
           <div

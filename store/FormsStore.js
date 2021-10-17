@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-
+import './email'
 class FormsStore {
   constructor() {
     makeAutoObservable(this)
@@ -9,7 +9,6 @@ class FormsStore {
   isSupportFormSended = false
 
   sendDawForm = async (dawName) => {
-    debugger
     let data = { type: 'daw', message: dawName }
     try {
       this.isDawFormSended = true

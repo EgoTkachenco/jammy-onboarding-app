@@ -611,7 +611,7 @@ class Configurator extends Component {
                       <div className="md-text">{string}</div>
                       <Switch
                         defaultChecked={
-                          this.state.active.values[index] ===
+                          this.state?.active.values[index] ===
                           this.positiveValue(this.state.active)
                         }
                         onChange={(v) =>
