@@ -343,3 +343,27 @@ div {
     background: #1b15ff;
   }
 }
+
+.info-btn {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__content {
+    background: #292931;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 100%;
+    left: -8px;
+    min-width: 25rem;
+    padding: 1rem;
+    height: 12.5rem;
+    transition: 0.3s all;
+    opacity: 0;
+    z-index: -1;
+    &.show {
+      z-index: 1;
+      opacity: 1;
+    }
+  }
+}

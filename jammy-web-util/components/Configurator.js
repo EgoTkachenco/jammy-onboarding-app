@@ -17,6 +17,8 @@ const strings = [1, 2, 3, 4, 5, 6]
 const globalStrings = [1]
 const globalString = 7
 
+import InfoBtn from '../../components/InfoBtn'
+
 const SettingGroupParam = ({
   param,
   sendParamRequest,
@@ -29,7 +31,8 @@ const SettingGroupParam = ({
       className={`presets-list__item ${isActive ? 'active' : ''}`}
       onClick={setActiveParam}
     >
-      {param.name}
+      <span>{param.name}</span>
+      <InfoBtn info={getSettingInfo(param.name)} />
     </div>
   )
 }
@@ -106,7 +109,6 @@ class Configurator extends Component {
   }
 
   preprocessConfig = (data, preset) => {
-
     for (let g of data.groups) {
       for (let p of g.params) {
         p.group = g
@@ -114,9 +116,7 @@ class Configurator extends Component {
         if (foundGroup) {
           const foundParam = foundGroup.params.find((e) => e.id == p.id)
           if (foundParam) {
-            foundParam.values.forEach((e) => [
-              p.values[e.string] = e.value
-            ])
+            foundParam.values.forEach((e) => [(p.values[e.string] = e.value)])
           }
         }
       }
@@ -518,7 +518,7 @@ class Configurator extends Component {
 
   onSetActiveParam(g, p) {
     const param = this.state.data.groups[g].params[p]
-    console.log('Activate param: ', p, " from group: ", g)
+    console.log('Activate param: ', p, ' from group: ', g)
     this.setState({
       active: param,
       activeGroup: g,
@@ -528,17 +528,17 @@ class Configurator extends Component {
 
   positiveValue(param) {
     if (param.reversed) {
-      return param.min;
+      return param.min
     } else {
-      return param.max;
+      return param.max
     }
   }
 
   negativeValue(param) {
     if (param.reversed) {
-      return param.max;
+      return param.max
     } else {
-      return param.min;
+      return param.min
     }
   }
 
@@ -558,7 +558,7 @@ class Configurator extends Component {
               activeGroup={this.state.activeGroup}
               activeParam={this.state.activeParam}
               setActiveParam={(g, p) => {
-                console.log("Click!")
+                console.log('Click!')
                 this.onSetActiveParam(g, p)
               }}
             />
@@ -584,27 +584,52 @@ class Configurator extends Component {
                 'String 6 (low E)',
               ].map((string, index) => {
                 if (this.state.active.type === 'MASK') {
-                  return <div className="switch-wrapper" key={index}>
-                    <div className="md-text">{string}</div>
-                    <Switch
-                      defaultChecked={this.state.active.values[index] === 16383}
-                      onChange={(v) => this.onRangeChange(v ? 16383 : 0, index)}
-                    />
-                  </div>
-                } else
-                  if (this.state.active.type === 'BOOL') {
-                    console.log("Params: ", this.state.active.values[index])
-                    return <div className="switch-wrapper" key={
-                      this.state.active.id * 10000 + this.state.active.group.groupId * 1000 + this.state.active.id * 100 + index * 10 + this.state.active.values[index]
-                    }>
+                  return (
+                    <div className="switch-wrapper" key={index}>
                       <div className="md-text">{string}</div>
                       <Switch
-                        defaultChecked={this.state.active.values[index] === this.positiveValue(this.state.active)}
-                        onChange={(v) => this.onRangeChange(v ? this.positiveValue(this.state.active) : this.negativeValue(this.state.active), index)}
+                        defaultChecked={
+                          this.state.active.values[index] === 16383
+                        }
+                        onChange={(v) =>
+                          this.onRangeChange(v ? 16383 : 0, index)
+                        }
                       />
                     </div>
-                  } else {
-                    return <Range
+                  )
+                } else if (this.state.active.type === 'BOOL') {
+                  console.log('Params: ', this.state.active.values[index])
+                  return (
+                    <div
+                      className="switch-wrapper"
+                      key={
+                        this.state.active.id * 10000 +
+                        this.state.active.group.groupId * 1000 +
+                        this.state.active.id * 100 +
+                        index * 10 +
+                        this.state.active.values[index]
+                      }
+                    >
+                      <div className="md-text">{string}</div>
+                      <Switch
+                        defaultChecked={
+                          this.state.active.values[index] ===
+                          this.positiveValue(this.state.active)
+                        }
+                        onChange={(v) =>
+                          this.onRangeChange(
+                            v
+                              ? this.positiveValue(this.state.active)
+                              : this.negativeValue(this.state.active),
+                            index
+                          )
+                        }
+                      />
+                    </div>
+                  )
+                } else {
+                  return (
+                    <Range
                       key={index}
                       label={string}
                       value={this.state.active.values[index]}
@@ -615,7 +640,8 @@ class Configurator extends Component {
                         if (v !== min && v !== max) this.onRangeChange(v, index)
                       }}
                     />
-                  }
+                  )
+                }
               })}
             </div>
           )}
@@ -626,11 +652,68 @@ class Configurator extends Component {
 }
 
 const ConfiguratorG = (props) => {
-  return <Configurator config={props.config} preset={props.preset} presetName={props.presetName} />
+  return (
+    <Configurator
+      config={props.config}
+      preset={props.preset}
+      presetName={props.presetName}
+    />
+  )
 }
 
 const ConfiguratorE = (props) => {
-  return <Configurator config={props.config} preset={props.preset} presetName={props.presetName} />
+  return (
+    <Configurator
+      config={props.config}
+      preset={props.preset}
+      presetName={props.presetName}
+    />
+  )
 }
 
 export { ConfiguratorE, ConfiguratorG }
+
+const getSettingInfo = (name) => {
+  switch (name) {
+    case 'Picking Sensitivity':
+      return "Defines how sensitive each string will be to picking and strumming. Increase this setting if some strings aren't sensitive enough or decrease it if they're picking up resonance from neighboring string."
+    case 'Maximum Note Duration':
+      return 'Defines how long a picked note can ring before a Note Off message will be automatically sent.'
+    case 'Bending and Vibrato Switch':
+      return 'Enables / disables bending and vibrato for all strings.'
+    case 'Right-Hand Muting Sensitivity':
+      return 'Defines how easily you can mute the sound by rapidly putting your right hand on the ringing string. Lowering the level helps to fix the problem with open strings that sometimes mute themselves.'
+    case 'Left-Hand Muting Sensitivity':
+      return 'Defines how easily you can mute the sound by touching the string on the Jammy fretboard. If you experience sound cut-offs frequently when playing fast solos, it might be worth looking at and making it less sensitive. Same applies for situations when you play open chords and one of the fretting fingers is too close to the nearest open string making it mute.'
+    case 'Hammer-On and Pull-Off Switch':
+      return 'Enables / disables hammer-ons, pull-offs and tapping on each string.'
+    case 'Hammer-On and Pull-Off Loudness':
+      return 'Defines the velocity level of hammer-ons, pull-offs and tapping.'
+    case 'Hammer-On and Pull-Off Algorithm':
+      return "Switches the algorithm that's being used to detect hammer-ons and pull-offs. Set this parameter to '1' for the strings that don't produce hammer-ons or pull-offs even when their sensitivity is set to the maximum."
+    case 'Hammer-On and Pull-Off Sensitivity':
+      return 'Defines how easy it is to trigger hammer-ons, pull-offs and tapping.'
+    case 'Open String Pull-Off Sensitivity':
+      return "Defines how easy it is to trigger pull-offs to an open string. This doesn't affect pull-offs to a fret. Lowering this setting will prevent open strings from ringing when you take your fingers off the string."
+    case 'Slide Switch':
+      return 'Enables / disables slides on each string.'
+    case 'Slide Up Sensitivity':
+      return 'Defines how easy it is to slide up the fretboard.'
+    case 'Slide Down Sensitivity':
+      return 'Defines how easy it is to slide down the fretboard.'
+    case 'Accidental Note Prevention':
+      return "Defines the amount of time that hammer-ons, pull-offs, tapping and slides won't be registered after the string was picked (in milliseconds)."
+    case 'Velocity Compressor Switch':
+      return 'Enables / disables loudness compression for all picked notes.'
+    case 'Velocity Compressor Level':
+      return 'Defines the velocity level to which the picking loudness will be compressed.'
+    case 'Velocity Compressor Amount':
+      return 'Defines how heavily the picking loudness will be pushed up or down towards the selected Velocity Compressor Level.'
+    case 'Velocity Minimum':
+      return 'Defines the minimum velocity of all picked notes. Quieter notes will have their velocity set to the minimum.'
+    case 'Velocity Maximum':
+      return 'Defines the maximum velocity of all picked notes. Louder notes will have their velocity set to the maximum.'
+    default:
+      return null
+  }
+}
