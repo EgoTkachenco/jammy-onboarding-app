@@ -1,6 +1,7 @@
 import { makeAutoObservable, computed, configure } from 'mobx'
 import jammy, { JAMMY_E, JAMMY_G } from '../jammy-web-util/services/jammy'
 import midiService from '../jammy-web-util/services/midi'
+import { sleep } from '../jammy-web-util/services/utils'
 // import MidiStore from './MidiStore'
 configure({
   enforceActions: 'never',
@@ -60,6 +61,7 @@ class Store {
           await this.defineGuitar()
           if (!this.jammyName) this.startScreenTab = 'Welcome'
           this.initStatusCheck()
+          this.versions = {}
           if (this.jammyName === 'Jammy E') {
             this.updateFirmware()
           } else {
@@ -67,6 +69,9 @@ class Store {
             this.isRebooted = true
             this.startScreenTab = 'Reboot'
           }
+          setTimeout(() => {
+            jammy.sendVersionsRequest()
+          }, 1000)
         } catch (err) {
           this.startScreenTab = 'Welcome'
         }
@@ -77,6 +82,7 @@ class Store {
       })
   }
   onMidiMessage = (e) => {
+    this.parseMidiMessageForE(e)
     let type = e.data[0] & 0xf0
     // MidiStore.handleMidiMessage(e)
     if (type === 144) {
@@ -113,7 +119,39 @@ class Store {
   }
   // For software-settings page back link
   isPresetsSkipped = false
-
+  parseMidiMessageForE(event) {
+    const jammyData = event.data
+    const stringId = jammyData[6]
+    if (stringId !== 0x7e && stringId !== 0x7f) {
+      const groupId = jammyData[7]
+      const paramId = jammyData[8]
+      let value = midiService.to16BitInt(jammyData, 9)
+      if (stringId === 6) {
+        switch (groupId) {
+          case 3: // FW Versions
+            switch (paramId) {
+              case 0: // Right part fw
+                console.log('rf', value)
+                this.versions = { ...this.versions, rf: value }
+                break
+              case 1: // Left part fw
+                console.log('lf', value)
+                this.versions = { ...this.versions, lf: value }
+                break
+              case 2: // Left part hw
+                console.log('lh', value)
+                this.versions = { ...this.versions, lh: value }
+                break
+              default:
+                break
+            }
+            break
+          default:
+            break
+        }
+      }
+    }
+  }
   get midiService() {
     return midiService
   }

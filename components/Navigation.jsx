@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite'
 import Store from '../store'
 import { useRouter } from 'next/router'
 import { Switch } from 'antd'
+
 const Navigation = observer(({ process }) => {
   const isPlaySound = Store.isPlaySound
   const versions = Store.versions

@@ -45,7 +45,7 @@ const MyApp = observer(({ Component, pageProps }) => {
       Store.initJammy(router.pathname).catch((e) => {
         if (!Store.isAdmin) router.push('/')
       })
-  }, [router])
+  }, [])
 
   const isAllowSound =
     process.browser && !DISABLE_SOUND_ROUTES.includes(router.pathname)
