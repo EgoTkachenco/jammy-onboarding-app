@@ -82,7 +82,9 @@ class Store {
       })
   }
   onMidiMessage = (e) => {
-    this.parseMidiMessageForE(e)
+    this.jammyName === 'Jammy E'
+      ? this.parseMidiMessageForE(e)
+      : this.parseMidiMessageForG(e)
     let type = e.data[0] & 0xf0
     // MidiStore.handleMidiMessage(e)
     if (type === 144) {
@@ -145,6 +147,21 @@ class Store {
               default:
                 break
             }
+            break
+          default:
+            break
+        }
+      }
+    }
+  }
+  parseMidiMessageForG(event) {
+    if (event.data.length === 39) {
+      const jammyData = jammy.unpackJammySysexForG(event.data)
+      if (jammyData.length > 0) {
+        switch (jammyData[0]) {
+          case 8:
+            // Versions info
+            this.versions = { lf: jammyData[3], rf: jammyData[8] }
             break
           default:
             break
