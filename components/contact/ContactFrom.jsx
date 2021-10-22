@@ -91,7 +91,7 @@ const ContactForm = observer(() => {
               Sensors&apos; values automatically attached.
             </div>
           )}
-          <div className="file-input">
+          {/* <div className="file-input">
             <input type="file" onChange={attachFile} />
             <svg
               width="24"
@@ -108,7 +108,7 @@ const ContactForm = observer(() => {
             {file
               ? file.name
               : 'Attach a short video demonstrating the problem (25MB)'}
-          </div>
+          </div> */}
           {fileError && <div className="file-error">{fileError}</div>}
         </form>
         {isFormSended && (
