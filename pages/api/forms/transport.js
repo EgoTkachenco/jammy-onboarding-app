@@ -7,7 +7,7 @@ var transport = nodemailer.createTransport({
     pass: 'NdBDcJSmy9PQHKE7',
   },
 })
-// const SUPPORT_MAIL = 'jammy@mail.com'
-const SUPPORT_MAIL = 'egortkachenco@gmail.com'
+const SUPPORT_MAIL = 'jammy@mail.com'
+// const SUPPORT_MAIL = 'egortkachenco@gmail.com'
 
 module.exports = { transport, SUPPORT_MAIL }
