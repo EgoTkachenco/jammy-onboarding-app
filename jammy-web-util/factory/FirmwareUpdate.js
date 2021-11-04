@@ -4,11 +4,11 @@ import { jammy } from '../../store'
 import { sleep } from '../services/utils'
 import dfu from './dfu/dfu'
 import dfuse from './dfu/dfuse'
-
-import je_fw_latest from '../../public/fw/je_fw_latest.bin'
-
-const LEFT_FIRMWARE = 9
-const RIGHT_FIRMWARE = 4
+import { Loader } from '../../components/Loader'
+import { LoaderLine } from '../../components/LoaderLine'
+import { vendorIdDecimal, vendorIdHexadecimal } from '../constants/vendor-id'
+import { LEFT_FIRMWARE, RIGHT_FIRMWARE } from '../constants/latest-firmware-versions'
+import { flashState } from './constants/flash-state'
 
 function hex4(n) {
   let s = n.toString(16)
@@ -54,37 +54,33 @@ class FirmwareUpdate extends React.Component {
       deviceInfo: '',
       inProgress: false,
       progress: 0,
-      flashState: 'connecting',
+      flashState: 'connecting'
     }
   }
 
   rebootInDFU = async () => {
-    console.log('Reboot: DFU')
     jammy.rebootJammyEInDFU()
     await sleep(50)
     jammy.rebootJammyEInDFU()
     await sleep(4000)
-    this.setState({
-      ready: true,
-    })
   }
 
   rebootInMIDI = async () => {
-    console.log('Reboot: MIDI')
     await this.device.do_leave()
   }
 
   isNeedToUpdate = () => {
-    return /*this.props.lf() !== LEFT_FIRMWARE ||*/ this.props.rf() !== RIGHT_FIRMWARE;
+    return this.props.lf() !== LEFT_FIRMWARE || this.props.rf() !== RIGHT_FIRMWARE
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
     this.setState({
-      ready: false,
+      ready: false
     })
+
     if (this.isNeedToUpdate()) {
-      this.rebootInDFU().then(() => {
-        // Finish
+      this.setState({
+        ready: true
       })
     } else {
       this.testPassed()
@@ -123,7 +119,7 @@ class FirmwareUpdate extends React.Component {
   onDisconnect = (error) => {
     this.setState({
       error: error,
-      isProgress: false,
+      isProgress: false
     })
   }
 
@@ -155,13 +151,14 @@ class FirmwareUpdate extends React.Component {
             CanDnload: (funcDesc.bmAttributes & 0x01) !== 0,
             TransferSize: funcDesc.wTransferSize,
             DetachTimeOut: funcDesc.wDetachTimeOut,
-            DFUVersion: funcDesc.bcdDFUVersion,
+            DFUVersion: funcDesc.bcdDFUVersion
           }
         } else {
           return {}
         }
       },
-      (error) => { }
+      (error) => {
+      }
     )
   }
 
@@ -185,11 +182,11 @@ class FirmwareUpdate extends React.Component {
     if (desc && Object.keys(desc).length > 0) {
       device.properties = desc
       let info = `WillDetach=${desc.WillDetach}, ManifestationTolerant=${desc.ManifestationTolerant
-        }, CanUpload=${desc.CanUpload}, CanDnload=${desc.CanDnload
-        }, TransferSize=${desc.TransferSize}, DetachTimeOut=${desc.DetachTimeOut
-        }, Version=${hex4(desc.DFUVersion)}`
+      }, CanUpload=${desc.CanUpload}, CanDnload=${desc.CanDnload
+      }, TransferSize=${desc.TransferSize}, DetachTimeOut=${desc.DetachTimeOut
+      }, Version=${hex4(desc.DFUVersion)}`
       this.setState({
-        test: info,
+        test: info
       })
       this.transferSizeField = desc.TransferSize
       this.transferSize = desc.TransferSize
@@ -200,7 +197,7 @@ class FirmwareUpdate extends React.Component {
       if (device.settings.alternate.interfaceProtocol === 0x02) {
         if (!desc.CanDnload) {
           this.setState({
-            isProgress: true,
+            isProgress: true
           })
         }
       }
@@ -209,6 +206,7 @@ class FirmwareUpdate extends React.Component {
         device.settings.alternate.interfaceProtocol === 0x02
       ) {
         device = new dfuse.Device(device.device_, device.settings)
+
         if (device.memoryInfo) {
           let totalSize = 0
           for (let segment of device.memoryInfo.segments) {
@@ -216,7 +214,7 @@ class FirmwareUpdate extends React.Component {
           }
           this.setState({
             memorySummary: `Selected memory region: ${device.memoryInfo.name
-              } (${niceSize(totalSize)})`,
+            } (${niceSize(totalSize)})`
           })
           for (let segment of device.memoryInfo.segments) {
             let properties = []
@@ -237,20 +235,16 @@ class FirmwareUpdate extends React.Component {
             this.setState({
               memorySummary: (this.state.memorySummary += `\n${hexAddr8(
                 segment.start
-              )}-${hexAddr8(segment.end - 1)} (${propertySummary})`),
+              )}-${hexAddr8(segment.end - 1)} (${propertySummary})`)
             })
           }
 
           if (update === true) {
-
-
             // TODO: Migrate to common way
             const remote = 'https://start.playjammy.com'
             const host = 'http://localhost:3000'
 
-            const je_fw_latest_path = ((window.location.hostname === 'localhost') ? host : remote) + '/fw/je_fw_latest.bin';
-
-            console.log("Fetch firmware from: ", je_fw_latest_path);
+            const je_fw_latest_path = ((window.location.hostname === 'localhost') ? host : remote) + '/fw/je_fw_latest.bin'
 
             fetch(je_fw_latest_path)
               .then((response) => {
@@ -280,7 +274,7 @@ class FirmwareUpdate extends React.Component {
     }
 
     this.setState({
-      deviceInfo: JSON.stringify(device),
+      deviceInfo: JSON.stringify(device)
     })
     return device
   }
@@ -297,20 +291,20 @@ class FirmwareUpdate extends React.Component {
       }
 
       this.device.flashState = (s) => {
-        console.log("Flash state to: ", s)
         this.setState({
-          flashState: s,
+          flashState: s
         })
       }
 
       this.device.logProgress = (p, t) => {
-        var percentage = ((p / t) * 50) | 0;
-        if (this.state.flashState == "download") {
-          percentage = percentage + 50;
+        let percentage = ((p / t) * 50) | 0
+
+        if (this.state.flashState === 'download') {
+          percentage = percentage + 50
         }
-        console.log("Update progress: ", p, "from: ", t, "percentage: ", percentage)
+
         this.setState({
-          progress: percentage,
+          progress: percentage
         })
       }
 
@@ -324,6 +318,7 @@ class FirmwareUpdate extends React.Component {
       } catch (error) {
         console.log(error)
       }
+
       console.log(
         'Done! s: ' +
         this.transferSize +
@@ -345,93 +340,110 @@ class FirmwareUpdate extends React.Component {
     }
   }
 
-  connectToJammy = async (update = true) => {
-    this.setState({ flashState: 'navigator' })
-    navigator.usb
-      .requestDevice({
-        filters: [
-          {
-            vendorId: 0x0483,
-          },
-        ],
-      })
-      .then(async (selectedDevice) => {
-        let interfaces = dfu.findDeviceDfuInterfaces(selectedDevice)
-        this.setState({
-          test: this.state.test + '\nDevice:\n' + JSON.stringify(interfaces),
+  startUpdate = async () => {
+    this.setState({
+      flashState: 'loader'
+    })
+
+    await this.rebootInDFU()
+
+    const availableDevices = await navigator.usb.getDevices()
+    let jammyDevice = availableDevices.find((usbDevice) => usbDevice.vendorId === vendorIdDecimal)
+    const isJammyAvailable = !!jammyDevice
+
+    if (!isJammyAvailable) {
+      this.setState({ flashState: 'navigator' })
+
+      try {
+        jammyDevice = await navigator.usb.requestDevice({
+          filters: [
+            {
+              vendorId: vendorIdHexadecimal
+            }
+          ]
         })
-        if (interfaces.length === 0) {
-          console.log(selectedDevice)
-          this.setState({
-            test:
-              this.state.test +
-              '\nThe selected device does not have any USB DFU interfaces.',
-          })
-        } else if (interfaces.length === 1) {
-          await this.fixInterfaceNames(selectedDevice, interfaces)
-          this.setState({
-            test:
-              this.state.test +
-              '\nConnect to ' +
-              JSON.stringify(selectedDevice),
-          })
-          this.device = await this.connect(
-            new dfu.Device(selectedDevice, interfaces[0]),
-            update
-          )
-        }
-      })
-      .catch((error) => {
+      } catch (error) {
         this.setState({
-          test: this.state.test + '\nConnect ERROR: ' + error,
+          test: this.state.test + '\nConnect ERROR: ' + error
         })
+      }
+    }
+
+    let interfaces = dfu.findDeviceDfuInterfaces(jammyDevice)
+
+    this.setState({
+      test: this.state.test + '\nDevice:\n' + JSON.stringify(interfaces)
+    })
+
+    if (interfaces.length === 0) {
+      this.setState({
+        test:
+          this.state.test +
+          '\nThe selected device does not have any USB DFU interfaces.'
       })
+    } else if (interfaces.length === 1) {
+      await this.fixInterfaceNames(jammyDevice, interfaces)
+
+      this.setState({
+        test:
+          this.state.test +
+          '\nConnect to ' +
+          JSON.stringify(jammyDevice)
+      })
+
+      this.device = await this.connect(
+        new dfu.Device(jammyDevice, interfaces[0]),
+        true
+      )
+    }
   }
 
   render() {
-    if (this.state.ready && this.state.flashState === 'connecting') {
+    if (this.state.ready && this.state.flashState === flashState.connecting) {
       return (
         <>
-          <div className="title-text text-center">
-            Checking for firmware updates
+          <div className='title-text text-center'>
+            New firmware available
           </div>
           <br />
           <button
-            className="btn btn-primary"
-            onClick={() => this.connectToJammy()}
+            className='btn btn-primary'
+            onClick={this.startUpdate}
           >
             Start update
           </button>
         </>
       )
-    } else if (this.state.flashState === 'navigator') {
+    } else if (this.state.flashState === flashState.navigator) {
       return (
-        <div className="text-center">
-          <div className="img">
+        <div className='text-center'>
+          <div className='img'>
             <Image
-              src="/jammy-white-logo.svg"
+              src='/jammy-white-logo.svg'
               width={72}
               height={72}
-              alt="Jammy"
+              alt='Jammy'
             />
           </div>
           <br />
-          <div className="lg-text white text-center">
+          <div className='lg-text white text-center'>
             For firmware updates, Select Jammy DFU <br /> and click connect.
           </div>
         </div>
       )
     } else if (
-      this.state.flashState === 'erase' ||
-      this.state.flashState === 'download'
+      this.state.flashState === flashState.erase ||
+      this.state.flashState === flashState.download
     ) {
       return (
         <>
-          <div className="title-text text-center">
+          <div className='title-text text-center'>
             Installing the latest firmware
           </div>
+
           <LoaderLine width={this.state.progress + '%'} />
-          <div className="lg-text white text-center">
+
+          <div className='lg-text white text-center'>
             {this.state.progress + '%'}
           </div>
         </>
@@ -451,33 +463,4 @@ class FirmwareUpdate extends React.Component {
 
 export default FirmwareUpdate
 
-const LoaderLine = ({ width }) => {
-  return (
-    <div className="loader-line-wrapper">
-      <div className="loader-line-value" style={{ width: width }}></div>
-    </div>
-  )
-}
-const Loader = () => {
-  return (
-    <div className="circle-loader">
-      <svg
-        width="46"
-        height="46"
-        viewBox="0 0 46 46"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <mask id="path-1-inside-1" fill="white">
-          <path d="M23 0C17.3458 -6.74251e-08 11.8898 2.08271 7.67387 5.85037C3.45793 9.61804 0.777529 14.8066 0.144571 20.4252C-0.488388 26.0439 0.97045 31.6988 4.24248 36.31C7.5145 40.9212 12.3704 44.1656 17.8829 45.4235C23.3953 46.6815 29.178 45.8649 34.1265 43.1296C39.075 40.3944 42.8426 35.9322 44.7097 30.5952C46.5769 25.2582 46.4127 19.4205 44.2486 14.1969C42.0846 8.97327 38.0722 4.72983 32.9778 2.27696L31.2614 5.84171C35.4795 7.87263 38.8017 11.3861 40.5935 15.7112C42.3853 20.0362 42.5212 24.8698 40.9753 29.2887C39.4293 33.7076 36.3098 37.4022 32.2125 39.667C28.1152 41.9317 23.3273 42.6078 18.7631 41.5663C14.1989 40.5247 10.1783 37.8384 7.46911 34.0204C4.75994 30.2024 3.55205 25.5203 4.07612 20.8682C4.6002 16.216 6.81952 11.92 10.3102 8.80043C13.801 5.68087 18.3185 3.95642 23 3.95642V0Z" />
-        </mask>
-        <path
-          d="M23 0C17.3458 -6.74251e-08 11.8898 2.08271 7.67387 5.85037C3.45793 9.61804 0.777529 14.8066 0.144571 20.4252C-0.488388 26.0439 0.97045 31.6988 4.24248 36.31C7.5145 40.9212 12.3704 44.1656 17.8829 45.4235C23.3953 46.6815 29.178 45.8649 34.1265 43.1296C39.075 40.3944 42.8426 35.9322 44.7097 30.5952C46.5769 25.2582 46.4127 19.4205 44.2486 14.1969C42.0846 8.97327 38.0722 4.72983 32.9778 2.27696L31.2614 5.84171C35.4795 7.87263 38.8017 11.3861 40.5935 15.7112C42.3853 20.0362 42.5212 24.8698 40.9753 29.2887C39.4293 33.7076 36.3098 37.4022 32.2125 39.667C28.1152 41.9317 23.3273 42.6078 18.7631 41.5663C14.1989 40.5247 10.1783 37.8384 7.46911 34.0204C4.75994 30.2024 3.55205 25.5203 4.07612 20.8682C4.6002 16.216 6.81952 11.92 10.3102 8.80043C13.801 5.68087 18.3185 3.95642 23 3.95642V0Z"
-          stroke="#1B15FF"
-          strokeWidth="12"
-          mask="url(#path-1-inside-1)"
-        />
-      </svg>
-    </div>
-  )
-}
+
