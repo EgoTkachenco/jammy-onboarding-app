@@ -9,6 +9,9 @@ import { LoaderLine } from '../../components/LoaderLine'
 import { vendorIdDecimal, vendorIdHexadecimal } from '../constants/vendor-id'
 import { LEFT_FIRMWARE, RIGHT_FIRMWARE } from '../constants/latest-firmware-versions'
 import { flashState } from './constants/flash-state'
+import { observer } from 'mobx-react'
+import Store from '../../store'
+
 
 function hex4(n) {
   let s = n.toString(16)
@@ -185,11 +188,14 @@ class FirmwareUpdate extends React.Component {
       }, CanUpload=${desc.CanUpload}, CanDnload=${desc.CanDnload
       }, TransferSize=${desc.TransferSize}, DetachTimeOut=${desc.DetachTimeOut
       }, Version=${hex4(desc.DFUVersion)}`
+
       this.setState({
         test: info
       })
+
       this.transferSizeField = desc.TransferSize
       this.transferSize = desc.TransferSize
+
       if (desc.CanDnload) {
         this.manifestationTolerant = desc.ManifestationTolerant
       }
@@ -259,6 +265,8 @@ class FirmwareUpdate extends React.Component {
                   await this.rebootInMIDI()
                   await sleep(2000)
                   this.testPassed()
+
+                  Store.setIsUpdating(false)
                 }
               })
           }
@@ -276,6 +284,7 @@ class FirmwareUpdate extends React.Component {
     this.setState({
       deviceInfo: JSON.stringify(device)
     })
+
     return device
   }
 
@@ -327,11 +336,11 @@ class FirmwareUpdate extends React.Component {
       )
       if (!this.manifestationTolerant) {
         this.device.waitDisconnected(5000).then(
-          (dev) => {
+          () => {
             this.onDisconnect()
             this.device = null
           },
-          (error) => {
+          () => {
             // It didn't reset and disconnect for some reason...
             console.log('Device unexpectedly tolerated manifestation.')
           }
@@ -341,6 +350,8 @@ class FirmwareUpdate extends React.Component {
   }
 
   startUpdate = async () => {
+    Store.setIsUpdating(true)
+
     this.setState({
       flashState: 'loader'
     })
@@ -461,6 +472,6 @@ class FirmwareUpdate extends React.Component {
   }
 }
 
-export default FirmwareUpdate
+export default observer(FirmwareUpdate)
 
 

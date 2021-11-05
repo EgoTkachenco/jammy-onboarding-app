@@ -68,11 +68,11 @@ dfu.findAllDfuInterfaces = function () {
 };
 
 dfu.Device.prototype.logDebug = function (msg) {
-    console.log("D:/", msg);
+    // console.log("D:/", msg);
 };
 
 dfu.Device.prototype.logInfo = function (msg) {
-    console.log("I:/", msg);
+    // console.log("I:/", msg);
 };
 
 dfu.Device.prototype.logWarning = function (msg) {

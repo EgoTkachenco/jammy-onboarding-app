@@ -1,4 +1,4 @@
-export default function WelcomScreen(props) {
+export default function StartScreen(props) {
   return (
     <div className="page-container no-navigation centered start-screen">
       <video

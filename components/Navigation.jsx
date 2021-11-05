@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Dialog from '../components/Dialog'
 import { observer } from 'mobx-react-lite'
 import Store from '../store'
-import { useRouter } from 'next/router'
 import { Switch } from 'antd'
 
 const Navigation = observer(({ process }) => {
@@ -12,7 +11,7 @@ const Navigation = observer(({ process }) => {
   const changeSound = (v) => (Store.isPlaySound = v)
   const isPlaying = Store.isPlaying
   const status = Store.status
-  const router = useRouter()
+
   return (
     <>
       <div className="navigation-wrapper">
@@ -43,7 +42,7 @@ const Navigation = observer(({ process }) => {
           <AnimatedLogo isPlaying={isPlaying} />
         </div>
       </div>
-      {Store.status === 'Disconnected' && router.pathname !== '/' && (
+      {status === 'Disconnected' && !Store.isUpdating && (
         <Dialog>
           <div
             className="title-text text-center"
@@ -98,7 +97,7 @@ function AnimatedLogo({ isPlaying }) {
             className="navigation-animated-logo__line"
             key={i}
             style={{ height: line + 'px' }}
-          ></div>
+          />
         ))}
       </div>
     </div>
