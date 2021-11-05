@@ -108,7 +108,6 @@ class Store {
   initStatusCheck = () => {
     // Check jammy status
     this.statusCheckInterval = setInterval(() => {
-      console.log({ midiService: midiService })
       let newStatus =
         midiService.midiAccess.inputs.size === 1 ? 'Connected' : 'Disconnected'
       if (this.status !== newStatus && newStatus === 'Connected') {
