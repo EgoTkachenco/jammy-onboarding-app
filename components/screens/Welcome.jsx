@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function WelcomScreen(props) {
+export default function WelcomeScreen(props) {
   return (
     <div className="page-container no-navigation centered connect-midi-device">
       <div className="img">

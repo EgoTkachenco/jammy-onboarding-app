@@ -1,11 +1,11 @@
 import { makeAutoObservable, computed, configure } from 'mobx'
 import jammy, { JAMMY_E, JAMMY_G } from '../jammy-web-util/services/jammy'
 import midiService from '../jammy-web-util/services/midi'
-import { sleep } from '../jammy-web-util/services/utils'
-// import MidiStore from './MidiStore'
+
 configure({
   enforceActions: 'never',
 })
+
 class Store {
   isAdmin = false
   isPlaySound = true
@@ -14,19 +14,21 @@ class Store {
   jammyName = null
   isRebooted = false
   isInited = false
+  isUpdating = false
+
   // START SCREEN TABS | Start, Welcome, Waiting, Denied, CheckFirmware, UpdateFirmware, Reboot |
   startScreenTab = 'Start'
 
   isPlaying = false
-  isPlayingTime = null
-
   statusCheckInterval = null
+
   constructor() {
     makeAutoObservable(this, {
       midiService: computed,
       jammy: computed,
     })
   }
+
   defineGuitar = async () => {
     this.jammyName = null
     if (midiService.midiAccess.inputs.size > 0) {
@@ -51,7 +53,8 @@ class Store {
       return Promise.reject()
     }
   }
-  initJammy = (path) => {
+
+  initJammy = () => {
     this.startScreenTab = 'Waiting'
     return midiService
       .init()
@@ -115,6 +118,11 @@ class Store {
       this.status = newStatus
     }, 500)
   }
+
+  setIsUpdating = (isUpdating) => {
+    this.isUpdating = isUpdating;
+  }
+
   clearStatusCheck = () => {
     clearInterval(this.statusCheckInterval)
     this.statusCheckInterval = null
