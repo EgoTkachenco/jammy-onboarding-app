@@ -10,6 +10,10 @@
   background: rgba(0, 0, 0, 0.8);
   z-index: 1000;
 
+  &.no-transparency {
+    background: rgba(0,0,0);
+  }
+
   .dialog {
     display: flex;
     flex-direction: column;

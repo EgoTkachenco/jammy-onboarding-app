@@ -1,6 +1,6 @@
-export default function Dialog({ children, close }) {
+export default function Dialog({ children, close, hasTransparency = true }) {
   return (
-    <div className="dialog-wrapper">
+    <div className={`dialog-wrapper ${hasTransparency ? '' : 'no-transparency'}`}>
       {close && (
         <button
           className="btn btn-dark dialog__close-btn"

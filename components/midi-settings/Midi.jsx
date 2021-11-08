@@ -8,9 +8,11 @@ import { observer } from 'mobx-react-lite'
 import { Switch } from 'antd'
 import MidiPresetsStore from '../../store/MidiPresetsStore'
 import InfoBtn from '../InfoBtn'
+
 const Midi = observer(() => {
   const router = useRouter()
   const [dialog, setDialog] = useState(false)
+  const [isOnboardingDone, setIsOnboardingDone] = useState(false);
   const activePreset = MidiPresetsStore.activePreset
   const onChange = (param, group, value, global) =>
     MidiPresetsStore.changePresetValue(param, group, value, global)
@@ -35,7 +37,7 @@ const Midi = observer(() => {
             }
             options={param.options}
             getOption={(option) => option.name}
-            onChange={(v, i) => onChange(param, group, v.id, global)}
+            onChange={(v) => onChange(param, group, v.id, global)}
           />
         )
       case 'BOOL':
@@ -66,7 +68,7 @@ const Midi = observer(() => {
                   value={param.name + ' ' + param.values[string]}
                   options={range(param.min, param.max)}
                   getOption={(option) => param.name + ' ' + option}
-                  onChange={(v, i) =>
+                  onChange={(v) =>
                     onChange(param, group, { string, value: v - 1 }, global)
                   }
                 />
@@ -133,11 +135,11 @@ const Midi = observer(() => {
         </div>
 
         {dialog && (
-          <Dialog close={() => setDialog(false)}>
-            <div className="title-text text-center">
-              Congrats on getting your <br /> Jammy all set up!
+          <Dialog hasTransparency={!isOnboardingDone} close={!isOnboardingDone && (() => setDialog(false))}>
+            <div className="title-text text-center pre-wrap">
+              { isOnboardingDone ? 'Enjoy your Jammy!' : 'Congrats on getting your \n Jammy all set up!' }
             </div>
-            <div>
+            { !isOnboardingDone && <div className="d-flex flex-column">
               {/* <a
                 className="no-effect"
                 href="https://playjammy.com/plugin/"
@@ -148,13 +150,21 @@ const Midi = observer(() => {
                   Finish onboarding and check the companion software
                 </button>
               </a> */}
+
+              <button
+                className="btn btn-primary"
+                onClick={() => setIsOnboardingDone(true)}
+              >
+                Finish onboarding
+              </button>
+
               <button
                 className="btn btn-primary__outline"
                 onClick={() => router.push('/support')}
               >
                 I still have some questions, would like to contact support
               </button>
-            </div>
+            </div> }
           </Dialog>
         )}
       </div>
@@ -338,6 +348,5 @@ const getSettingInfo = (name) => {
 
     default:
       return null
-      break
   }
 }
