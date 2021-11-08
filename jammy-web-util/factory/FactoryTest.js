@@ -5,12 +5,10 @@ import { MenuItem } from './tests/NavigationMenu'
 import ConnectionTest from './tests/ConnectionTest'
 import FailedTest from './tests/FailedTest'
 import PassedTest from './tests/PassedTest'
-import Store, { midiService as midi } from '../../store'
-import { observer } from 'mobx-react-lite'
+import Store from '../../store'
 import FirmwareUpdate from './FirmwareUpdate'
-import { useRouter } from 'next/router'
 
-class FactoryTest extends Component {
+export class FactoryTest extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -86,7 +84,7 @@ class FactoryTest extends Component {
   onTestResultCallback = (passed) => {
     let currentTest = this.state.test
     let currentMenu = this.state.menuItem
-    let m = this.currentMenuIndex()
+    let menuIndex = this.currentMenuIndex()
     console.log(
       'Test Result Callback: passed = ',
       passed,
@@ -97,20 +95,21 @@ class FactoryTest extends Component {
       ', menu = ',
       currentMenu.title,
       ' - ',
-      m
+      menuIndex
     )
 
-    if (m !== -1) {
+    if (menuIndex !== -1) {
       if (passed) {
-        if (m + 1 < currentTest.menu.length) {
+        if (menuIndex + 1 < currentTest.menu.length) {
           this.setState({
-            menuItem: currentTest.menu[m + 1],
+            menuItem: currentTest.menu[menuIndex + 1],
           })
         } else {
           let test = this.passedTest(this.state.test)
           this.setState({
             menuItem: MenuItem(-1, 'Passed', test),
           })
+
           this.props.router.push('/sound-check')
         }
       } else {
@@ -118,6 +117,7 @@ class FactoryTest extends Component {
         this.setState({
           menuItem: MenuItem(-1, 'Failed', test),
         })
+
         this.props.router.push('/sound-check')
       }
     }
@@ -154,20 +154,7 @@ class FactoryTest extends Component {
           lf={() => this.state.versions.lf}
           rf={() => this.state.versions.rf}
         />
-      ),
-      MenuItem(
-        3,
-        'Verification',
-        <ConnectionTest
-          functional
-          left={false}
-          onTestResult={this.onTestResultCallback}
-          onSerial={this.onSerial}
-          onVersion={this.onVersion}
-        />
-      ),
+      )
     ],
   }
 }
-
-export { FactoryTest }

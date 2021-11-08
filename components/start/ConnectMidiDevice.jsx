@@ -16,7 +16,6 @@ export default function ConnectMidiDevice() {
       const outputs = access.outputs.values()
 
       access.onstatechange = function (e) {
-        debugger
         // Print information about the (dis)connected MIDI controller
         console.log(e.port.name, e.port.manufacturer, e.port.state)
       }
