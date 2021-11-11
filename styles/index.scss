@@ -41,8 +41,18 @@ a {
   color: #ff00ff;
   text-decoration: none;
   transition: all 0.3s;
+
   &:hover {
     text-decoration: underline;
+  }
+
+  &.link-orange {
+    color: #FF9F0A;
+  }
+
+  &.dashed {
+    text-decoration: none;
+    border-bottom: 1px dashed #FF9F0A;
   }
 }
 a.no-effect {
@@ -138,6 +148,7 @@ div {
 @import './blocks/dialog';
 @import './blocks/select';
 @import './blocks/sensitivity';
+@import './blocks/firmware-update';
 @import './blocks/support';
 @import './blocks/_jammy-web-components';
 
@@ -404,4 +415,14 @@ div {
   flex-direction: column;
   color: #888899;
   @extend .caption-text;
+}
+
+.popover {
+  max-width: none !important;
+  background-color: transparent;
+  border-width: 0;
+
+  .arrow {
+    display: none;
+  }
 }

@@ -1,0 +1,1 @@
+export const driverDownloadLink = 'https://jammy-fw.s3.amazonaws.com/tmp/driver/Jammy_E_Driver_Update.zip';

@@ -4,4 +4,5 @@ export const flashState = {
   loader: 'loader',
   navigator: 'navigator',
   erase: 'erase',
+  driverUpdate: 'driverUpdate',
 };
