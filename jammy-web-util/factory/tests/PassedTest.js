@@ -1,16 +1,12 @@
 import React, { Component } from 'react'
 import { Col, Row } from 'reactstrap'
 
-// import './Test.css'
-
 class PassedTest extends Component {
   render() {
     return (
-      <Col className="test">
-        <Row className="test-cont test-lb justify-content-md-center">
-          All firmware up to date!
-        </Row>
-      </Col>
+      <div>
+        All firmware up to date!
+      </div>
     )
   }
 }

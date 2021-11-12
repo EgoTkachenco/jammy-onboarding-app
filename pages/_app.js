@@ -79,6 +79,7 @@ const MyApp = observer(({ Component, pageProps }) => {
           color="#5bbad5"
         ></link>
         <meta name="theme-color" content="#000000"></meta>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" />
       </Head>
       <Component {...pageProps} />
 

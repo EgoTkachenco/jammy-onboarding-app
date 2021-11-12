@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-// import './FactoryTest.css'
 import { MenuItem } from './tests/NavigationMenu'
 import ConnectionTest from './tests/ConnectionTest'
 import FailedTest from './tests/FailedTest'
@@ -69,10 +68,6 @@ export class FactoryTest extends Component {
     })
   }
 
-  refreshPage = () => {
-    window.location.reload()
-  }
-
   render() {
     return (
       this.state.test !== undefined &&
@@ -127,8 +122,8 @@ export class FactoryTest extends Component {
     return <FailedTest test={menu.title} part={part.title} />
   }
 
-  passedTest = (part) => {
-    return <PassedTest part={part.title} />
+  passedTest = () => {
+    return <PassedTest />
   }
 
   firmwareUpdateTest = {

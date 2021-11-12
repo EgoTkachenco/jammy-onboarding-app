@@ -1,17 +1,19 @@
 import React from 'react'
-import Image from 'next/image'
 import { jammy } from '../../store'
 import { sleep } from '../services/utils'
 import dfu from './dfu/dfu'
 import dfuse from './dfu/dfuse'
 import { Loader } from '../../components/Loader'
-import { LoaderLine } from '../../components/LoaderLine'
 import { vendorIdDecimal, vendorIdHexadecimal } from '../constants/vendor-id'
 import { LEFT_FIRMWARE, RIGHT_FIRMWARE } from '../constants/latest-firmware-versions'
 import { flashState } from './constants/flash-state'
 import { observer } from 'mobx-react'
 import Store from '../../store'
-
+import { StartUpdateState } from './components/StartUpdateState'
+import { ConnectDSUState } from './components/ConnectDSUState'
+import { FirmwareUpdateProgressState } from './components/FirmwareUpdateProgressState'
+import { ErrorState } from './components/ErrorState'
+import { DriverUpdateState } from './components/DriverUpdateState'
 
 function hex4(n) {
   let s = n.toString(16)
@@ -65,7 +67,7 @@ class FirmwareUpdate extends React.Component {
     jammy.rebootJammyEInDFU()
     await sleep(50)
     jammy.rebootJammyEInDFU()
-    await sleep(4000)
+    await sleep(500)
   }
 
   rebootInMIDI = async () => {
@@ -349,15 +351,7 @@ class FirmwareUpdate extends React.Component {
     }
   }
 
-  startUpdate = async () => {
-    Store.setIsUpdating(true)
-
-    this.setState({
-      flashState: 'loader'
-    })
-
-    await this.rebootInDFU()
-
+  getJammyDevice = async () => {
     const availableDevices = await navigator.usb.getDevices()
     let jammyDevice = availableDevices.find((usbDevice) => usbDevice.vendorId === vendorIdDecimal)
     const isJammyAvailable = !!jammyDevice
@@ -378,6 +372,29 @@ class FirmwareUpdate extends React.Component {
           test: this.state.test + '\nConnect ERROR: ' + error
         })
       }
+    }
+
+    return jammyDevice
+  }
+
+  startUpdate = async () => {
+    Store.setIsUpdating(true)
+
+    this.setState({
+      flashState: 'loader'
+    })
+
+    await this.rebootInDFU();
+
+    let jammyDevice = await this.getJammyDevice();
+    const isDriverUpdateNeeded = await this.isDriverUpdateNeeded(jammyDevice)
+
+    if (isDriverUpdateNeeded) {
+      this.setState({
+        flashState: flashState.driverUpdate,
+      });
+
+      return;
     }
 
     let interfaces = dfu.findDeviceDfuInterfaces(jammyDevice)
@@ -409,64 +426,48 @@ class FirmwareUpdate extends React.Component {
     }
   }
 
+  isWindowsPlatform () {
+    return navigator.platform.includes('Win');
+  }
+
+  isDriverUpdateNeeded = async (device) => {
+    if (!this.isWindowsPlatform()) {
+      return false;
+    }
+
+    try {
+      await device.open()
+
+      return false
+    } catch (e) {
+      return true
+    }
+  }
+
   render() {
     if (this.state.ready && this.state.flashState === flashState.connecting) {
       return (
-        <>
-          <div className='title-text text-center'>
-            New firmware available
-          </div>
-          <br />
-          <button
-            className='btn btn-primary'
-            onClick={this.startUpdate}
-          >
-            Start update
-          </button>
-        </>
+        <StartUpdateState onUpdateClick={this.startUpdate} />
       )
     } else if (this.state.flashState === flashState.navigator) {
       return (
-        <div className='text-center'>
-          <div className='img'>
-            <Image
-              src='/jammy-white-logo.svg'
-              width={72}
-              height={72}
-              alt='Jammy'
-            />
-          </div>
-          <br />
-          <div className='lg-text white text-center'>
-            For firmware updates, Select Jammy DFU <br /> and click connect.
-          </div>
-        </div>
+        <ConnectDSUState />
       )
     } else if (
       this.state.flashState === flashState.erase ||
       this.state.flashState === flashState.download
     ) {
       return (
-        <>
-          <div className='title-text text-center'>
-            Installing the latest firmware
-          </div>
-
-          <LoaderLine width={this.state.progress + '%'} />
-
-          <div className='lg-text white text-center'>
-            {this.state.progress + '%'}
-          </div>
-        </>
+        <FirmwareUpdateProgressState progress={this.state.progress} />
       )
     } else if (this.state.error && this.state.error.length > 0) {
       return (
-        <>
-          <p>Error: </p>
-          <p>{this.state.error}</p>
-        </>
+        <ErrorState error={this.state.error} />
       )
-    } else {
+    } else if (this.state.flashState === flashState.driverUpdate) {
+      return <DriverUpdateState onUpdateClick={this.startUpdate} />;
+    }
+    else {
       return <Loader />
     }
   }

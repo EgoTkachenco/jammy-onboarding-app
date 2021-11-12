@@ -1,0 +1,35 @@
+$button-size: 69px;
+
+.download-button {
+  width: $button-size;
+  height: $button-size;
+  background-color: #FF00FF;
+  display: block;
+  border-radius: 50%;
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 3px));
+  }
+}
+
+.download-driver-label {
+  margin-top: 13px;
+}
+
+.finish-driver-update-button {
+  margin-top: 45px;
+  width: 316px;
+}
+
+.driver-update-hint-image-wrapper {
+  border-radius: 17px;
+  overflow: hidden;
+
+  div {
+    display: block !important;
+  }
+}
