@@ -31,6 +31,7 @@ class Store {
 
   defineGuitar = async () => {
     this.jammyName = null
+
     if (midiService.midiAccess.inputs.size > 0) {
       let input
       for (const inp of midiService.midiAccess.inputs) {
@@ -123,12 +124,9 @@ class Store {
     this.isUpdating = isUpdating;
   }
 
-  clearStatusCheck = () => {
-    clearInterval(this.statusCheckInterval)
-    this.statusCheckInterval = null
-  }
   // For software-settings page back link
   isPresetsSkipped = false
+
   parseMidiMessageForE(event) {
     const jammyData = event.data
     const stringId = jammyData[6]
@@ -162,6 +160,7 @@ class Store {
       }
     }
   }
+
   parseMidiMessageForG(event) {
     if (event.data.length === 39) {
       const jammyData = jammy.unpackJammySysexForG(event.data)
@@ -180,6 +179,7 @@ class Store {
   get midiService() {
     return midiService
   }
+
   get jammy() {
     return jammy
   }

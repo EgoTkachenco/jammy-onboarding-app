@@ -1,21 +1,25 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function CustomSelect({ value, options, onChange, getOption }) {
-  const [state, setstate] = useState(value)
+  const [state, setState] = useState(value)
   const [active, setActive] = useState(false)
+
   const handleOption = (option, i) => {
-    setstate(option)
+    setState(getOption ? getOption(option) : option)
     setActive(false)
-    if (onChange) onChange(option, i)
+    onChange && onChange(option?.id ?? option, i)
   }
   const toggleSelect = () => setActive(!active)
   const selectRef = useRef(null)
+
   useOutClick(selectRef, active, setActive, '.select-wrapper')
+
   return (
     <div ref={selectRef} className={`select-wrapper ${active ? 'active' : ''}`}>
       <div className="select" onClick={toggleSelect}>
         {state}
       </div>
+
       {active && (
         <div className="select-options">
           {options.map((item, i) => (

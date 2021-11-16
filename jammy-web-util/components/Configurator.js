@@ -410,6 +410,7 @@ class Configurator extends Component {
 
     function convert(sg, groups, global) {
       const params = []
+
       sg.params.forEach((sp) => {
         const values = []
 
