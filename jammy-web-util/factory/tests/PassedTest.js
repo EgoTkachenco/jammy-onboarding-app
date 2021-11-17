@@ -4,7 +4,7 @@ import { Col, Row } from 'reactstrap'
 class PassedTest extends Component {
   render() {
     return (
-      <div>
+      <div className="lg-text text-center">
         All firmware up to date!
       </div>
     )

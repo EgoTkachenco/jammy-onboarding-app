@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-import MidiPresets from './MidiPresets'
 import { jammy } from './index'
 import { sleep } from '../jammy-web-util/services/utils'
 
@@ -62,7 +61,9 @@ class MidiPresetsStore {
       preset: Default,
     },
   ]
+
   activePreset = null
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -117,7 +118,6 @@ class MidiPresetsStore {
   }
 
   processPreset = async (soft) => {
-
     for (var i = 0; i < soft.preset.groups.length; i++) {
       var gr = soft.preset.groups[i]
       for (var j = 0; j < gr.params.length; j++) {
@@ -152,33 +152,34 @@ class MidiPresetsStore {
   }
 
   changePresetValue = async (param, group, value, global) => {
-
     let string = 6
-    if (value.value) {
+
+    if (value.value || value.value === 0) {
       string = value.string
       value = value.value
     }
     
     if (!global) {
-      let gIndex = this.activePreset.groups.findIndex((g) => g.id === group.id)
-      let pIndex = this.activePreset.groups[gIndex].params.findIndex(
-        (p) => p.id === param.id
-      )
-      console.log(gIndex, pIndex, value)
+      const presetGroup = this.activePreset.groups.find((g) => g.groupId === group.groupId)
+      const parameter = presetGroup.params.find((p) => p.id === param.id)
+
       for (let i = 0; i < 6; i++) {
+        const value = string === i
+          ? value
+          : parameter.values[i];
+
         jammy.sendParamRequest('setget', {
           groupId: group.groupId,
           paramId: param.id,
           left: param.left,
           stringId: i,
-          value:
-            string === i
-              ? value
-              : this.activePreset.groups[gIndex].params[pIndex].values[i],
+          value,
         })
         await sleep(20)
+
+        console.log("Send param: ", param.id, "for string: ", i, "value: ", value)
       }
-      this.activePreset.groups[gIndex].params[pIndex].values[string] = value
+      parameter.values[string] = value
     } else {
       let gIndex = this.activePreset.global.findIndex((g) => g.id === group.id)
       let pIndex = this.activePreset.global[gIndex].params.findIndex(
@@ -193,10 +194,13 @@ class MidiPresetsStore {
       })
       await sleep(20)
       this.activePreset.global[gIndex].params[pIndex].values[0] = value
+
+      console.log("Send param: ", param.id, "for string: ", 6, "value: ", value)
     }
     this.activePreset = { ...this.activePreset }
   }
 }
 
 const store = new MidiPresetsStore()
+
 export default store

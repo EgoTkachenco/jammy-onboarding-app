@@ -5,6 +5,7 @@
 @import '../public/PT Root UI_Light/PT Root UI_Light.css';
 @import '../public/PT Root UI_Medium/PT Root UI_Medium.css';
 @import '../public/PT Root UI_Regular/PT Root UI_Regular.css';
+
 // THEME
 $bold_font: 'PTRootUIWebBold', sans-serif;
 $light_font: 'PTRootUIWebLight', sans-serif;
@@ -12,6 +13,7 @@ $medium_font: 'PTRootUIWebMedium', sans-serif;
 $regular_font: 'PTRootUIWebRegular', sans-serif;
 $secondary_font: 'Montserrat', sans-serif;
 @import '../node_modules/antd/dist/antd.dark.css';
+@import './blocks/colors';
 
 // Typography
 .title-text {
@@ -74,6 +76,8 @@ a.no-effect {
 .white-50 {
   color: rgba(255, 255, 255, 0.55);
 }
+
+
 
 html {
   // 16px = 1rem on 1200px screen
@@ -151,6 +155,7 @@ div {
 @import './blocks/firmware-update';
 @import './blocks/support';
 @import './blocks/_jammy-web-components';
+@import './blocks/common';
 
 .video__back {
   position: absolute;
@@ -375,11 +380,14 @@ div {
     top: 100%;
     left: -8px;
     min-width: 25rem;
+    max-height: 25rem;
+    overflow-y: scroll;
     padding: 1rem;
-    height: 12.5rem;
     transition: 0.3s all;
     opacity: 0;
     z-index: -1;
+    height: auto;
+
     &.show {
       z-index: 1;
       opacity: 1;

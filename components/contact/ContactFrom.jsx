@@ -4,16 +4,19 @@ import Stepper from '../Stepper'
 import Dialog from '../Dialog'
 import FormsStore from '../../store/FormsStore'
 import { observer } from 'mobx-react-lite'
+
 const ContactForm = observer(() => {
-  const isFormSended = FormsStore.isSupportFormSended
+  const isFormSent = FormsStore.isSupportFormSended
   const [file, setFile] = useState(null)
   const [fileError, setFileError] = useState(null)
+
   const handleForm = () => {
     var formData = new FormData(document.querySelector('.support-form'))
     let email = formData.get('email')
     let message = formData.get('message')
     FormsStore.sendSupportForm({ email, message, file })
   }
+
   const attachFile = (e) => {
     let file = e.target.files[0]
     if (file.size < 25000000) {
@@ -111,7 +114,7 @@ const ContactForm = observer(() => {
           </div> */}
           {fileError && <div className="file-error">{fileError}</div>}
         </form>
-        {isFormSended && (
+        {isFormSent && (
           <Dialog>
             <div className="title-text text-center">
               Thanks for submitting your <br /> support request!
@@ -137,6 +140,7 @@ const ContactForm = observer(() => {
             </a>
           </Dialog>
         )}
+
         {backDialog && (
           <div className="sensitivity">
             <Dialog close={() => setbackDialog(false)}>
@@ -164,21 +168,3 @@ const ContactForm = observer(() => {
 })
 
 export default ContactForm
-
-const ArrowIcon = () => {
-  return (
-    <svg
-      style={{ marginRight: '0.5rem' }}
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12 20L13.41 18.59L7.83 13L20 13L20 11L7.83 11L13.41 5.41L12 4L4 12L12 20Z"
-        fill="white"
-      />
-    </svg>
-  )
-}
