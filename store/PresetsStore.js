@@ -103,15 +103,16 @@ class PresetsStore {
 
   saveParamChange = async (group, param, string) => {
     this.isFetch = true
-    const value = param.values[string]
+    const currentString = string
+    const value = param.values[currentString]
     console.log("Send param: ", param.id, "from group:", param.group.groupId)
-    console.log("       String: ", string, " value: [", value, "]")
+    console.log("       String: ", currentString, " value: [", value, "]")
     jammy.sendParamRequest('setget', {
       groupId: group.groupId,
       paramId: param.id,
+      stringId: currentString,
       left: param.left,
-      string,
-      value,
+      value: value,
     })
     this.isFetch = false
   }

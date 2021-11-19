@@ -597,7 +597,6 @@ class Configurator extends Component {
                     </div>
                   )
                 } else if (this.state.active.type === 'BOOL') {
-                  console.log('Params: ', this.state.active.values[index])
                   return (
                     <div
                       className="switch-wrapper"
