@@ -528,7 +528,7 @@ class Configurator extends Component {
   }
 
   positiveValue(param) {
-    if (param.reversed) {
+    if (param.reversed === true) {
       return param.min
     } else {
       return param.max
@@ -536,10 +536,47 @@ class Configurator extends Component {
   }
 
   negativeValue(param) {
-    if (param.reversed) {
+    if (param.reversed === true) {
       return param.max
     } else {
       return param.min
+    }
+  }
+  // Reversed function convert value from Jammy to UI value
+  // 
+  // min-------------max
+  //  1-----(*)-------8 // Value from Jammy
+  //  1-2-3--4--5-6-7-8
+  //
+  //  8-----(#)-------1 // Value on UI
+  //  8-7-6--5--4-3-2-1
+  // 
+  // for * === 4 on Jammy >> # === 5 on UI
+  // # = max - * + min >> 8 - (4) + 1 = 5 
+  //                   >> 8 - (3) + 1 = 6
+  //                   >> 8 - (7) + 1 = 2
+
+  // Reversed function convert value from UI to Jammy value
+  // 
+  //  8-----(#)-------1 // Value on UI
+  //  8-7-6--5--4-3-2-1
+  // 
+  // min-------------max
+  //  1-----(*)-------8 // Value from Jammy
+  //  1-2-3--4--5-6-7-8
+
+  // 
+  // for # === 5 on Jammy >> * === 4 on UI
+  // # = max - # + min >> 8 - (5) + 1 = 4
+  //                   >> 8 - (7) + 1 = 2
+  //                   >> 8 - (2) + 1 = 7
+
+  reverse(param, value) {
+    if (param.reversed === true) {
+      const reversed = (param.max - value) + param.min
+      return reversed;
+    } else {
+      return value;
     }
   }
 
@@ -630,12 +667,12 @@ class Configurator extends Component {
                     <Range
                       key={index}
                       label={string}
-                      value={this.state.active.values[index]}
+                      value={this.reverse(this.state.active, this.state.active.values[index])}
                       min={this.state.active.min}
                       max={this.state.active.max}
                       onChange={(v) => {
                         let { min, max } = this.state.active
-                        if (v !== min && v !== max) this.onRangeChange(v, index)
+                        if (v !== min && v !== max) this.onRangeChange(this.reverse(this.state.active, v), index)
                       }}
                     />
                   )
