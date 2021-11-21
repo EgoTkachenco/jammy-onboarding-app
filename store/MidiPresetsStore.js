@@ -164,7 +164,7 @@ class MidiPresetsStore {
       const parameter = presetGroup.params.find((p) => p.id === param.id)
 
       for (let i = 0; i < 6; i++) {
-        const value = string === i
+        const currentValue = string === i
           ? value
           : parameter.values[i];
 
@@ -173,11 +173,11 @@ class MidiPresetsStore {
           paramId: param.id,
           left: param.left,
           stringId: i,
-          value,
+          value: currentValue,
         })
         await sleep(20)
 
-        console.log("Send param: ", param.id, "for string: ", i, "value: ", value)
+        console.log("Change param: ", param.id, "for string: ", i, "value: ", currentValue)
       }
       parameter.values[string] = value
     } else {
@@ -195,7 +195,7 @@ class MidiPresetsStore {
       await sleep(20)
       this.activePreset.global[gIndex].params[pIndex].values[0] = value
 
-      console.log("Send param: ", param.id, "for string: ", 6, "value: ", value)
+      console.log("Change global param: ", param.id, "value: ", value)
     }
     this.activePreset = { ...this.activePreset }
   }

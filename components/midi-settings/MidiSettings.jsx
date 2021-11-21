@@ -48,7 +48,7 @@ export const MidiSettings = observer(() => {
                   options={getValuesRange(param.min, param.max)}
                   getOption={(option) => param.name + ' ' + option}
                   onChange={(v) =>
-                    handleChange(param, group, { string, value: v - 1 }, global)
+                    handleChange(param, group, { string, value: v }, global)
                   }
                 />
               </div>
