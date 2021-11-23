@@ -387,6 +387,15 @@ class FirmwareUpdate extends React.Component {
     await this.rebootInDFU();
 
     let jammyDevice = await this.getJammyDevice();
+
+    if (!jammyDevice) {
+      this.setState({
+        flashState: flashState.connecting
+      })
+
+      return;
+    }
+
     const isDriverUpdateNeeded = await this.isDriverUpdateNeeded(jammyDevice)
 
     if (isDriverUpdateNeeded) {
