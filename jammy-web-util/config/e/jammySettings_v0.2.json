@@ -36,7 +36,7 @@
           "left": true,
           "all": true,
           "enabled": true,
-          "reversed": false,
+          "reversed": true,
           "name": "Hammer-On and Pull-Off Switch",
           "description": "Enables / disables hammer-ons, pull-offs and tapping on each string.",
           "default": [1, 1, 1, 1, 1, 1],
