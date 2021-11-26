@@ -11,6 +11,7 @@ import { FinishOnboardingDialog } from './components/FinishOnboardingDialog'
 import { SettingInput } from './components/SettingInput'
 import { getValuesRange } from './utils/get-values-range'
 import { mappedSettingCategories, settingCategories } from './constants/setting-categories'
+import { log } from 'tone/build/esm/core/util/Debug'
 
 export const MidiSettings = observer(() => {
   const router = useRouter()
@@ -18,6 +19,23 @@ export const MidiSettings = observer(() => {
   const [isOnboardingDone, setIsOnboardingDone] = useState(false);
   const activePreset = MidiPresetsStore.activePreset
   const handleChange = MidiPresetsStore.changePresetValue;
+
+  const getOptions = (param) => {
+    if(param.options != undefined){
+      return param.options.map((e) => e.id)
+    }else{
+      return getValuesRange(param.min, param.max);
+    }
+  }
+
+  const getOptionName = (param, option) => {
+    if(param.options != undefined){
+      let foundParam = param.options.find((e) => e.id === option)
+      return foundParam === undefined ? param.name + ' ' + option : foundParam.name;
+    }else{
+      return param.name + ' ' + option
+    }
+  }
 
   const getParamRow = (param, group, global) => {
     if (global) {
@@ -39,14 +57,15 @@ export const MidiSettings = observer(() => {
     return (
       <>
         {[0, 1, 2, 3, 4, 5].map((string) => {
+          console.log("Option: ", string, ", val: ", param.values[string], JSON.stringify(getOptionName(param, param.values[string])));
           return (
             <div className="midi-list__item" key={string}>
               <div className="midi-list__item__label">String {string + 1}</div>
               <div className="midi-list__item__input">
                 <Select
-                  value={param.name + ' ' + param.values[string]}
-                  options={getValuesRange(param.min, param.max)}
-                  getOption={(option) => param.name + ' ' + option}
+                  value={getOptionName(param, param.values[string])}
+                  options={getOptions(param)}
+                  getOption={(option) =>  getOptionName(param, option)}
                   onChange={(v) =>
                     handleChange(param, group, { string, value: v }, global)
                   }
