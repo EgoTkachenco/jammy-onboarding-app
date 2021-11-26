@@ -11,7 +11,6 @@ import { FinishOnboardingDialog } from './components/FinishOnboardingDialog'
 import { SettingInput } from './components/SettingInput'
 import { getValuesRange } from './utils/get-values-range'
 import { mappedSettingCategories, settingCategories } from './constants/setting-categories'
-import { log } from 'tone/build/esm/core/util/Debug'
 
 export const MidiSettings = observer(() => {
   const router = useRouter()
