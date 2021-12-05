@@ -520,6 +520,7 @@ class Configurator extends Component {
   onSetActiveParam(g, p) {
     const param = this.state.data.groups[g].params[p]
     console.log('Activate param: ', p, ' from group: ', g)
+    console.log('Activate values: ', param.values.map((k,v) => "[" + v + "]=" + k + "" ))
     this.setState({
       active: param,
       activeGroup: g,
@@ -596,7 +597,6 @@ class Configurator extends Component {
               activeGroup={this.state.activeGroup}
               activeParam={this.state.activeParam}
               setActiveParam={(g, p) => {
-                console.log('Click!')
                 this.onSetActiveParam(g, p)
               }}
             />
@@ -672,7 +672,7 @@ class Configurator extends Component {
                       max={this.state.active.max}
                       onChange={(v) => {
                         let { min, max } = this.state.active
-                        if (v !== min && v !== max) this.onRangeChange(this.reverse(this.state.active, v), index)
+                        if (v >= min && v <= max) this.onRangeChange(this.reverse(this.state.active, v), index)
                       }}
                     />
                   )

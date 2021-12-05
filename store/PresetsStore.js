@@ -106,7 +106,7 @@ class PresetsStore {
     const currentString = string
     const value = param.values[currentString]
     console.log("Send param: ", param.id, "from group:", param.group.groupId)
-    console.log("       String: ", currentString, " value: [", value, "]")
+    console.log("    String: ", currentString, " value: [", value, "]")
     jammy.sendParamRequest('setget', {
       groupId: group.groupId,
       paramId: param.id,
