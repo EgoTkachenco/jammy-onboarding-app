@@ -21,15 +21,13 @@ import InfoBtn from '../../components/InfoBtn'
 
 const SettingGroupParam = ({
   param,
-  sendParamRequest,
-  global,
-  setActiveParam,
+  onClick,
   isActive,
 }) => {
   return (
     <div
       className={`presets-list__item ${isActive ? 'active' : ''}`}
-      onClick={setActiveParam}
+      onClick={onClick}
     >
       <span>{param.name}</span>
       <InfoBtn info={getSettingInfo(param.name)} />
@@ -53,7 +51,7 @@ const SettingGroupParams = ({
           key={p.id + (global ? 1000 : 1)}
           sendParamRequest={sendParamRequest}
           global={global}
-          setActiveParam={() => setActiveParam(i)}
+          onClick={() => setActiveParam(i)}
           isActive={isActive && i == activeParam}
         />
       ))}
@@ -71,15 +69,15 @@ const SettingGroups = ({
 }) => {
   return (
     <>
-      {groups.map((g, i) => (
+      {groups.map((g, groupIndex) => (
         <SettingGroupParams
-          key={g.id}
+          key={groupIndex}
           params={g.params}
           sendParamRequest={sendParamRequest}
           global={global}
-          isActive={i === activeGroup}
+          isActive={groupIndex === activeGroup}
           activeParam={activeParam}
-          setActiveParam={(p) => setActiveParam(i, p)}
+          setActiveParam={(paramIndex) => setActiveParam(groupIndex, paramIndex)}
         />
       ))}
     </>
@@ -517,14 +515,15 @@ class Configurator extends Component {
     this.setState({ data })
   }
 
-  onSetActiveParam(g, p) {
-    const param = this.state.data.groups[g].params[p]
-    console.log('Activate param: ', p, ' from group: ', g)
-    console.log('Activate values: ', param.values.map((k,v) => "[" + v + "]=" + k + "" ))
+  onSetActiveParam(groupIndex, paramIndex) {
+    const param = this.state.data.groups[groupIndex].params[paramIndex];
+    console.log('Activate param: ', paramIndex, ' from group: ', groupIndex)
+    console.log('Active values: ', this.state.active.values.map((k, v) => "[" + v + "]=" + k + ""))
+    console.log('Activate values: ', param.values.map((k, v) => "[" + v + "]=" + k + ""))
     this.setState({
       active: param,
-      activeGroup: g,
-      activeParam: p,
+      activeGroup: groupIndex,
+      activeParam: paramIndex,
     })
   }
 
@@ -596,8 +595,8 @@ class Configurator extends Component {
               global={false}
               activeGroup={this.state.activeGroup}
               activeParam={this.state.activeParam}
-              setActiveParam={(g, p) => {
-                this.onSetActiveParam(g, p)
+              setActiveParam={(groupIndex, paramIndex) => {
+                this.onSetActiveParam(groupIndex, paramIndex)
               }}
             />
           </div>
@@ -663,16 +662,18 @@ class Configurator extends Component {
                     </div>
                   )
                 } else {
+                  const active = this.state.active
                   return (
                     <Range
                       key={index}
                       label={string}
-                      value={this.reverse(this.state.active, this.state.active.values[index])}
-                      min={this.state.active.min}
-                      max={this.state.active.max}
+                      value={this.reverse(active, active.values[index])}
+                      min={active.min}
+                      max={active.max}
                       onChange={(v) => {
-                        let { min, max } = this.state.active
-                        if (v >= min && v <= max) this.onRangeChange(this.reverse(this.state.active, v), index)
+                        console.log("Change! ")
+                        let { min, max } = active
+                        if (v >= min && v <= max) this.onRangeChange(this.reverse(active, v), index)
                       }}
                     />
                   )

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useLayoutEffect } from 'react'
 import Slider from 'rc-slider'
 import 'rc-slider/assets/index.css'
 export default function CustomSlider({ label, value, onChange, min, max }) {
@@ -11,6 +11,24 @@ export default function CustomSlider({ label, value, onChange, min, max }) {
     clearTimeout(timeout)
     settimeout(null)
   }
+
+  useLayoutEffect(() => {
+    return () => {
+      cleartimeout()
+    }
+  }, [])
+
+  const onChangeValue = (value) => {
+    setv(value)
+    if (timeout) cleartimeout()
+    settimeout(
+      setTimeout(() => {
+        onChange(value)
+        cleartimeout()
+      }, 300)
+    )
+  }
+
   return (
     <div className="slider">
       <div className="slider-top">
@@ -20,16 +38,13 @@ export default function CustomSlider({ label, value, onChange, min, max }) {
       <Slider
         value={v}
         min={min}
+        autoFocus={false}
         max={max}
-        onChange={(v) => {
-          setv(v)
-          if (timeout) cleartimeout()
-          settimeout(
-            setTimeout(() => {
-              onChange(v)
-              cleartimeout()
-            }, 300)
-          )
+        onChange={(value) => {
+          setv(value)
+        }}
+        onAfterChange={(value) => {
+          onChangeValue(value)
         }}
       />
     </div>
